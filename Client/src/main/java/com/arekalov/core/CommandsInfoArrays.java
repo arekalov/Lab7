@@ -15,7 +15,7 @@ public class CommandsInfoArrays {
         commandsList.add("update");
         commandsList.add("remove_by_id");
         commandsList.add("clear");
-        commandsList.add("save");
+        commandsList.add("clear");
         commandsList.add("execute_script");
         commandsList.add("exit");
         commandsList.add("remove_first");
@@ -33,7 +33,6 @@ public class CommandsInfoArrays {
         commandListWithoutArgs.add("info");
         commandListWithoutArgs.add("show");
         commandListWithoutArgs.add("clear");
-        commandListWithoutArgs.add("save");
         commandListWithoutArgs.add("exit");
         commandListWithoutArgs.add("remove_first");
         commandListWithoutArgs.add("remove_head");
@@ -53,8 +52,9 @@ public class CommandsInfoArrays {
     }
     public static ArrayList<String> commandsWithInputing = new ArrayList<>();
     static {
-        commandsListWithArg.add("update");
-        commandsListWithArg.add("add");
-        commandsListWithArg.add("remove_lower");
+        commandsWithInputing.add("update");
+        commandsWithInputing.add("add");
+        commandsWithInputing.add("remove_lower");
+        commandsWithInputing.add("remove_lower");
     }
 }

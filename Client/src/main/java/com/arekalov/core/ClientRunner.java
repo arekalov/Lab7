@@ -2,27 +2,30 @@ package com.arekalov.core;
 
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgsCountError;
 import com.arekalov.errors.IncorrectCommandError;
+import com.arekalov.readers.ProductReader;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 
 /**
  * Class for running the program
  */
-public class Runner {
+public class ClientRunner {
     public static final String ENV_NAME = "PROGA";
-    private final PrintWriter out;
+    private final ObjectOutputStream out;
     private final BufferedReader in;
     private IOManager ioManager = new IOManager(ENV_NAME);
+    private ProductReader productReader = new ProductReader(ioManager);
     private Boolean isRunning = true;
 
 
-    public Runner(PrintWriter out, BufferedReader in) {
+    public ClientRunner(ObjectOutputStream out, BufferedReader in) {
         this.out = out;
         this.in = in;
     }
@@ -38,7 +41,6 @@ public class Runner {
                 printDelimiter();
                 String input = ioManager.consoleRead();
                 sendCommand(input);
-                System.out.println(in.readLine());
             }
             stopWorkingPrinter();
         } catch (NoSuchElementException noSuchElementException) {
@@ -56,14 +58,19 @@ public class Runner {
             String[] commandParts = validateCommand(command.toLowerCase());
             Product product = null;
             if (CommandsInfoArrays.commandsWithInputing.contains(command)) {
-                product = ProductRe
+                product = productReader.getProduct();
             }
-            out.println(command + " / " + commandParts);
+            CommandWithProduct commandWithProduct = new CommandWithProduct(command, commandParts, product);
+            out.writeObject(commandWithProduct);
+            System.out.println(in.readLine());
         } catch (IncorrectCommandError icr) {
             System.err.println("Error command: " + command);
         }
         catch (ArgsCountError ace) {
             System.err.println("Error args count for command: " + command);
+        }
+        catch (Exception e) {
+            System.err.println(e);
         }
     }
 

@@ -1,10 +1,11 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
-import arekalov.com.proga5.entities.Coordinates;
-import arekalov.com.proga5.entities.Organization;
-import arekalov.com.proga5.entities.Product;
-import arekalov.com.proga5.entities.UnitOfMeasure;
+
+import com.arekalov.core.IOManager;
+import com.arekalov.entities.Coordinates;
+import com.arekalov.entities.Organization;
+import com.arekalov.entities.Product;
+import com.arekalov.entities.UnitOfMeasure;
 
 import java.time.LocalDateTime;
 

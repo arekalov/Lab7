@@ -1,7 +1,8 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
-import arekalov.com.proga5.entities.Coordinates;
+
+import com.arekalov.core.IOManager;
+import com.arekalov.entities.Coordinates;
 
 /**
  * Class for reading Coordinates

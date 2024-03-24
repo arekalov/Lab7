@@ -1,6 +1,7 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
+
+import com.arekalov.core.IOManager;
 
 /**
  * Interface for reading from console
@@ -12,6 +13,6 @@ public interface Reader {
      * Method to print error message
      */
     default void errorPrinter() {
-        System.err.println("Error: input incorrect, try again");
+        System.out.println("\u001B[31m" + "Error: input incorrect, try again" + "\u001B[0m");
     }
 }

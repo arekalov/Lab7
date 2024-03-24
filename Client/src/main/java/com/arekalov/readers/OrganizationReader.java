@@ -1,9 +1,10 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
-import arekalov.com.proga5.entities.Address;
-import arekalov.com.proga5.entities.Organization;
-import arekalov.com.proga5.entities.OrganizationType;
+
+import com.arekalov.core.IOManager;
+import com.arekalov.entities.Address;
+import com.arekalov.entities.Organization;
+import com.arekalov.entities.OrganizationType;
 
 import java.time.LocalDateTime;
 

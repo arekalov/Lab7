@@ -1,7 +1,8 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
-import arekalov.com.proga5.entities.Location;
+
+import com.arekalov.core.IOManager;
+import com.arekalov.entities.Location;
 
 /**
  * Class for reading Location from console

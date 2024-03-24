@@ -1,8 +1,9 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.core.IOManager;
-import arekalov.com.proga5.entities.Address;
-import arekalov.com.proga5.entities.Location;
+
+import com.arekalov.core.IOManager;
+import com.arekalov.entities.Address;
+import com.arekalov.entities.Location;
 
 /**
  * The IOManager to be used for reading

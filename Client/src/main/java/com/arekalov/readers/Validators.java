@@ -1,8 +1,9 @@
 package com.arekalov.readers;
 
-import arekalov.com.proga5.entities.OrganizationType;
-import arekalov.com.proga5.entities.UnitOfMeasure;
-import arekalov.com.proga5.errors.ArgumentError;
+
+import com.arekalov.entities.OrganizationType;
+import com.arekalov.entities.UnitOfMeasure;
+import com.arekalov.errors.ArgumentError;
 
 /**
  * Class for checking data

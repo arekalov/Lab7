@@ -1,6 +1,6 @@
 package com.arekalov;
 
-import com.arekalov.core.Runner;
+import com.arekalov.core.ClientRunner;
 
 import java.io.*;
 import java.net.*;
@@ -12,10 +12,10 @@ public class Client {
     public static void main(String[] args) {
         try {
             Socket socket = new Socket(HOST, PORT);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             try {
-                Runner runner = new Runner(out, in);
+                ClientRunner runner = new ClientRunner(out, in);
                 runner.startInteractiveMode();
             } catch (Exception ex) {}
             finally {
@@ -24,7 +24,7 @@ public class Client {
                 socket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
 }

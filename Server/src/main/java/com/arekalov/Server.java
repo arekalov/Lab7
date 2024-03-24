@@ -1,5 +1,8 @@
 package com.arekalov;
 
+import com.arekalov.entities.CommandWithProduct;
+import com.arekalov.entities.Product;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -17,13 +20,14 @@ public class Server {
                 System.out.println("Клиент подключен");
 
                 // Обработка клиента
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    System.out.println("Получено от клиента: " + inputLine);
-                    out.println("Ответ от сервера: " + inputLine); // Отправка ответа клиенту
+                CommandWithProduct commandWithProduct;
+                while ((commandWithProduct = (CommandWithProduct) in.readObject()) != null) {
+
+                    System.out.println("Получено от клиента: " + commandWithProduct);
+                    out.println("Ответ от сервера: " + commandWithProduct); // Отправка ответа клиенту
                 }
 
                 clientSocket.close(); // Закрытие соединения с клиентом
@@ -31,6 +35,8 @@ public class Server {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

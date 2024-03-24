@@ -4,19 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9a2cd92-d211-4d50-b8e8-6a8b6987168b" name="Changes" comment="add unput to client">
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/CoordinatesReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/LocationReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/OrganizationReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/PostalAddressReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/ProductReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Reader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Validators.java" afterDir="false" />
+    <list default="true" id="f9a2cd92-d211-4d50-b8e8-6a8b6987168b" name="Changes" comment="add readers">
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/CommandWithProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/CommandWithProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/Coordinates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/Organization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/OrganizationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/UnitOfMeasure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ProductComparator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/errors/EmptyDequeError.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Organization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/OrganizationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/OrganizationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/UnitOfMeasure.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/UnitOfMeasure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/CoordinatesReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/CoordinatesReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/LocationReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/LocationReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/OrganizationReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/OrganizationReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/PostalAddressReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/PostalAddressReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/ProductReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/ProductReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Reader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Validators.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/readers/Validators.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +66,7 @@
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab6/Client/src/main/java/com/arekalov",
+    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/java/com/arekalov",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,6 +80,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov" />
       <recent name="$PROJECT_DIR$/Client/src/main/java/com/arekalov" />
       <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov/data" />
     </key>
@@ -72,7 +89,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -135,7 +152,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711278987985</updated>
-      <workItem from="1711278988986" duration="7357000" />
+      <workItem from="1711278988986" duration="10846000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -153,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711290876762</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add readers">
+      <option name="closed" value="true" />
+      <created>1711292025245</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711292025245</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +187,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="add unput to client" />
-    <option name="LAST_COMMIT_MESSAGE" value="add unput to client" />
+    <MESSAGE value="add readers" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readers" />
   </component>
 </project>
