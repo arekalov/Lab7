@@ -2,6 +2,7 @@ package com.arekalov.core;
 
 
 
+import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgsCountError;
 import com.arekalov.errors.IncorrectCommandError;
 
@@ -37,6 +38,7 @@ public class Runner {
                 printDelimiter();
                 String input = ioManager.consoleRead();
                 sendCommand(input);
+                System.out.println(in.readLine());
             }
             stopWorkingPrinter();
         } catch (NoSuchElementException noSuchElementException) {
@@ -52,6 +54,10 @@ public class Runner {
     protected void sendCommand(String command) {
         try {
             String[] commandParts = validateCommand(command.toLowerCase());
+            Product product = null;
+            if (CommandsInfoArrays.commandsWithInputing.contains(command)) {
+                product = ProductRe
+            }
             out.println(command + " / " + commandParts);
         } catch (IncorrectCommandError icr) {
             System.err.println("Error command: " + command);

@@ -51,4 +51,10 @@ public class CommandsInfoArrays {
         commandsListWithArg.add("execute_script");
         commandsListWithArg.add("count_less_than_price");
     }
+    public static ArrayList<String> commandsWithInputing = new ArrayList<>();
+    static {
+        commandsListWithArg.add("update");
+        commandsListWithArg.add("add");
+        commandsListWithArg.add("remove_lower");
+    }
 }
