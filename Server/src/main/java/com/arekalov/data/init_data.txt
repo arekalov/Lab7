@@ -1,0 +1,135 @@
+[
+  {
+    "id": 4,
+    "name": "name",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1.0
+    },
+    "creationDate": "2024-02-11T16:37:34.263729921",
+    "price": 52,
+    "partNumber": "1",
+    "manufactureCost": 12,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 4,
+      "name": "name",
+      "annualTurnover": 12.1,
+      "type": "COMMERCIAL",
+      "postalAddress": {
+        "street": "fmaskdf",
+        "town": {
+          "y": 0.0
+        }
+      }
+    }
+  },
+  {
+    "id": 419085090,
+    "name": "arte",
+    "coordinates": {
+      "x": 12.0,
+      "y": 2.0
+    },
+    "creationDate": "2024-02-11T18:16:20.857482826",
+    "price": 2134,
+    "partNumber": "324fasdf",
+    "manufactureCost": 12,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 1321453926,
+      "name": "dfdsaf",
+      "annualTurnover": 12.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "dsafaf",
+        "town": {
+          "x": 11.0,
+          "y": 21.0,
+          "name": "dvdadfgds"
+        }
+      }
+    }
+  },
+  {
+    "id": 441064606,
+    "name": "arten",
+    "coordinates": {
+      "x": 12.0,
+      "y": 12.0
+    },
+    "creationDate": "2024-02-20T16:32:29.504292891",
+    "price": 124,
+    "partNumber": "dsaf",
+    "manufactureCost": 23,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 191362657,
+      "name": "dfasf",
+      "annualTurnover": 213.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "asdffds",
+        "town": {
+          "x": 12.0,
+          "y": 21.0,
+          "name": "dafs"
+        }
+      }
+    }
+  },
+  {
+    "id": 1261795770,
+    "name": "fasd",
+    "coordinates": {
+      "x": 12.0,
+      "y": 12.0
+    },
+    "creationDate": "2024-02-27T09:49:04.255038906",
+    "price": 123,
+    "partNumber": "sdfsafd",
+    "manufactureCost": 123,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 1307184655,
+      "name": "asdf",
+      "annualTurnover": 123.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "fadsf",
+        "town": {
+          "x": 1.0,
+          "y": 2.0,
+          "name": "dfgfdg"
+        }
+      }
+    }
+  },
+  {
+    "id": 398241751,
+    "name": "new",
+    "coordinates": {
+      "x": 12.0,
+      "y": 12.0
+    },
+    "creationDate": "2024-03-24T14:42:02.954604227",
+    "price": 12,
+    "partNumber": "12",
+    "manufactureCost": 21,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 448517335,
+      "name": "ew",
+      "annualTurnover": 12.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "12",
+        "town": {
+          "x": 12.0,
+          "y": 21.0,
+          "name": "12"
+        }
+      }
+    }
+  }
+]
