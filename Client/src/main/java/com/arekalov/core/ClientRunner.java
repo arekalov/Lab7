@@ -8,9 +8,8 @@ import com.arekalov.errors.ArgsCountError;
 import com.arekalov.errors.IncorrectCommandError;
 import com.arekalov.readers.ProductReader;
 
-import java.io.BufferedReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 
 /**
@@ -19,13 +18,13 @@ import java.util.NoSuchElementException;
 public class ClientRunner {
     public static final String ENV_NAME = "PROGA";
     private final ObjectOutputStream out;
-    private final BufferedReader in;
+    private final ObjectInputStream in;
     private IOManager ioManager = new IOManager(ENV_NAME);
     private ProductReader productReader = new ProductReader(ioManager);
     private Boolean isRunning = true;
 
 
-    public ClientRunner(ObjectOutputStream out, BufferedReader in) {
+    public ClientRunner(ObjectOutputStream out, ObjectInputStream in) {
         this.out = out;
         this.in = in;
     }
@@ -61,8 +60,10 @@ public class ClientRunner {
                 product = productReader.getProduct();
             }
             CommandWithProduct commandWithProduct = new CommandWithProduct(command, commandParts, product);
+            System.out.println(commandWithProduct);
             out.writeObject(commandWithProduct);
-            System.out.println(in.readLine());
+            out.flush();
+            System.out.println(in.readObject());
         } catch (IncorrectCommandError icr) {
             System.err.println("Error command: " + command);
         }

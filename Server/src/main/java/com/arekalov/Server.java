@@ -1,42 +1,55 @@
 package com.arekalov;
 
 import com.arekalov.entities.CommandWithProduct;
-import com.arekalov.entities.Product;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 
 public class Server {
-    public static void main(String[] args) {
-
+    final public static Integer PORT = 12345;
+    final ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT);
+    private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+    public void run() {
+        System.out.println("Сервер запущен. Ожидание подключения...");
+        ServerSocketChannel socketChannel = serverConnectivityManager.getServerSocketChannel();
         try {
-            ServerSocket serverSocket = new ServerSocket(12345); // Создание серверного сокета на порту 12345
-            System.out.println("Сервер запущен. Ожидание подключения...");
-
             while (true) {
-                Socket clientSocket = serverSocket.accept(); // Ожидание подключения клиента
+                SocketChannel clientSocketChannel = socketChannel.accept();
                 System.out.println("Клиент подключен");
 
-                // Обработка клиента
-                ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                readData(clientSocketChannel);
 
-                CommandWithProduct commandWithProduct;
-                while ((commandWithProduct = (CommandWithProduct) in.readObject()) != null) {
-
-                    System.out.println("Получено от клиента: " + commandWithProduct);
-                    out.println("Ответ от сервера: " + commandWithProduct); // Отправка ответа клиенту
-                }
-
-                clientSocket.close(); // Закрытие соединения с клиентом
+                clientSocketChannel.close();
                 System.out.println("Соединение с клиентом закрыто.");
             }
+
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception exception) {
+            System.err.println("Произошла ошибка " + exception);
+        }
+    }
+
+    private void readData(SocketChannel socketChannel) {
+        try (ObjectInputStream in = new ObjectInputStream(socketChannel.socket().getInputStream());
+             ObjectOutputStream out = new ObjectOutputStream(socketChannel.socket().getOutputStream())) {
+            while (true) {
+                Object obj = in.readObject();
+                if (obj instanceof CommandWithProduct) {
+                    CommandWithProduct commandWithProduct = (CommandWithProduct) obj;
+                    System.out.println("Получено от клиента: " + commandWithProduct);
+
+                    serverExecutionManager.
+
+                    out.writeObject(commandWithProduct);
+                    out.flush();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }

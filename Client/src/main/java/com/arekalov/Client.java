@@ -13,7 +13,7 @@ public class Client {
         try {
             Socket socket = new Socket(HOST, PORT);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             try {
                 ClientRunner runner = new ClientRunner(out, in);
                 runner.startInteractiveMode();
