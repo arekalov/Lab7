@@ -42,7 +42,7 @@ public class Server {
                     CommandWithProduct commandWithProduct = (CommandWithProduct) obj;
                     System.out.println("Получено от клиента: " + commandWithProduct);
 
-                    serverExecutionManager.
+//                    serverExecutionManager.
 
                     out.writeObject(commandWithProduct);
                     out.flush();

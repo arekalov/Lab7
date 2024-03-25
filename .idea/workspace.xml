@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/MainServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/ServerConnectivityManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/ServerExecutionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add managers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +64,7 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.MainServer">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -137,8 +128,25 @@
       <option name="presentableId" value="Default" />
       <updated>1711355279980</updated>
       <workItem from="1711355281313" duration="5002000" />
-      <workItem from="1711396537922" duration="2779000" />
+      <workItem from="1711396537922" duration="3086000" />
     </task>
+    <task id="LOCAL-00001" summary="add managers">
+      <option name="closed" value="true" />
+      <created>1711399457816</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711399457816</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add managers">
+      <option name="closed" value="true" />
+      <created>1711399466487</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711399466487</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +162,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add managers" />
+    <option name="LAST_COMMIT_MESSAGE" value="add managers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
