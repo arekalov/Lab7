@@ -2,6 +2,9 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -13,12 +16,13 @@ import java.util.Scanner;
 
 public class Server {
     final public static Integer PORT = 12345;
+    private static final Logger logger = LogManager.getLogger(Server.class);
 
-    ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT);
-    private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+    ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
+    private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager(logger);
 
     public void run() {
-        System.out.println("Сервер запущен. Ожидание подключения...");
+        logger.info("Сервер запущен. Ожидание подключения...");
         ServerSocketChannel socketChannel = serverConnectivityManager.getServerSocketChannel();
 
         Thread consoleInputThread = new Thread(() -> {
@@ -34,18 +38,18 @@ public class Server {
         try {
             while (true) {
                 SocketChannel clientSocketChannel = socketChannel.accept();
-                System.out.println("Клиент подключен");
+                logger.info("Клиент подключен");
 
                 readData(clientSocketChannel);
 
                 clientSocketChannel.close();
-                System.out.println("Соединение с клиентом закрыто.");
+                logger.info("Соединение с клиентом закрыто.");
             }
 
 
         } catch (IOException e) {
         } catch (Exception exception) {
-            System.err.println("Произошла ошибка " + exception);
+            logger.error("Произошла ошибка " + exception);
         } finally {
             serverConnectivityManager.close();
         }
@@ -59,16 +63,16 @@ public class Server {
                 Object obj = in.readObject();
                 if (obj instanceof CommandWithProduct) {
                     CommandWithProduct commandWithProduct = (CommandWithProduct) obj;
-                    System.out.println("Получено от клиента: " + commandWithProduct);
+                    logger.info("Получено от клиента: " + commandWithProduct);
 
                     serverExecutionManager.executeCommand(commandWithProduct);
 
                 }
             }
         } catch (EOFException eofException) {
-            System.out.println();
+            logger.info("");
         } catch (Exception e) {
-            System.err.println(e);
+            logger.error(e);
         }
     }
 }

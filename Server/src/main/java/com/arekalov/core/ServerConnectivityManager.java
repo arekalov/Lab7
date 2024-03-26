@@ -1,28 +1,26 @@
 package com.arekalov.core;
 
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 
 public class ServerConnectivityManager {
     private Integer port;
-    private Selector selector;
 
-    public Selector getSelector() {
-        return selector;
-    }
-
+    Logger logger;
     private ServerSocketChannel serverSocketChannel;
 
-    public ServerConnectivityManager(Integer port) {
+    public ServerConnectivityManager(Integer port, Logger logger) {
+        this.logger = logger;
         try {
             this.port = port;
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.bind(new InetSocketAddress(port));
         } catch (Exception ex) {
-            System.out.println(ex);
+            logger.error(ex);
             serverSocketChannel = null;
         }
     }
@@ -46,7 +44,7 @@ public class ServerConnectivityManager {
 
             }
         } catch (IOException ioException) {
-
+            logger.error(ioException);
         }
     }
 }

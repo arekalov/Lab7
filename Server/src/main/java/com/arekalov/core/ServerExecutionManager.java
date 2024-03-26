@@ -7,6 +7,7 @@ import com.arekalov.errors.EnvNotFoundError;
 import com.arekalov.errors.ReadFromFileError;
 import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
+import org.apache.logging.log4j.Logger;
 
 import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
@@ -20,6 +21,7 @@ public class ServerExecutionManager {
     private IOManager ioManager = new IOManager(ENV_NAME);
     protected Boolean isRunning = true;
     HashMap<String, Command> commandHashMap;
+    Logger logger;
     CommandManager commandManager;
     {
         initFromFile();
@@ -27,6 +29,10 @@ public class ServerExecutionManager {
         commandManager = new CommandManager(ioManager, this, parser, collectionManager);
         commandHashMap = commandManager.getHashMapCommands();
         initCommands();
+    }
+
+    public ServerExecutionManager(Logger logger) {
+        this.logger = logger;
     }
 
     public void addOutStream(ObjectOutputStream out) {
@@ -41,10 +47,10 @@ public class ServerExecutionManager {
     public void executeCommand(CommandWithProduct commandWithProduct){
         try {
             commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
-            System.out.println("OK\n");
+            logger.error("OK\n");
         }
         catch (RuntimeException runtimeException) {
-            System.err.println(runtimeException.getMessage());
+            logger.error(runtimeException.getMessage());
         }
     }
 
@@ -53,14 +59,14 @@ public class ServerExecutionManager {
             if (consoleInput.toLowerCase().equals("save")) {
                 CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null);
                 commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
-                System.out.println("OK\n");
+                logger.info("OK\n");
             }
             else {
-//                System.out.println("Error: Incorrect server command");
+                logger.error("Error: Incorrect server command");
             }
         }
         catch (RuntimeException runtimeException) {
-            System.err.println(runtimeException.getMessage());
+            logger.error(runtimeException.getMessage());
         }
     }
 
@@ -69,13 +75,13 @@ public class ServerExecutionManager {
             String json = ioManager.getJsonFromEnv();
             arrayDeque = parser.jsonToDequeOfProducts(json);
         } catch (EnvNotFoundError envNotFoundError) {
-            System.err.println(envNotFoundError.getMessage());
+            logger.error(envNotFoundError.getMessage());
             setRunning(false);
         } catch (ReadFromFileError readFromFileError) {
-            System.err.println(readFromFileError.getMessage());
+            logger.error(readFromFileError.getMessage());
             setRunning(false);
         } catch (Exception exception) {
-            System.err.println("Unexpected error! (" + exception + ")");
+            logger.fatal("Unexpected error! (" + exception + ")");
             setRunning(false);
         }
     }
