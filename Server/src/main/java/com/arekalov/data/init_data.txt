@@ -1,32 +1,5 @@
 [
   {
-    "id": 419085090,
-    "name": "arte",
-    "coordinates": {
-      "x": 12.0,
-      "y": 2.0
-    },
-    "creationDate": "2024-02-11T18:16:20.857482826",
-    "price": 2134,
-    "partNumber": "324fasdf",
-    "manufactureCost": 12,
-    "unitOfMeasure": "KILOGRAMS",
-    "manufacturer": {
-      "id": 1321453926,
-      "name": "dfdsaf",
-      "annualTurnover": 12.0,
-      "type": "TRUST",
-      "postalAddress": {
-        "street": "dsafaf",
-        "town": {
-          "x": 11.0,
-          "y": 21.0,
-          "name": "dvdadfgds"
-        }
-      }
-    }
-  },
-  {
     "id": 441064606,
     "name": "arten",
     "coordinates": {

@@ -2,10 +2,18 @@ package com.arekalov.core;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 
 public class ServerConnectivityManager {
     private Integer port;
+    private Selector selector;
+
+    public Selector getSelector() {
+        return selector;
+    }
+
     private ServerSocketChannel serverSocketChannel;
 
     public ServerConnectivityManager(Integer port) {
@@ -35,9 +43,10 @@ public class ServerConnectivityManager {
         try {
             if (serverSocketChannel != null) {
                 serverSocketChannel.close();
+
             }
         } catch (IOException ioException) {
-            return;
+
         }
     }
 }

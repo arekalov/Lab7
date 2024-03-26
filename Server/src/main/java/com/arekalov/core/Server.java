@@ -9,18 +9,30 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Scanner;
 
 public class Server {
     final public static Integer PORT = 12345;
 
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT);
     private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+
     public void run() {
         System.out.println("Сервер запущен. Ожидание подключения...");
         ServerSocketChannel socketChannel = serverConnectivityManager.getServerSocketChannel();
-        serverExecutionManager.setRunning(true);
+
+        Thread consoleInputThread = new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                if (scanner.hasNextLine()) {
+                    String consoleInput = scanner.nextLine();
+                    serverExecutionManager.save(consoleInput);
+                }
+            }
+        });
+        consoleInputThread.start();
         try {
-            while (serverExecutionManager.isRunning) {
+            while (true) {
                 SocketChannel clientSocketChannel = socketChannel.accept();
                 System.out.println("Клиент подключен");
 
@@ -30,11 +42,11 @@ public class Server {
                 System.out.println("Соединение с клиентом закрыто.");
             }
 
-        } catch (IOException e) {}
-        catch (Exception exception) {
+
+        } catch (IOException e) {
+        } catch (Exception exception) {
             System.err.println("Произошла ошибка " + exception);
-        }
-        finally {
+        } finally {
             serverConnectivityManager.close();
         }
     }
@@ -54,8 +66,8 @@ public class Server {
                 }
             }
         } catch (EOFException eofException) {
-        }
-        catch (Exception e) {
+            System.out.println();
+        } catch (Exception e) {
             System.err.println(e);
         }
     }

@@ -48,6 +48,22 @@ public class ServerExecutionManager {
         }
     }
 
+    public void save(String consoleInput) {
+        try {
+            if (consoleInput.toLowerCase().equals("save")) {
+                CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null);
+                commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+                System.out.println("OK\n");
+            }
+            else {
+//                System.out.println("Error: Incorrect server command");
+            }
+        }
+        catch (RuntimeException runtimeException) {
+            System.err.println(runtimeException.getMessage());
+        }
+    }
+
     public void initFromFile() {
         try {
             String json = ioManager.getJsonFromEnv();

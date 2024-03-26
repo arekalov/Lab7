@@ -131,7 +131,6 @@ public class CommandManager {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        saveCommand(commandParts);
     }
 
     /**
@@ -148,7 +147,6 @@ public class CommandManager {
                 System.err.println(ex);
             }
         } else throw new EmptyDequeError();
-        saveCommand(commandParts);
     }
 
     /**
@@ -169,7 +167,6 @@ public class CommandManager {
         } else {
             throw new EmptyDequeError();
         }
-        saveCommand(commandParts);
     }
 
     /**
@@ -262,7 +259,6 @@ public class CommandManager {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        saveCommand(commandParts);
     }
 
     /**
@@ -290,7 +286,6 @@ public class CommandManager {
         } else {
             throw new ArgumentError("Error: No product with id " + id);
         }
-        saveCommand(commandParts);
     }
 
     /**
@@ -323,7 +318,6 @@ public class CommandManager {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        saveCommand(commandParts);
     }
 
     /**
@@ -339,7 +333,6 @@ public class CommandManager {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-        saveCommand(commandParts);
     }
 
     /**
