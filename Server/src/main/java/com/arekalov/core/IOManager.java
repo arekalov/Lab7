@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class IOManager {
 
     private String envName;
-    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Constructor for IOManager
@@ -38,10 +37,6 @@ public class IOManager {
      * Method to set Scanner
      * @param scanner - Scanner
      */
-    public void setScanner(Scanner scanner) {
-
-        this.scanner = scanner;
-    }
     /**
      * Method to get File
      * @return File
@@ -76,18 +71,6 @@ public class IOManager {
         }
     }
 
-    /**
-     * Method to read from console
-     * @return String
-     */
-    public String consoleRead() {
-
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        }
-        setScanner(new Scanner(System.in));
-        return scanner.nextLine();
-    }
 
 
 }

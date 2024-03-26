@@ -8,7 +8,9 @@ import com.arekalov.errors.ReadFromFileError;
 import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 
+import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 
 public class ServerExecutionManager {
     public static final String ENV_NAME = "PROGA";
@@ -16,22 +18,34 @@ public class ServerExecutionManager {
     private CollectionManager collectionManager;
     private JsonParser parser = new JsonParser();
     private IOManager ioManager = new IOManager(ENV_NAME);
-    protected Boolean isRunning = false;
+    protected Boolean isRunning = true;
+    HashMap<String, Command> commandHashMap;
     CommandManager commandManager;
     {
         initFromFile();
         collectionManager = new CollectionManager(arrayDeque);
         commandManager = new CommandManager(ioManager, this, parser, collectionManager);
+        commandHashMap = commandManager.getHashMapCommands();
+        initCommands();
+    }
+
+    public void addOutStream(ObjectOutputStream out) {
+        commandManager.setOut(out);
     }
 
 
     public void setRunning(Boolean running) {
         isRunning = running;
-
     }
 
     public void executeCommand(CommandWithProduct commandWithProduct){
-
+        try {
+            commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+            System.out.println("OK\n");
+        }
+        catch (RuntimeException runtimeException) {
+            System.err.println(runtimeException.getMessage());
+        }
     }
 
     public void initFromFile() {

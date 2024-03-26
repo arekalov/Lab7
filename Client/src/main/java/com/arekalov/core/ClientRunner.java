@@ -11,6 +11,7 @@ import com.arekalov.readers.ProductReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * Class for running the program
@@ -56,14 +57,20 @@ public class ClientRunner {
         try {
             String[] commandParts = validateCommand(command.toLowerCase());
             Product product = null;
-            if (CommandsInfoArrays.commandsWithInputing.contains(command)) {
+            if (CommandsInfoArrays.commandsWithInputing.contains(commandParts[0])) {
                 product = productReader.getProduct();
             }
             CommandWithProduct commandWithProduct = new CommandWithProduct(command, commandParts, product);
-            System.out.println(commandWithProduct);
             out.writeObject(commandWithProduct);
             out.flush();
-            System.out.println(in.readObject());
+
+            String ans = (String) in.readObject();
+            if (Objects.equals(ans, "Bye")) {
+                isRunning = false;
+            }
+            else {
+                System.out.println(ans);
+            }
         } catch (IncorrectCommandError icr) {
             System.err.println("Error command: " + command);
         }

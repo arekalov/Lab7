@@ -12,20 +12,13 @@ import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 //import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * This class is responsible for executing commands
  * There are methods for executing commands and working with them
- *
  */
 public class CommandManager {
 
@@ -35,6 +28,11 @@ public class CommandManager {
     private HashMap<String, Command> hashMapCommands;
     private CollectionManager collectionManager;
     private HashSet<String> executableFiles;
+    private ObjectOutputStream out;
+
+    public void setOut(ObjectOutputStream out) {
+        this.out = out;
+    }
 
     /**
      * Constructor for CommandManager
@@ -64,9 +62,17 @@ public class CommandManager {
 
         ArrayList<Product> arrayList = new ArrayList<>(collectionManager.getArrayDeque());
         arrayList.sort(Collections.reverseOrder(new ProductComparator()));
+        String res = "";
         for (Product i : arrayList) {
-            System.out.println(i);
+            res += i + "\n";
         }
+        try {
+            out.writeObject(res);
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+
     }
 
     /**
@@ -83,7 +89,12 @@ public class CommandManager {
         for (Integer i : set) {
             unique.append(i.toString()).append(" ");
         }
-        System.out.println("Unique manufacturer: " + unique);
+        try {
+            out.writeObject("Unique manufacturer: " + unique);
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**
@@ -92,8 +103,6 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public void countLessThenPriceCommand(String[] commandParts) {
-
-//        Long price = Validators.checkUpperThenZero(Validators.checkLong(commandParts[1]));
         Long price = Long.valueOf(commandParts[1]);
         int count = 0;
         for (Product i : collectionManager.getArrayDeque()) {
@@ -101,7 +110,12 @@ public class CommandManager {
                 count++;
             }
         }
-        System.out.println("Count: " + count);
+        try {
+            out.writeObject("Count: " + count);
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**
@@ -110,10 +124,14 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public void removeLowerCommand(String[] commandParts, Product product) {
-
-//        Product product = new ProductReader(ioManager).getProduct();
         collectionManager.removeLower(product);
-        System.out.println("Success");
+        try {
+            out.writeObject("Success");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        saveCommand(commandParts);
     }
 
     /**
@@ -123,9 +141,14 @@ public class CommandManager {
      */
     public void removeHeadCommand(String[] commandParts) {
         if (!collectionManager.isEmpty()) {
-            System.out.println(collectionManager.removeHead());
-            System.out.println("Successfully deleted");
+            try {
+                out.writeObject(collectionManager.removeHead() + "\n" + "Successfully deleted");
+                out.flush();
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
         } else throw new EmptyDequeError();
+        saveCommand(commandParts);
     }
 
     /**
@@ -137,10 +160,16 @@ public class CommandManager {
 
         if (!collectionManager.isEmpty()) {
             collectionManager.removeHead();
-            System.out.println("Successfully deleted first element");
+            try {
+                out.writeObject("Successfully deleted first element");
+                out.flush();
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
         } else {
             throw new EmptyDequeError();
         }
+        saveCommand(commandParts);
     }
 
     /**
@@ -149,8 +178,12 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public void exitCommand(String[] commandParts) {
-
-        runner.setRunning(false);
+        try {
+            out.writeObject("Bye");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
 
     }
 
@@ -223,7 +256,13 @@ public class CommandManager {
     public void clearCommand(String[] commandParts) {
 
         collectionManager.clear();
-        System.out.println("Successfully cleared");
+        try {
+            out.writeObject("Successfully cleared");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        saveCommand(commandParts);
     }
 
     /**
@@ -236,16 +275,22 @@ public class CommandManager {
         Product toRemove = null;
         Long id = Validators.checkLong(commandParts[1]);
         for (Product i : collectionManager.getArrayDeque()) {
-            if (i.getId() == id) {
+            if (i.getId().equals(id)) {
                 toRemove = i;
             }
         }
         if (toRemove != null) {
             collectionManager.remove(toRemove);
-            System.out.println("Successfully deleted");
+            try {
+                out.writeObject("Successfully deleted");
+                out.flush();
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
         } else {
             throw new ArgumentError("Error: No product with id " + id);
         }
+        saveCommand(commandParts);
     }
 
     /**
@@ -256,9 +301,11 @@ public class CommandManager {
     public void updateCommand(String[] commandParts, Product product) {
 
         Long id = Validators.checkLong(commandParts[1]);
+        System.out.println("get id " + id);
         Product changeProduct = product;
         for (Product i : collectionManager.getArrayDeque()) {
-            if (i.getId() == id) {
+            if (Objects.equals(i.getId(), id)) {
+                System.out.println("Changed product id " + i);
                 changeProduct = i;
             }
         }
@@ -270,7 +317,13 @@ public class CommandManager {
         changeProduct.setManufactureCost(product.getManufactureCost());
         changeProduct.setUnitOfMeasure(product.getUnitOfMeasure());
         changeProduct.setManufacturer(product.getManufacturer());
-        System.out.println("Success");
+        try {
+            out.writeObject("Success");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        saveCommand(commandParts);
     }
 
     /**
@@ -280,7 +333,13 @@ public class CommandManager {
      */
     public void addCommand(String[] commandParts, Product product) {
         collectionManager.add(product);
-        System.out.println("Success");
+        try {
+            out.writeObject("Success");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+        saveCommand(commandParts);
     }
 
     /**
@@ -289,13 +348,20 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public void showCommand(String[] commandParts) {
-
-        if (collectionManager.isEmpty()) {
-            System.out.println("Empty");
-        }
-        for (Product i : collectionManager.getArrayDeque()) {
-            System.out.println(i);
-            System.out.println();
+        try {
+            if (collectionManager.isEmpty()) {
+                out.writeObject("Empty");
+                out.flush();
+            } else {
+                String res = "";
+                for (Product i : collectionManager.getArrayDeque()) {
+                    res += i + "\n\n";
+                }
+                out.writeObject(res);
+                out.flush();
+            }
+        } catch (IOException ex) {
+            System.err.println(ex);
         }
     }
 
@@ -305,40 +371,45 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public void infoCommand(String[] commandParts) {
-
-        System.out.println(collectionManager.getArrayDeque().getClass());
-        System.out.println(LocalDate.now());
-        System.out.println(collectionManager.getArrayDeque().size());
-
+        try {
+            out.writeObject(collectionManager.getArrayDeque().getClass() + "\n" + LocalDate.now() + "\n" + collectionManager.getArrayDeque().size());
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
 
     }
 
 
     public void helpCommand(String[] commandsParts) {
-
-        System.out.println("""
-                help : вывести справку по доступным командам
-                info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-                show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
-                add {element} : добавить новый элемент в коллекцию
-                update id {element} : обновить значение элемента коллекции, id которого равен заданному
-                remove_by_id id : удалить элемент из коллекции по его id
-                clear : очистить коллекцию
-                save : сохранить коллекцию в файл
-                execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
-                exit : завершить программу (без сохранения в файл)
-                remove_first : удалить первый элемент из коллекции
-                remove_head : вывести первый элемент коллекции и удалить его
-                remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
-                count_less_than_price price : вывести количество элементов, значение поля price которых меньше заданного
-                print_unique_manufacturer : вывести уникальные значения поля manufacturer всех элементов в коллекции
-                print_field_descending_price : вывести значения поля price всех элементов в порядке убывания""");
+        try {
+            out.writeObject("""
+                    help : вывести справку по доступным командам
+                    info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+                    show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
+                    add {element} : добавить новый элемент в коллекцию
+                    update id {element} : обновить значение элемента коллекции, id которого равен заданному
+                    remove_by_id id : удалить элемент из коллекции по его id
+                    clear : очистить коллекцию
+                    save : сохранить коллекцию в файл
+                    execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+                    exit : завершить программу (без сохранения в файл)
+                    remove_first : удалить первый элемент из коллекции
+                    remove_head : вывести первый элемент коллекции и удалить его
+                    remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
+                    count_less_than_price price : вывести количество элементов, значение поля price которых меньше заданного
+                    print_unique_manufacturer : вывести уникальные значения поля manufacturer всех элементов в коллекции
+                    print_field_descending_price : вывести значения поля price всех элементов в порядке убывания""");
+            out.flush();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**
      * This method initializes the collection from a file, it creates a new collection from the file and catches exceptions like file not found or incorrect json or permission denied
      */
-    public HashMap<String, Command> initHashMap(Pair<String, Command> ... commands) {
+    public HashMap<String, Command> initHashMap(Pair<String, Command>... commands) {
         for (Pair<String, Command> command : commands) {
             hashMapCommands.put(command.getKey(), command.getValue());
         }

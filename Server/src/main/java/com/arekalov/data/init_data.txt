@@ -1,30 +1,5 @@
 [
   {
-    "id": 4,
-    "name": "name",
-    "coordinates": {
-      "x": 1.0,
-      "y": 1.0
-    },
-    "creationDate": "2024-02-11T16:37:34.263729921",
-    "price": 52,
-    "partNumber": "1",
-    "manufactureCost": 12,
-    "unitOfMeasure": "KILOGRAMS",
-    "manufacturer": {
-      "id": 4,
-      "name": "name",
-      "annualTurnover": 12.1,
-      "type": "COMMERCIAL",
-      "postalAddress": {
-        "street": "fmaskdf",
-        "town": {
-          "y": 0.0
-        }
-      }
-    }
-  },
-  {
     "id": 419085090,
     "name": "arte",
     "coordinates": {
@@ -127,6 +102,33 @@
         "town": {
           "x": 12.0,
           "y": 21.0,
+          "name": "12"
+        }
+      }
+    }
+  },
+  {
+    "id": 291975596,
+    "name": "rekalov",
+    "coordinates": {
+      "x": 12.0,
+      "y": 1.0
+    },
+    "creationDate": "2024-03-26T11:49:40.389263788",
+    "price": 1,
+    "partNumber": "1",
+    "manufactureCost": 1,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 1787100041,
+      "name": "12",
+      "annualTurnover": 12.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "1",
+        "town": {
+          "x": 12.0,
+          "y": 12.0,
           "name": "12"
         }
       }

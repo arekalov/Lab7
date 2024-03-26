@@ -4,6 +4,30 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class CommandWithProduct implements Serializable {
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
+    public String[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(String[] args) {
+        this.args = args;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     String command;
     String[] args;
     Product product;

@@ -2,6 +2,8 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
+
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,8 +18,9 @@ public class Server {
     public void run() {
         System.out.println("Сервер запущен. Ожидание подключения...");
         ServerSocketChannel socketChannel = serverConnectivityManager.getServerSocketChannel();
+        serverExecutionManager.setRunning(true);
         try {
-            while (true) {
+            while (serverExecutionManager.isRunning) {
                 SocketChannel clientSocketChannel = socketChannel.accept();
                 System.out.println("Клиент подключен");
 
@@ -27,9 +30,8 @@ public class Server {
                 System.out.println("Соединение с клиентом закрыто.");
             }
 
-        } catch (IOException e) {
-
-        } catch (Exception exception) {
+        } catch (IOException e) {}
+        catch (Exception exception) {
             System.err.println("Произошла ошибка " + exception);
         }
         finally {
@@ -40,19 +42,24 @@ public class Server {
     private void readData(SocketChannel socketChannel) {
         try (ObjectInputStream in = new ObjectInputStream(socketChannel.socket().getInputStream());
              ObjectOutputStream out = new ObjectOutputStream(socketChannel.socket().getOutputStream())) {
+            serverExecutionManager.addOutStream(out);
             while (true) {
                 Object obj = in.readObject();
                 if (obj instanceof CommandWithProduct) {
                     CommandWithProduct commandWithProduct = (CommandWithProduct) obj;
                     System.out.println("Получено от клиента: " + commandWithProduct);
 
-//                    serverExecutionManager.
+                    serverExecutionManager.executeCommand(commandWithProduct);
 
-                    out.writeObject(commandWithProduct);
-                    out.flush();
+//                    out.writeObject(commandWithProduct);
+//                    out.flush();
                 }
             }
-        } catch (Exception e) {
+        } catch (EOFException eofException) {
+            System.out.println("Соединение с клиентом закрыто.");
+        }
+        catch (Exception e) {
+            System.err.println("hui");
             System.err.println(e);
         }
     }
