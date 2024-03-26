@@ -40,6 +40,7 @@ public class ClientRunner {
             while (isRunning) {
                 printDelimiter();
                 String input = ioManager.consoleRead();
+                files.clear();
                 executeCommand(input);
             }
             stopWorkingPrinter();
@@ -59,6 +60,7 @@ public class ClientRunner {
             String[] commandParts = validateCommand(command);
             commandParts[0] = commandParts[0].toLowerCase();
             if (commandParts[0].equals("execute_script")) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 executeScript(commandParts[1]);
             } else {
                 sendCommand(command);
@@ -86,8 +88,6 @@ public class ClientRunner {
                     System.out.println(line);
                     if (files.contains(path)) {
                         throw new RecursionError();
-                    } else {
-                        sendCommand(line);
                     }
                     sendCommand(line);
                 } while (scanner.hasNextLine());

@@ -47,7 +47,7 @@ public class ServerExecutionManager {
     public void executeCommand(CommandWithProduct commandWithProduct){
         try {
             commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
-            logger.error("OK\n");
+            logger.info("OK\n");
         }
         catch (RuntimeException runtimeException) {
             logger.error(runtimeException.getMessage());
