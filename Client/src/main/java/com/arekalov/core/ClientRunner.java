@@ -9,6 +9,7 @@ import com.arekalov.errors.RecursionError;
 import com.arekalov.readers.ProductReader;
 
 import java.io.*;
+import java.net.SocketException;
 import java.util.*;
 
 /**
@@ -62,8 +63,12 @@ public class ClientRunner {
             } else {
                 sendCommand(command);
             }
-        } catch (Exception ex) {
-            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
+        } catch (SocketException socketException) {
+            System.out.println("\u001B[31m" + "Сервер временно недоступен" + "\u001B[0m");
+            isRunning = false;
+        }
+        catch (Exception ex) {
+            System.out.println("\u001B[31m" + ex + "\u001B[0m");
         }
     }
 
