@@ -36,6 +36,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -45,28 +46,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Lab6:Client [:Client:Client.main()].executor": "Run",
-    "Gradle.Lab6:Client [:Client:Client2.main()].executor": "Run",
-    "Gradle.Lab6:Server [:Server:MainServer.main()].executor": "Run",
-    "Gradle.Lab6:Server [:Server:Server.main()].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/java/com/arekalov/core",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Lab6:Client [:Client:Client.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Lab6:Client [:Client:Client2.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Lab6:Server [:Server:MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Lab6:Server [:Server:Server.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/java/com/arekalov/core&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.arekalov" />
@@ -84,7 +85,7 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.MainServer">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -254,6 +255,7 @@
     <MESSAGE value="edit ConnectionManager" />
     <MESSAGE value="edit commands" />
     <MESSAGE value="add recursion fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="add recursion fix" />
+    <MESSAGE value="add recursion fix&#10;&#10;(cherry picked from commit acd20321c2ba9e96b99228cc673d6019ee60863e)" />
+    <option name="LAST_COMMIT_MESSAGE" value="add recursion fix&#10;&#10;(cherry picked from commit acd20321c2ba9e96b99228cc673d6019ee60863e)" />
   </component>
 </project>
