@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * Class of command RemoveLower.
@@ -20,8 +22,10 @@ public class RemoveLowerCommand implements Command{
      * Method for executing this command.
      * @param commandParts
      */
+
+
     @Override
-    public void execute(String[] commandParts) {
-        manager.removeLowerCommand(commandParts);
+    public void execute(String[] commandParts, Product product) {
+        manager.removeLowerCommand(commandParts, product);
     }
 }

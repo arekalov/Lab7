@@ -1,6 +1,7 @@
 package com.arekalov.core;
 
-import arekalov.com.proga5.entities.Product;
+
+import com.arekalov.entities.Product;
 
 import java.util.Comparator;
 

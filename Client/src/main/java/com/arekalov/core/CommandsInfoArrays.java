@@ -55,6 +55,5 @@ public class CommandsInfoArrays {
         commandsWithInputing.add("update");
         commandsWithInputing.add("add");
         commandsWithInputing.add("remove_lower");
-        commandsWithInputing.add("remove_lower");
     }
 }

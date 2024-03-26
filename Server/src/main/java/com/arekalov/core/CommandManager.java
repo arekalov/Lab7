@@ -1,19 +1,26 @@
 package com.arekalov.core;
 
-import arekalov.com.proga5.commands.Command;
-import arekalov.com.proga5.entities.Product;
-import arekalov.com.proga5.errors.*;
-import arekalov.com.proga5.parsing.JsonParser;
-import arekalov.com.proga5.readers.ProductReader;
-import arekalov.com.proga5.readers.Validators;
+
+import com.arekalov.commands.Command;
+import com.arekalov.commands.Validators;
+import com.arekalov.entities.Product;
+import com.arekalov.errors.ArgumentError;
+import com.arekalov.errors.EmptyDequeError;
+import com.arekalov.errors.EnvNotFoundError;
+import com.arekalov.errors.ReadFromFileError;
+import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
+//import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * This class is responsible for executing commands
@@ -22,7 +29,7 @@ import java.util.*;
  */
 public class CommandManager {
 
-    private Runner runner;
+    private ServerExecutionManager runner;
     private IOManager ioManager;
     private JsonParser parser;
     private HashMap<String, Command> hashMapCommands;
@@ -36,7 +43,7 @@ public class CommandManager {
      * @param runner
      * @param parser
      */
-    public CommandManager(IOManager ioManager, Runner runner, JsonParser parser, CollectionManager collectionManager) {
+    public CommandManager(IOManager ioManager, ServerExecutionManager runner, JsonParser parser, CollectionManager collectionManager) {
         this.runner = runner;
         this.ioManager = ioManager;
         this.parser = parser;
@@ -86,7 +93,8 @@ public class CommandManager {
      */
     public void countLessThenPriceCommand(String[] commandParts) {
 
-        Long price = Validators.checkUpperThenZero(Validators.checkLong(commandParts[1]));
+//        Long price = Validators.checkUpperThenZero(Validators.checkLong(commandParts[1]));
+        Long price = Long.valueOf(commandParts[1]);
         int count = 0;
         for (Product i : collectionManager.getArrayDeque()) {
             if (i.getPrice() < price) {
@@ -101,9 +109,9 @@ public class CommandManager {
      *
      * @param commandParts - command parts
      */
-    public void removeLowerCommand(String[] commandParts) {
+    public void removeLowerCommand(String[] commandParts, Product product) {
 
-        Product product = new ProductReader(ioManager).getProduct();
+//        Product product = new ProductReader(ioManager).getProduct();
         collectionManager.removeLower(product);
         System.out.println("Success");
     }
@@ -152,35 +160,34 @@ public class CommandManager {
      *
      * @param commandParts - command parts
      */
-    public void executeScriptCommand(String[] commandParts, HashMap<String, Integer> files){
-        try {
-            File inputFile = new File(commandParts[1]);
-            Scanner scanner = new Scanner(inputFile);
-            ioManager.setScanner(scanner);
-            if (true) {
-                System.out.println("Start executing script");
-                do {
-                    String line = scanner.nextLine();
-                    System.out.println("__");
-                    System.out.println(line);
-                    if (files.get(commandParts[1]) > 1) {
-                        throw new RecursionError();
-                    }
-                    else {
-                        runner.executeCommand(line);
-                    }
-                } while (scanner.hasNextLine());
-                ioManager.setScanner(new Scanner(System.in));
-                System.out.println("End executing script");
-            } else throw new RecursionError();
-        } catch (FileNotFoundException e) {
-            System.err.println("Error: can't read this file");
-        } catch (RecursionError recursionError) {
-            System.err.println(recursionError.getMessage());
-            runner.setRunning(false);
-        }
+//    public void executeScriptCommand(String[] commandParts, HashMap<String, Integer> files){
+//        try {
+//            File inputFile = new File(commandParts[1]);
+//            Scanner scanner = new Scanner(inputFile);
+//            ioManager.setScanner(scanner);
+//            if (true) {
+//                System.out.println("Start executing script");
+//                do {
+//                    String line = scanner.nextLine();
+//                    System.out.println("__");
+//                    System.out.println(line);
+//                    if (files.get(commandParts[1]) > 1) {
+//                        throw new RecursionError();
+//                    }
+//                    else {
+//                        runner.executeCommand(line);
+//                    }
+//                } while (scanner.hasNextLine());
+//                ioManager.setScanner(new Scanner(System.in));
+//                System.out.println("End executing script");
+//            } else throw new RecursionError();
+//        } catch (FileNotFoundException e) {
+//            System.err.println("Error: can't read this file");
+//        } catch (RecursionError recursionError) {
+//            System.err.println(recursionError.getMessage());
+//            runner.setRunning(false);
+//        }
 
-    }
 
     /**
      * This method saves the collection to a file, it can throw an exception if the file is not found
@@ -246,10 +253,9 @@ public class CommandManager {
      *
      * @param commandParts - command parts
      */
-    public void updateCommand(String[] commandParts) {
+    public void updateCommand(String[] commandParts, Product product) {
 
         Long id = Validators.checkLong(commandParts[1]);
-        Product product = new ProductReader(ioManager).getProduct();
         Product changeProduct = product;
         for (Product i : collectionManager.getArrayDeque()) {
             if (i.getId() == id) {
@@ -272,9 +278,7 @@ public class CommandManager {
      *
      * @param commandParts - command parts
      */
-    public void addCommand(String[] commandParts) {
-
-        Product product = new ProductReader(ioManager).getProduct();
+    public void addCommand(String[] commandParts, Product product) {
         collectionManager.add(product);
         System.out.println("Success");
     }
@@ -309,11 +313,7 @@ public class CommandManager {
 
     }
 
-    /**
-     * This method prints the help
-     *
-     * @param commandsParts - command parts
-     */
+
     public void helpCommand(String[] commandsParts) {
 
         System.out.println("""

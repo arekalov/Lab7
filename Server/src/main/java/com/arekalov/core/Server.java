@@ -1,9 +1,7 @@
 package com.arekalov.core;
 
-import com.arekalov.core.ServerConnectivityManager;
-import com.arekalov.core.ServerExecutionManager;
-import com.arekalov.entities.CommandWithProduct;
 
+import com.arekalov.entities.CommandWithProduct;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -12,7 +10,8 @@ import java.nio.channels.SocketChannel;
 
 public class Server {
     final public static Integer PORT = 12345;
-    final ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT);
+
+    ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT);
     private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
     public void run() {
         System.out.println("Сервер запущен. Ожидание подключения...");

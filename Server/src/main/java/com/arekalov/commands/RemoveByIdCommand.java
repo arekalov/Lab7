@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * Class of command PrintFileDecsindingPriceCommand.
@@ -19,8 +21,10 @@ public class RemoveByIdCommand implements Command{
      * Method for executing this command
      * @param commandParts string array of command parameters
      */
+
+
     @Override
-    public void execute(String[] commandParts) {
+    public void execute(String[] commandParts, Product product) {
         manager.removeByIdCommand(commandParts);
     }
 }

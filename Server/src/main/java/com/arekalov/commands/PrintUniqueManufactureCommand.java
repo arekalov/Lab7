@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * PrintUniqueManufactureCommand class
@@ -20,8 +22,9 @@ public class PrintUniqueManufactureCommand implements Command{
      * calls the manager to execute the printUniqueManufactureCommand
      * @param commandParts
      */
+
     @Override
-    public void execute(String[] commandParts) {
+    public void execute(String[] commandParts, Product product) {
         manager.printUniqueManufactureCommand(commandParts);
     }
 }

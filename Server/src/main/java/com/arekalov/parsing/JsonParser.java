@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-
 /**
  * Class for arekalov.com.parsing json
  */

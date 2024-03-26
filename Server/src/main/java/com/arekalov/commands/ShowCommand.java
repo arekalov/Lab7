@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * Class of the command to show the collection
@@ -18,8 +20,9 @@ public class ShowCommand implements Command{
      * Method to execute the command
      * @param commandParts - the parts of the command
      */
+
     @Override
-    public void execute(String[] commandParts) {
+    public void execute(String[] commandParts, Product product) {
         manager.showCommand(commandParts);
     }
 }

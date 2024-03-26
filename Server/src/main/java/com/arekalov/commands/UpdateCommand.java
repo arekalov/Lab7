@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * UpdateCommand class is a command that updates the command in the command manager
@@ -19,7 +21,7 @@ public class UpdateCommand implements Command{
      * @param commandParts String array of command parts
      */
     @Override
-    public void execute(String[] commandParts) {
-        manager.updateCommand(commandParts);
+    public void execute(String[] commandParts, Product product) {
+        manager.updateCommand(commandParts, product);
     }
 }

@@ -4,10 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="bug fix">
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="edit ConnectionManager">
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/Validators.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/ArgsCountError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/ArgumentError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/EmptyDequeError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/EnvNotFoundError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/IncorrectCommandError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/ReadFromFileError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/errors/RecursionError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/ServerConnectivityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/ServerConnectivityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/parsing/JsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/parsing/JsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/parsing/LocalDateTimeDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/parsing/LocalDateTimeDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/parsing/LocalDateTimeSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/parsing/LocalDateTimeSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Server/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CommandInvoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CommandInvoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CountLessThenPriceCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CountLessThenPriceCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintFileDecsindingPriceCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintFileDecsindingPriceCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintUniqueManufactureCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintUniqueManufactureCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveFirstCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveFirstCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveHeadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveHeadCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveLowerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveLowerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/UpdateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/IOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/IOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/ProductComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/ProductComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/ServerExecutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/ServerExecutionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,36 +79,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Lab6:Client [:Client:Client.main()].executor": "Run",
-    "Gradle.Lab6:Server [:Server:MainServer.main()].executor": "Run",
-    "Gradle.Lab6:Server [:Server:Server.main()].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab6",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Lab6:Client [:Client:Client.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Lab6:Server [:Server:MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Lab6:Server [:Server:Server.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/java/com/arekalov/core&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.arekalov" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core" />
+      <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.MainServer">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="PATTERN" value="com.arekalov.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -84,7 +125,7 @@
       <module name="Lab6.Server.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="PATTERN" value="com.arekalov.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -93,11 +134,11 @@
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.Server" />
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.core.Server" />
       <module name="Lab6.Server.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="PATTERN" value="com.arekalov.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -129,7 +170,9 @@
       <option name="presentableId" value="Default" />
       <updated>1711355279980</updated>
       <workItem from="1711355281313" duration="5002000" />
-      <workItem from="1711396537922" duration="3576000" />
+      <workItem from="1711396537922" duration="3905000" />
+      <workItem from="1711433913508" duration="387000" />
+      <workItem from="1711434311716" duration="769000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -155,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711399628158</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="edit ConnectionManager">
+      <option name="closed" value="true" />
+      <created>1711427521321</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711427521321</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,14 +226,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add managers" />
     <MESSAGE value="bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+    <MESSAGE value="edit ConnectionManager" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit ConnectionManager" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/src/main/java/com/arekalov/Server.java</url>
-          <line>20</line>
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java</url>
+          <line>21</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

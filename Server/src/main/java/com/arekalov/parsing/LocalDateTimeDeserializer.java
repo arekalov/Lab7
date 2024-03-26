@@ -1,6 +1,5 @@
 package com.arekalov.parsing;
 
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -10,7 +9,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 
 /**
- * Class for deserializing local date time
+ * Class for deserializing localimplementation("com.google.code.gson:gson:2.10.1") date time
  */
 public class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
     /**

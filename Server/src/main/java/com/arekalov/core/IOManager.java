@@ -1,7 +1,9 @@
 package com.arekalov.core;
 
-import arekalov.com.proga5.errors.EnvNotFoundError;
-import arekalov.com.proga5.errors.ReadFromFileError;
+
+
+import com.arekalov.errors.EnvNotFoundError;
+import com.arekalov.errors.ReadFromFileError;
 
 import java.io.BufferedInputStream;
 import java.io.File;

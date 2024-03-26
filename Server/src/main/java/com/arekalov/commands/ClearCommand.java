@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * ClearCommand class realizes Command interface and execute method
@@ -27,8 +29,9 @@ public class ClearCommand implements Command{
      * Method for executing command
      * @param commandParts
      */
+
     @Override
-    public void execute(String[] commandParts) {
+    public void execute(String[] commandParts, Product product) {
         manager.clearCommand(commandParts);
     }
 }

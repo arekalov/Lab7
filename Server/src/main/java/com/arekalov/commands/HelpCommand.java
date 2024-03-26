@@ -1,6 +1,8 @@
 package com.arekalov.commands;
 
-import arekalov.com.proga5.core.CommandManager;
+
+import com.arekalov.core.CommandManager;
+import com.arekalov.entities.Product;
 
 /**
  * Class of command Help.
@@ -21,7 +23,7 @@ public class HelpCommand implements Command{
      * @param commandParts
      */
     @Override
-    public void execute(String[] commandParts) {
+    public void execute(String[] commandParts, Product product) {
         commandManager.helpCommand(commandParts);
     }
 }
