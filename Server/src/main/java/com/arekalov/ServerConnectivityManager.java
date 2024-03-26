@@ -1,5 +1,6 @@
 package com.arekalov;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
 
@@ -28,5 +29,15 @@ public class ServerConnectivityManager {
 
     public ServerSocketChannel getServerSocketChannel() {
         return serverSocketChannel;
+    }
+
+    public void close() {
+        try {
+            if (serverSocketChannel != null) {
+                serverSocketChannel.close();
+            }
+        } catch (IOException ioException) {
+            return;
+        }
     }
 }

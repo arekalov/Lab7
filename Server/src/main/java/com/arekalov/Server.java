@@ -27,9 +27,12 @@ public class Server {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (Exception exception) {
             System.err.println("Произошла ошибка " + exception);
+        }
+        finally {
+            serverConnectivityManager.close();
         }
     }
 
