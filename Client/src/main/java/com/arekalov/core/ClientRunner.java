@@ -1,17 +1,15 @@
 package com.arekalov.core;
 
 
-
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgsCountError;
 import com.arekalov.errors.IncorrectCommandError;
+import com.arekalov.errors.RecursionError;
 import com.arekalov.readers.ProductReader;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.io.*;
+import java.util.*;
 
 /**
  * Class for running the program
@@ -23,6 +21,7 @@ public class ClientRunner {
     private IOManager ioManager = new IOManager(ENV_NAME);
     private ProductReader productReader = new ProductReader(ioManager);
     private Boolean isRunning = true;
+    private HashSet<String> files = new HashSet<String>();
 
 
     public ClientRunner(ObjectOutputStream out, ObjectInputStream in) {
@@ -40,7 +39,7 @@ public class ClientRunner {
             while (isRunning) {
                 printDelimiter();
                 String input = ioManager.consoleRead();
-                sendCommand(input);
+                executeCommand(input);
             }
             stopWorkingPrinter();
         } catch (NoSuchElementException noSuchElementException) {
@@ -53,32 +52,68 @@ public class ClientRunner {
             stopWorkingPrinter();
         }
     }
-    protected void sendCommand(String command) {
-        try {
-            String[] commandParts = validateCommand(command.toLowerCase());
-            Product product = null;
-            if (CommandsInfoArrays.commandsWithInputing.contains(commandParts[0])) {
-                product = productReader.getProduct();
-            }
-            CommandWithProduct commandWithProduct = new CommandWithProduct(command, commandParts, product);
-            out.writeObject(commandWithProduct);
-            out.flush();
 
-            String ans = (String) in.readObject();
-            if (Objects.equals(ans, "Bye")) {
-                isRunning = false;
+    private void executeCommand(String command) {
+        try {
+            String[] commandParts = validateCommand(command);
+            commandParts[0] = commandParts[0].toLowerCase();
+            if (commandParts[0].equals("execute_script")) {
+                executeScript(commandParts[1]);
+            } else {
+                sendCommand(command);
             }
-            else {
-                System.out.println(ans);
-            }
-        } catch (IncorrectCommandError icr) {
-            System.err.println("Error command: " + command);
+        } catch (Exception ex) {
+            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
         }
-        catch (ArgsCountError ace) {
-            System.err.println("Error args count for command: " + command);
+    }
+
+    private void executeScript(String path) {
+        try {
+//          execute_script  /home/arekalov/Subjects/II/Proga/Lab6/Client/src/main/data/simple.txt
+            File inputFile = new File(path);
+            Scanner scanner = new Scanner(inputFile);
+            ioManager.setScanner(scanner);
+            if (true) {
+                System.out.println("Start executing script");
+                do {
+                    String line = scanner.nextLine();
+                    System.out.println("__");
+                    System.out.println(line);
+                    if (files.contains(path)) {
+                        throw new RecursionError();
+                    } else {
+                        sendCommand(line);
+                    }
+                    sendCommand(line);
+                } while (scanner.hasNextLine());
+                files.add(path);
+                ioManager.setScanner(new Scanner(System.in));
+                System.out.println("End executing script");
+            } else throw new RecursionError();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        catch (Exception e) {
-            System.err.println(e);
+    }
+
+    protected void sendCommand(String command) throws IOException, ClassNotFoundException {
+        String[] commandParts = validateCommand(command.toLowerCase());
+        Product product = null;
+        if (CommandsInfoArrays.commandsWithInputing.contains(commandParts[0])) {
+            product = productReader.getProduct();
+        }
+        CommandWithProduct commandWithProduct = new CommandWithProduct(commandParts[0], commandParts, product);
+        out.writeObject(commandWithProduct);
+        out.flush();
+
+        String ans = (String) in.readObject();
+        if (Objects.equals(ans, "Bye")) {
+            isRunning = false;
+        } else {
+            System.out.println(ans);
         }
     }
 

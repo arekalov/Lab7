@@ -51,15 +51,11 @@ public class Server {
 
                     serverExecutionManager.executeCommand(commandWithProduct);
 
-//                    out.writeObject(commandWithProduct);
-//                    out.flush();
                 }
             }
         } catch (EOFException eofException) {
-            System.out.println("Соединение с клиентом закрыто.");
         }
         catch (Exception e) {
-            System.err.println("hui");
             System.err.println(e);
         }
     }
