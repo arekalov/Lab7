@@ -1,5 +1,7 @@
-package com.arekalov;
+package com.arekalov.core;
 
+import com.arekalov.core.ServerConnectivityManager;
+import com.arekalov.core.ServerExecutionManager;
 import com.arekalov.entities.CommandWithProduct;
 
 import java.io.IOException;

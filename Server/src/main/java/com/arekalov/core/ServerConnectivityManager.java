@@ -1,4 +1,4 @@
-package com.arekalov;
+package com.arekalov.core;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

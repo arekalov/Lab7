@@ -1,5 +1,6 @@
-package com.arekalov;
+package com.arekalov.core;
 
 public class ServerExecutionManager {
+
 
 }
