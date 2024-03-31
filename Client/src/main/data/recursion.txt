@@ -1,0 +1,1 @@
+execute_script /home/arekalov/Development/Lab6/Client/src/main/data/recursion.txt

@@ -60,7 +60,6 @@ public class ClientRunner {
             String[] commandParts = validateCommand(command);
             commandParts[0] = commandParts[0].toLowerCase();
             if (commandParts[0].equals("execute_script")) {
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 executeScript(commandParts[1]);
             } else {
                 sendCommand(command);
@@ -70,7 +69,7 @@ public class ClientRunner {
             isRunning = false;
         }
         catch (Exception ex) {
-            System.out.println("\u001B[31m" + ex + "\u001B[0m");
+            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
         }
     }
 
@@ -82,6 +81,7 @@ public class ClientRunner {
             ioManager.setScanner(scanner);
             if (true) {
                 System.out.println("Start executing script");
+                files.add(path);
                 do {
                     String line = scanner.nextLine();
                     System.out.println("__");
@@ -89,17 +89,12 @@ public class ClientRunner {
                     if (files.contains(path)) {
                         throw new RecursionError();
                     }
-                    sendCommand(line);
+                    executeCommand(line);
                 } while (scanner.hasNextLine());
-                files.add(path);
                 ioManager.setScanner(new Scanner(System.in));
                 System.out.println("End executing script");
             } else throw new RecursionError();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
