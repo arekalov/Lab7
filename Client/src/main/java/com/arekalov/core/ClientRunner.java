@@ -9,6 +9,7 @@ import com.arekalov.errors.RecursionError;
 import com.arekalov.readers.ProductReader;
 
 import java.io.*;
+import java.net.SocketException;
 import java.util.*;
 
 /**
@@ -39,6 +40,7 @@ public class ClientRunner {
             while (isRunning) {
                 printDelimiter();
                 String input = ioManager.consoleRead();
+                files.clear();
                 executeCommand(input);
             }
             stopWorkingPrinter();
@@ -58,12 +60,17 @@ public class ClientRunner {
             String[] commandParts = validateCommand(command);
             commandParts[0] = commandParts[0].toLowerCase();
             if (commandParts[0].equals("execute_script")) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 executeScript(commandParts[1]);
             } else {
                 sendCommand(command);
             }
-        } catch (Exception ex) {
-            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
+        } catch (SocketException socketException) {
+            System.out.println("\u001B[31m" + "Сервер временно недоступен" + "\u001B[0m");
+            isRunning = false;
+        }
+        catch (Exception ex) {
+            System.out.println("\u001B[31m" + ex + "\u001B[0m");
         }
     }
 
@@ -81,8 +88,6 @@ public class ClientRunner {
                     System.out.println(line);
                     if (files.contains(path)) {
                         throw new RecursionError();
-                    } else {
-                        sendCommand(line);
                     }
                     sendCommand(line);
                 } while (scanner.hasNextLine());
