@@ -21,7 +21,7 @@ public class ServerExecutionManager {
     private IOManager ioManager = new IOManager(ENV_NAME);
     protected Boolean isRunning = true;
     HashMap<String, Command> commandHashMap;
-    Logger logger;
+    Logger logger = Server.logger;
     CommandManager commandManager;
     {
         initFromFile();
@@ -31,9 +31,6 @@ public class ServerExecutionManager {
         initCommands();
     }
 
-    public ServerExecutionManager(Logger logger) {
-        this.logger = logger;
-    }
 
     public void addOutStream(ObjectOutputStream out) {
         commandManager.setOut(out);

@@ -16,10 +16,10 @@ import java.util.Scanner;
 
 public class Server {
     final public static Integer PORT = 12345;
-    private static final Logger logger = LogManager.getLogger(Server.class);
+    public static final Logger logger = LogManager.getLogger(Server.class);
 
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
-    private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager(logger);
+    private final ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
 
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");

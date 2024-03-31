@@ -44,6 +44,7 @@ public class IOManager {
     public File getFile() {
 
         String filePath = System.getenv(envName);
+//        System.out.println(filePath);
         if (filePath != null) {
             return new File(filePath);
         } else throw new EnvNotFoundError(envName);
