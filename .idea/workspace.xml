@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="fix bug with env reading">
-      <change afterPath="$PROJECT_DIR$/Client/src/main/data/recursion.txt" afterDir="false" />
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="fix recursion problems, add recursion.txt file for demonstration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,29 +48,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Lab6:Client [:Client:Client.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:Client2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:MainServer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:Server.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Lab6:Client [:Client:Client.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:Client2.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:NonBlockingClient.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:NonBlockingClient2.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:TestClient.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:TestClient2.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:MainServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:NonBlockingServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:Server.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:TestServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:TestServer2.main()].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab6/Server/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.arekalov" />
@@ -90,22 +96,9 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
-      <module name="Lab6.Client.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.arekalov.core.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Client2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.Client2" />
+  <component name="RunManager" selected="Application.NonBlockingClient2">
+    <configuration name="NonBlockingClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.NonBlockingClient" />
       <module name="Lab6.Client.main" />
       <extension name="coverage">
         <pattern>
@@ -117,12 +110,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.MainServer" />
-      <module name="Lab6.Server.main" />
+    <configuration name="NonBlockingClient2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.NonBlockingClient2" />
+      <module name="Lab6.Client.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.arekalov.core.*" />
+          <option name="PATTERN" value="com.arekalov.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -130,12 +123,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.core.Server" />
+    <configuration name="NonBlockingServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.NonBlockingServer" />
       <module name="Lab6.Server.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.arekalov.core.*" />
+          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClient2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.TestClient2" />
+      <module name="Lab6.Client.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestServer2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.TestServer2" />
+      <module name="Lab6.Server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.arekalov.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -145,10 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client2" />
-        <item itemvalue="Application.MainServer" />
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.Server" />
+        <item itemvalue="Application.NonBlockingClient2" />
+        <item itemvalue="Application.NonBlockingClient" />
+        <item itemvalue="Application.NonBlockingServer" />
+        <item itemvalue="Application.TestClient2" />
+        <item itemvalue="Application.TestServer2" />
       </list>
     </recent_temporary>
   </component>
@@ -173,7 +193,7 @@
       <workItem from="1711434311716" duration="13014000" />
       <workItem from="1711451151534" duration="2815000" />
       <workItem from="1711461229010" duration="3416000" />
-      <workItem from="1711894242425" duration="1373000" />
+      <workItem from="1711894242425" duration="4282000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -263,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711894924722</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix recursion problems, add recursion.txt file for demonstration">
+      <option name="closed" value="true" />
+      <created>1711895655474</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711895655474</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +316,7 @@
     <MESSAGE value="add recursion fix" />
     <MESSAGE value="reset" />
     <MESSAGE value="fix bug with env reading" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug with env reading" />
+    <MESSAGE value="fix recursion problems, add recursion.txt file for demonstration" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix recursion problems, add recursion.txt file for demonstration" />
   </component>
 </project>
