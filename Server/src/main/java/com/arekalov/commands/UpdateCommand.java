@@ -21,7 +21,7 @@ public class UpdateCommand implements Command{
      * @param commandParts String array of command parts
      */
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.updateCommand(commandParts, product);
+    public String execute(String[] commandParts, Product product) {
+        return manager.updateCommand(commandParts, product);
     }
 }

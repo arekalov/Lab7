@@ -31,7 +31,7 @@ public class ClearCommand implements Command{
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.clearCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.clearCommand(commandParts);
     }
 }

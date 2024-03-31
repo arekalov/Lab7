@@ -9,7 +9,11 @@ import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 import org.apache.logging.log4j.Logger;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
@@ -32,22 +36,36 @@ public class ServerExecutionManager {
     }
 
 
-    public void addOutStream(ObjectOutputStream out) {
-        commandManager.setOut(out);
-    }
-
-
     public void setRunning(Boolean running) {
         isRunning = running;
     }
 
-    public void executeCommand(CommandWithProduct commandWithProduct){
+    public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client){
         try {
-            commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+            String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+            byte[] data = serialize(answer);
+
+            // Создаем буфер для отправки данных
+            ByteBuffer buffer = ByteBuffer.allocate(data.length);
+            buffer.put(data);
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                client.write(buffer);
+            }
             logger.info("OK\n");
         }
         catch (RuntimeException runtimeException) {
             logger.error(runtimeException.getMessage());
+        } catch (IOException e) {
+            logger.error("Serialization error");
+        }
+    }
+
+    private static byte[] serialize(String obj) throws IOException {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
+            objectOutputStream.writeObject(obj);
+            return byteArrayOutputStream.toByteArray();
         }
     }
 

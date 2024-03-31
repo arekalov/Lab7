@@ -25,7 +25,7 @@ public class RemoveFirstCommand implements Command {
      * @param commandParts the parts of the command
      */
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.removeFirstCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.removeFirstCommand(commandParts);
     }
 }

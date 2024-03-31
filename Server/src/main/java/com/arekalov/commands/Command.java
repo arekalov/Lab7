@@ -10,5 +10,5 @@ public interface Command {
      * Execute the command
      * @param commandParts
      */
-    void execute(String[] commandParts, Product product);
+    String execute(String[] commandParts, Product product);
 }

@@ -28,7 +28,7 @@ public class InfoCommand implements Command {
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        commandManager.infoCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return commandManager.infoCommand(commandParts);
     }
 }

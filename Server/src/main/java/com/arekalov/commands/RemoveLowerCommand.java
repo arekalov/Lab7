@@ -25,7 +25,7 @@ public class RemoveLowerCommand implements Command{
 
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.removeLowerCommand(commandParts, product);
+    public String execute(String[] commandParts, Product product) {
+        return manager.removeLowerCommand(commandParts, product);
     }
 }

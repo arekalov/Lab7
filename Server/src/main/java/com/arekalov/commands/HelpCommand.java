@@ -23,7 +23,7 @@ public class HelpCommand implements Command{
      * @param commandParts
      */
     @Override
-    public void execute(String[] commandParts, Product product) {
-        commandManager.helpCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return commandManager.helpCommand(commandParts);
     }
 }

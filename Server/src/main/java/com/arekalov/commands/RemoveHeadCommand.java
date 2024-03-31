@@ -26,7 +26,7 @@ public class RemoveHeadCommand implements Command {
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.removeHeadCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.removeHeadCommand(commandParts);
     }
 }

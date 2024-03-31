@@ -27,7 +27,7 @@ public class SaveCommand implements Command {
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.saveCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.saveCommand(commandParts);
     }
 }

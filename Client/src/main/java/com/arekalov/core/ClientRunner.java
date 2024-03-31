@@ -1,6 +1,7 @@
 package com.arekalov.core;
 
 
+import com.arekalov.Client;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgsCountError;
@@ -10,6 +11,8 @@ import com.arekalov.readers.ProductReader;
 
 import java.io.*;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 import java.util.*;
 
 /**
@@ -17,17 +20,15 @@ import java.util.*;
  */
 public class ClientRunner {
     public static final String ENV_NAME = "PROGA";
-    private final ObjectOutputStream out;
-    private final ObjectInputStream in;
+    private final SocketChannel socketChanel;
     private IOManager ioManager = new IOManager(ENV_NAME);
     private ProductReader productReader = new ProductReader(ioManager);
     private Boolean isRunning = true;
     private HashSet<String> files = new HashSet<String>();
 
 
-    public ClientRunner(ObjectOutputStream out, ObjectInputStream in) {
-        this.out = out;
-        this.in = in;
+    public ClientRunner(SocketChannel socketChannel) {
+        this.socketChanel = socketChannel;
     }
 
     /**
@@ -106,14 +107,26 @@ public class ClientRunner {
             product = productReader.getProduct();
         }
         CommandWithProduct commandWithProduct = new CommandWithProduct(commandParts[0], commandParts, product);
-        out.writeObject(commandWithProduct);
-        out.flush();
+        byte[] data = Client.serialize(commandWithProduct);
+        ByteBuffer buffer = ByteBuffer.allocate(data.length);
+        buffer.put(data);
+        buffer.flip();
+        // Отправляем данные на сервер
+        while (buffer.hasRemaining()) {
+            socketChanel.write(buffer);
+        }
 
-        String ans = (String) in.readObject();
-        if (Objects.equals(ans, "Bye")) {
+        buffer.clear();
+        int bytesRead = socketChanel.read(buffer);
+        if (bytesRead == -1) {
+            // Соединение закрыто клиентом
             isRunning = false;
-        } else {
-            System.out.println(ans);
+        } else if (bytesRead > 0) {
+            buffer.flip();
+            byte[] answer = new byte[buffer.remaining()];
+            buffer.get(answer);
+            Object obj = deserialize(answer);
+            System.out.println(obj);
         }
     }
 
@@ -177,5 +190,14 @@ public class ClientRunner {
     public void setRunning(Boolean running) {
 
         isRunning = running;
+    }
+
+    private static String deserialize(byte[] data) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(data))) {
+            return (String) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

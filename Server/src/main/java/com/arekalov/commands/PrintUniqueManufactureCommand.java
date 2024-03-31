@@ -24,7 +24,7 @@ public class PrintUniqueManufactureCommand implements Command{
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.printUniqueManufactureCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.printUniqueManufactureCommand(commandParts);
     }
 }

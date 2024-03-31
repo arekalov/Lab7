@@ -24,7 +24,7 @@ public class ExitCommand implements Command{
 
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.exitCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.exitCommand(commandParts);
     }
 }

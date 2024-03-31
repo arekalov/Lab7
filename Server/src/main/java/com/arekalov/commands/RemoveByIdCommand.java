@@ -24,7 +24,7 @@ public class RemoveByIdCommand implements Command{
 
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.removeByIdCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.removeByIdCommand(commandParts);
     }
 }

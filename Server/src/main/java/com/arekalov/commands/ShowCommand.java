@@ -22,7 +22,7 @@ public class ShowCommand implements Command{
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.showCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.showCommand(commandParts);
     }
 }

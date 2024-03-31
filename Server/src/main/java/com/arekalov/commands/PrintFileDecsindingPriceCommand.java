@@ -28,7 +28,7 @@ public class PrintFileDecsindingPriceCommand implements Command {
 
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.printFiledDescendingPriceCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.printFiledDescendingPriceCommand(commandParts);
     }
 }

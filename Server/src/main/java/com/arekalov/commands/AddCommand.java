@@ -31,7 +31,7 @@ public class AddCommand implements Command {
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.addCommand(commandParts, product);
+    public String execute(String[] commandParts, Product product) {
+        return  manager.addCommand(commandParts, product);
     }
 }

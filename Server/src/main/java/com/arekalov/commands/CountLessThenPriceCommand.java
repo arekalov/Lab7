@@ -23,7 +23,7 @@ public class CountLessThenPriceCommand implements Command{
      */
 
     @Override
-    public void execute(String[] commandParts, Product product) {
-        manager.countLessThenPriceCommand(commandParts);
+    public String execute(String[] commandParts, Product product) {
+        return manager.countLessThenPriceCommand(commandParts);
     }
 }
