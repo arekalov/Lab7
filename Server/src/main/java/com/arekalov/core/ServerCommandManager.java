@@ -18,8 +18,8 @@ public class ServerCommandManager {
     public void executeCommand(String input) {
         try {
             Pair<String, Integer> pair = validateCommand(input);
-            System.out.println(pair.getKey());
-            System.out.println(pair.getValue());
+//            System.out.println(pair.getKey());
+//            System.out.println(pair.getValue());
             if (pair != null) {
                 if (pair.getKey().equals("save")) {
                     server.clientsHashSet.get(pair.getValue()).save("save");
