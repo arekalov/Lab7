@@ -15,6 +15,8 @@ import javafx.util.Pair;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This class is responsible for executing commands
@@ -53,14 +55,9 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public String printFiledDescendingPriceCommand(String[] commandParts) {
-
-        ArrayList<Product> arrayList = new ArrayList<>(collectionManager.getArrayDeque());
-        arrayList.sort(Collections.reverseOrder(new ProductComparator()));
-        String res = "";
-        for (Product i : arrayList) {
-            res += i + "\n";
-        }
-        return res;
+        String stream = collectionManager.getArrayDeque().stream().sorted(Comparator.reverseOrder())
+                .map(Product::toString).collect(Collectors.joining("\n"));
+        return stream;
 
     }
 
@@ -70,16 +67,9 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public String printUniqueManufactureCommand(String[] commandParts) {
-        HashSet<Integer> set = new HashSet<>();
-        for (Product i : collectionManager.getArrayDeque()) {
-            set.add(i.getManufactureCost());
-        }
-        StringBuilder unique = new StringBuilder();
-        for (Integer i : set) {
-            unique.append(i.toString()).append(" ");
-        }
-
-        return "Unique manufacturer: " + unique;
+        String stream = collectionManager.getArrayDeque().stream().map(x -> x.getManufacturer().getName())
+                .map(Object::toString).distinct().collect(Collectors.joining(" "));
+        return "Unique manufacturers: " + stream;
 
     }
 
@@ -90,13 +80,8 @@ public class CommandManager {
      */
     public String countLessThenPriceCommand(String[] commandParts) {
         Long price = Long.valueOf(commandParts[1]);
-        int count = 0;
-        for (Product i : collectionManager.getArrayDeque()) {
-            if (i.getPrice() < price) {
-                count++;
-            }
-        }
-        return "Count: " + count;
+        Long stream = collectionManager.getArrayDeque().stream().filter(x -> x.getPrice() < price).count();
+        return "Count: " + stream;
 
     }
 
@@ -191,7 +176,6 @@ public class CommandManager {
      * @param commandParts - command parts
      */
     public String removeByIdCommand(String[] commandParts) {
-
         Product toRemove = null;
         Long id = Validators.checkLong(commandParts[1]);
         for (Product i : collectionManager.getArrayDeque()) {

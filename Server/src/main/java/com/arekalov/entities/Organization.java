@@ -27,6 +27,10 @@ public class Organization implements Serializable {
     private OrganizationType type; //Поле не может быть null
     Address postalAddress; //Поле не может быть null
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Method to represent organization as string
      *
