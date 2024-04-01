@@ -133,5 +133,32 @@
         }
       }
     }
+  },
+  {
+    "id": 1164035238,
+    "name": "may",
+    "coordinates": {
+      "x": 12.0,
+      "y": 12.0
+    },
+    "creationDate": "2024-04-01T21:35:17.969034318",
+    "price": 12,
+    "partNumber": "21",
+    "manufactureCost": 4,
+    "unitOfMeasure": "KILOGRAMS",
+    "manufacturer": {
+      "id": 650305261,
+      "name": "12",
+      "annualTurnover": 12.0,
+      "type": "TRUST",
+      "postalAddress": {
+        "street": "12",
+        "town": {
+          "x": 12.0,
+          "y": 2.0,
+          "name": "2"
+        }
+      }
+    }
   }
 ]
