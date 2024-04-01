@@ -116,17 +116,21 @@ public class ClientRunner {
             socketChanel.write(buffer);
         }
 
-        buffer.clear();
-        int bytesRead = socketChanel.read(buffer);
-        if (bytesRead == -1) {
-            // Соединение закрыто клиентом
-            isRunning = false;
-        } else if (bytesRead > 0) {
-            buffer.flip();
-            byte[] answer = new byte[buffer.remaining()];
-            buffer.get(answer);
-            Object obj = deserialize(answer);
-            System.out.println(obj);
+        ByteBuffer bufferNew = ByteBuffer.allocate(16384);
+        while (true) {
+            bufferNew.clear();
+            int bytesRead = socketChanel.read(bufferNew);
+            if (bytesRead == -1) {
+                System.out.println("close");
+                break;
+            } else if (bytesRead > 0) {
+                bufferNew.flip();
+                byte[] answer = new byte[bufferNew.remaining()];
+                bufferNew.get(answer);
+                Object obj = deserialize(answer);
+                System.out.println(obj);
+                break;
+            }
         }
     }
 
@@ -196,6 +200,8 @@ public class ClientRunner {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(data))) {
             return (String) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("deserialize error!");
+            System.out.println(e);
             e.printStackTrace();
             return null;
         }

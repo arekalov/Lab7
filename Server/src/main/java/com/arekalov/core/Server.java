@@ -33,7 +33,7 @@ public class Server {
 //            }
 //        });
 //        consoleInputThread.start();
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocate(16384);
         Selector selector = serverConnectivityManager.selector;
         try {
             while (true) {
