@@ -19,8 +19,8 @@ import java.util.HashMap;
 
 public class ServerExecutionManager {
     public static final String ENV_NAME = "PROGA";
-    private ArrayDeque<Product> arrayDeque;
-    private CollectionManager collectionManager;
+    ArrayDeque<Product> arrayDeque;
+    CollectionManager collectionManager;
     private JsonParser parser = new JsonParser();
     private IOManager ioManager = new IOManager(ENV_NAME);
     protected Boolean isRunning = true;
@@ -43,7 +43,6 @@ public class ServerExecutionManager {
     public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client){
         try {
             String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
-//            System.out.println(answer);
             byte[] data = serialize(answer);
             ByteBuffer buffer = ByteBuffer.allocate(data.length);
             buffer.put(data);

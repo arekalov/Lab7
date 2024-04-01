@@ -11,28 +11,32 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Server {
     final public static Integer PORT = 12345;
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
-    ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+    HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
 
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");
 
-//        Thread consoleInputThread = new Thread(() -> {
-//            Scanner scanner = new Scanner(System.in);
-//            while (true) {
-//                if (scanner.hasNextLine()) {
-//                    String consoleInput = scanner.nextLine();
-//                    serverExecutionManager.save(consoleInput);
-//                }
-//            }
-//        });
-//        consoleInputThread.start();
+        Thread consoleInputThread = new Thread(() -> {
+            ServerCommandManager serverCommandManager = new ServerCommandManager(this);
+            Scanner scanner = new Scanner(System.in);
+            while (true) {
+                if (scanner.hasNextLine()) {
+                    String consoleInput = scanner.nextLine();
+                    serverCommandManager.executeCommand(consoleInput);
+                }
+            }
+        });
+        consoleInputThread.start();
+
         ByteBuffer buffer = ByteBuffer.allocate(16384);
         Selector selector = serverConnectivityManager.selector;
         try {
@@ -49,6 +53,8 @@ public class Server {
                         logger.info("Клиент подключен");
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
+                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+                        clientsHashSet.put(client.hashCode(), serverExecutionManager);
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_READ);
                     } else if (key.isReadable()) {
@@ -57,8 +63,8 @@ public class Server {
                         int bytesRead = client.read(buffer);
                         if (bytesRead == -1) {
                             logger.info("Соединение с клиентом закрыто!");
+                            clientsHashSet.remove(client.hashCode());
                             client.close();
-                            key.cancel();
                         } else if (bytesRead > 0) {
                             buffer.flip();
                             byte[] data = new byte[buffer.remaining()];
@@ -67,6 +73,7 @@ public class Server {
                             readData(obj, client);
                         }
                 }
+
             }
             }
         } catch (IOException e) {
@@ -79,7 +86,7 @@ public class Server {
 
     private void readData(CommandWithProduct commandWithProduct, SocketChannel client) {
         try {
-            serverExecutionManager.executeCommand(commandWithProduct, client);
+            clientsHashSet.get(client.hashCode()).executeCommand(commandWithProduct, client);
         } catch (Exception ex) {
             logger.error(ex);
         }

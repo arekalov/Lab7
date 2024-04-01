@@ -121,13 +121,15 @@ public class ClientRunner {
             bufferNew.clear();
             int bytesRead = socketChanel.read(bufferNew);
             if (bytesRead == -1) {
-                System.out.println("close");
                 break;
             } else if (bytesRead > 0) {
                 bufferNew.flip();
                 byte[] answer = new byte[bufferNew.remaining()];
                 bufferNew.get(answer);
-                Object obj = deserialize(answer);
+                String obj = deserialize(answer);
+                if (obj.equals("Bye")) {
+                    isRunning = false;
+                }
                 System.out.println(obj);
                 break;
             }
