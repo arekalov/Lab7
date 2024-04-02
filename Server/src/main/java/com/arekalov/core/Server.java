@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Server {
-    final public static Integer PORT = 12345;
+    final public static Integer PORT = 54376;
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
     HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();

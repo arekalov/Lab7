@@ -1,6 +1,6 @@
 show
 update 291975596
-artem
+new
 1
 1
 1
