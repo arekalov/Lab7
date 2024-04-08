@@ -1,18 +1,38 @@
 package com.arekalov.managers;
 
 import com.arekalov.entities.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
+import static com.arekalov.core.Server.logger;
 
 public class DBCommandManager {
+    private static final Logger log = LogManager.getLogger(DBCommandManager.class);
     private Connection connection;
 
     public DBCommandManager(Connection connection) {
         this.connection = connection;
     }
+    
+    public void clearWithLogin(String login) throws SQLException {
+        ArrayDeque<Product> arrayDeque = new ArrayDeque<Product>();
+        PreparedStatement statement = connection.prepareStatement("select *\n" +
+                "from product\n" +
+                "         natural inner join coordinate\n" +
+                "         inner join organization on manufacturer = organization.id\n" +
+                "         inner join adress on organization.postaladress = adress.id\n" +
+                "         inner join locationp on adress.location = locationp.id\n");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            arrayDeque.add(getProduct(resultSet));
+        }
+    }
 
-    public void insertProduct(Product product) throws SQLException {
+    public int insertProduct(Product product) throws SQLException {
         PreparedStatement idStatement = connection.prepareStatement("select nextval('product_id_seq')");
         idStatement.execute();
         ResultSet idRes = idStatement.getResultSet();
@@ -69,21 +89,27 @@ public class DBCommandManager {
         productStatement.setInt(9, id);
         productStatement.setString(10, product.getCreator());
         productStatement.executeUpdate();
+        return id;
     }
 
-    public ArrayDeque<Product> getProducts() throws SQLException {
-        ArrayDeque<Product> arrayDeque = new ArrayDeque<Product>();
-        PreparedStatement statement = connection.prepareStatement("select *\n" +
-                "from product\n" +
-                "         natural inner join coordinate\n" +
-                "         inner join organization on manufacturer = organization.id\n" +
-                "         inner join adress on organization.postaladress = adress.id\n" +
-                "         inner join locationp on adress.location = locationp.id\n");
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            arrayDeque.add(getProduct(resultSet));
+    public ConcurrentLinkedDeque<Product> getProducts() {
+        ConcurrentLinkedDeque<Product> arrayDeque = new ConcurrentLinkedDeque<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select *\n" +
+                    "from product\n" +
+                    "         natural inner join coordinate\n" +
+                    "         inner join organization on manufacturer = organization.id\n" +
+                    "         inner join adress on organization.postaladress = adress.id\n" +
+                    "         inner join locationp on adress.location = locationp.id\n");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                arrayDeque.add(getProduct(resultSet));
+            }
+        } catch (Exception ex) {
+            logger.error(ex);
+        } finally {
+            return arrayDeque;
         }
-        return arrayDeque;
     }
 
     public Product getProduct(ResultSet resultSet) throws SQLException {

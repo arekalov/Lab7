@@ -91,6 +91,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
+//    todo 1
     public String removeLowerCommand(String[] commandParts, Product product) {
         collectionManager.removeLower(product);
         return "Success";
@@ -101,6 +102,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
+//    todo 2
     public String removeHeadCommand(String[] commandParts) {
         if (!collectionManager.isEmpty()) {
             return collectionManager.removeHead() + "\n" + "Successfully deleted";
@@ -112,6 +114,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
+//    todo 3
     public String removeFirstCommand(String[] commandParts) {
 
         if (!collectionManager.isEmpty()) {
@@ -132,39 +135,13 @@ public class ClientCommandManager {
     }
 
 
-    /**
-     * This method saves the collection to a file, it can throw an exception if the file is not found
-     *
-     * @param commandParts - command parts
-     */
-    public String saveCommand(String[] commandParts) {
-
-        try {
-            String json = parser.dequeOfProductsToJson(collectionManager.getArrayDeque());
-            File file = ioManager.getFile();
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            OutputStreamWriter output = new OutputStreamWriter(fileOutputStream);
-            output.write(json);
-            output.close();
-            return "Success";
-        } catch (EnvNotFoundError envNotFoundError) {
-            System.out.println(envNotFoundError.getMessage());
-        } catch (ReadFromFileError readFromFileError) {
-            System.out.println(readFromFileError.getMessage());
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found");
-        } catch (Exception exception) {
-            System.out.println("Unexpected error! (" + exception + ")");
-        } finally {
-            return "Error";
-        }
-    }
 
     /**
      * This method clears the collection
      *
      * @param commandParts - command parts
      */
+//    todo 3
     public String clearCommand(String[] commandParts) {
         collectionManager.clear();
         return ("Successfully cleared");
@@ -176,6 +153,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
+//    todo 4
     public String removeByIdCommand(String[] commandParts) {
         Product toRemove = null;
         Long id = Validators.checkLong(commandParts[1]);
@@ -197,6 +175,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
+//    todo 5
     public String updateCommand(String[] commandParts, Product product) {
 
         Long id = Validators.checkLong(commandParts[1]);
@@ -223,7 +202,8 @@ public class ClientCommandManager {
      * @param commandParts - command parts
      */
     public String addCommand(String[] commandParts, Product product) throws SQLException {
-        serverExecutionManager.dbCommandManager.insertProduct(product);
+        Long id = (long) serverExecutionManager.dbCommandManager.insertProduct(product);
+        product.setId(id);
         collectionManager.add(product);
         return "Success";
     }

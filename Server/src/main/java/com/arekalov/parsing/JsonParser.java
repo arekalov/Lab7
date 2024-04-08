@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Class for arekalov.com.parsing json
@@ -26,7 +27,7 @@ public class JsonParser {
      *
      * @param json
      */
-    public ArrayDeque<Product> jsonToDequeOfProducts(String json) {
+    public ConcurrentLinkedDeque<Product> jsonToDequeOfProducts(String json) {
         Type itemsListType = new TypeToken<Deque<Product>>() {
         }.getType();
         return gson.fromJson(json, itemsListType);
@@ -37,7 +38,7 @@ public class JsonParser {
      *
      * @param deque
      */
-    public String dequeOfProductsToJson(ArrayDeque<Product> deque) {
+    public String dequeOfProductsToJson(ConcurrentLinkedDeque<Product> deque) {
         return gson.toJson(deque);
     }
 

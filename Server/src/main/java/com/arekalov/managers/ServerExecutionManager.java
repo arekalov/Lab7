@@ -20,10 +20,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class ServerExecutionManager {
     public static final String ENV_NAME = "PROGA";
-    ArrayDeque<Product> arrayDeque;
+    ConcurrentLinkedDeque<Product> arrayDeque;
     CollectionManager collectionManager;
     private JsonParser parser = new JsonParser();
     private IOManager ioManager = new IOManager(ENV_NAME);
@@ -35,11 +36,11 @@ public class ServerExecutionManager {
     private Connection connection;
     DBCommandManager dbCommandManager;
 
-    public ServerExecutionManager(DBAuthenticateManager dbAuthenticateManager, Connection connection, DBCommandManager dbCommandManager) throws SQLException {
+    public ServerExecutionManager(ConcurrentLinkedDeque arrayDeque, DBAuthenticateManager dbAuthenticateManager, Connection connection, DBCommandManager dbCommandManager) throws SQLException {
         this.dbAuthenticateManager = dbAuthenticateManager;
         this.connection = connection;
         this.dbCommandManager = dbCommandManager;
-        initFromDB();
+        this.arrayDeque = arrayDeque;
         collectionManager = new CollectionManager(arrayDeque);
         commandManager = new ClientCommandManager(ioManager, this, parser, collectionManager);
         commandHashMap = commandManager.getHashMapCommands();
@@ -111,10 +112,6 @@ public class ServerExecutionManager {
         }
     }
 
-    public void initFromDB() throws SQLException {
-        arrayDeque = dbCommandManager.getProducts();
-    }
-
     private void initCommands() {
         commandManager.initHashMap(
                 new Pair<>("help", new HelpCommand(commandManager)),
@@ -124,7 +121,6 @@ public class ServerExecutionManager {
                 new Pair<>("update", new UpdateCommand(commandManager)),
                 new Pair<>("remove_by_id", new RemoveByIdCommand(commandManager)),
                 new Pair<>("clear", new ClearCommand(commandManager)),
-                new Pair<>("save", new SaveCommand(commandManager)),
                 new Pair<>("exit", new ExitCommand(commandManager)),
                 new Pair<>("remove_first", new RemoveFirstCommand(commandManager)),
                 new Pair<>("remove_head", new RemoveHeadCommand(commandManager)),

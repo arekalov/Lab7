@@ -15,10 +15,9 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Server {
     final public static Integer PORT = 54376;
@@ -26,21 +25,10 @@ public class Server {
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
     DBConnectivityManager dbManager = new DBConnectivityManager();
     public HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
+    ConcurrentLinkedDeque arrayDeque = new DBCommandManager(dbManager.getConnection()).getProducts();
 
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");
-
-        Thread consoleInputThread = new Thread(() -> {
-            ServerCommandManager serverCommandManager = new ServerCommandManager(this);
-            Scanner scanner = new Scanner(System.in);
-            while (true) {
-                if (scanner.hasNextLine()) {
-                    String consoleInput = scanner.nextLine();
-                    serverCommandManager.executeCommand(consoleInput);
-                }
-            }
-        });
-        consoleInputThread.start();
 
         ByteBuffer buffer = ByteBuffer.allocate(16384);
         Selector selector = serverConnectivityManager.selector;
@@ -58,7 +46,7 @@ public class Server {
                         logger.info("Клиент подключен");
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
-                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(new DBAuthenticateManager(dbManager.getConnection(), client), dbManager.getConnection(), new DBCommandManager(dbManager.getConnection()));
+                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(arrayDeque, new DBAuthenticateManager(dbManager.getConnection(), client), dbManager.getConnection(), new DBCommandManager(dbManager.getConnection()));
                         clientsHashSet.put(client.hashCode(), serverExecutionManager);
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_READ);

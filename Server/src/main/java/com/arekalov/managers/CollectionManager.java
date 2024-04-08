@@ -4,25 +4,26 @@ package com.arekalov.managers;
 import com.arekalov.entities.Product;
 
 import java.util.ArrayDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * Class for managing the collection
  */
 public class CollectionManager {
-    private ArrayDeque<Product> arrayDeque;
+    private ConcurrentLinkedDeque<Product> arrayDeque;
     /**
      * Constructor for CollectionManager
      * @param arrayDeque
      * @see ArrayDeque
      */
-    public CollectionManager(ArrayDeque<Product> arrayDeque) {
+    public CollectionManager(ConcurrentLinkedDeque<Product> arrayDeque) {
         this.arrayDeque = arrayDeque;
     }
     /**
      * Method to get the collection
      * @return ArrayDeque
      */
-    public ArrayDeque<Product> getArrayDeque() {
+    public ConcurrentLinkedDeque<Product> getArrayDeque() {
         return arrayDeque;
     }
 
@@ -47,7 +48,7 @@ public class CollectionManager {
      * @return int
      */
     public void removeLower(Product product) {
-            ArrayDeque<Product> copy = arrayDeque.clone();
+        ConcurrentLinkedDeque<Product> copy = new ConcurrentLinkedDeque<>(arrayDeque);
             for (Product i : arrayDeque) {
                 if (i.compareTo(product) < 0) {
                     copy.remove(i);
