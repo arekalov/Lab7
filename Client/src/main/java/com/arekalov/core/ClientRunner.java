@@ -208,4 +208,14 @@ public class ClientRunner {
             return null;
         }
     }
+    private static CommandWithProduct deserializeCommand(byte[] data) {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(data))) {
+            return (CommandWithProduct) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("deserialize error!");
+            System.out.println(e);
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

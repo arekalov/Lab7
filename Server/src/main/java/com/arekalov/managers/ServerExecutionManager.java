@@ -44,6 +44,7 @@ public class ServerExecutionManager {
 
     public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client){
         try {
+            System.out.println(commandWithProduct);
             String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
             byte[] data = serialize(answer);
             ByteBuffer buffer = ByteBuffer.allocate(data.length);

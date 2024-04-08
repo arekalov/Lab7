@@ -20,6 +20,10 @@ public class DBConnectivityManager {
         connect();
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public void connect() {
         String sshHost = "se.ifmo.ru";
         String sshUsername = "s409449";

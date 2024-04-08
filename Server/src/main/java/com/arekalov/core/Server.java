@@ -2,10 +2,7 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
-import com.arekalov.managers.DBConnectivityManager;
-import com.arekalov.managers.ServerCommandManager;
-import com.arekalov.managers.ServerConnectivityManager;
-import com.arekalov.managers.ServerExecutionManager;
+import com.arekalov.managers.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +22,8 @@ public class Server {
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
     DBConnectivityManager dbManager = new DBConnectivityManager();
+    DBCommandManager dbCommandManager = new DBCommandManager(dbManager.getConnection());
+
     public HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
 
     public void run() {
