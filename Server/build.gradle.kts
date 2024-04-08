@@ -15,6 +15,7 @@ javafx {
 }
 
 dependencies {
+    implementation("org.postgresql:postgresql")
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
     implementation("org.openjfx:javafx-controls:17") // Зависимость на JavaFX Controls
     implementation("org.openjfx:javafx-fxml:17") // Зависимость на JavaFX FXML
