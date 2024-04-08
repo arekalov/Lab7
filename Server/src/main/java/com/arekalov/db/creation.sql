@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS ORGANIZATION
 
 CREATE TABLE IF NOT EXISTS COORDINATE
 (
-    x REAL NOT NULL,
-    y REAL NOT NULL,
-    PRIMARY KEY (x, y)
+    id SERIAL PRIMARY KEY,
+    x  REAL NOT NULL,
+    y  REAL NOT NULL
 );
 
 CREATE TYPE UnitOfMeasure AS ENUM ('KILOGRAMS', 'SQUARE_METERS', 'PCS', 'MILLIGRAMS');
@@ -52,6 +52,6 @@ CREATE TABLE IF NOT EXISTS PRODUCT
     manufactureCost INT                         NOT NULL,
     unitOfMeasure   UnitOfMeasure               NOT NULL,
     manufacturer    INT REFERENCES ORGANIZATION NOT NULL,
-    creatorLogin    INT REFERENCES USERS        NOT NULL
+    creatorLogin    TEXT REFERENCES USERS        NOT NULL
 );
 END TRANSACTION;

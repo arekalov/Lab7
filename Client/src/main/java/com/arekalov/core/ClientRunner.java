@@ -2,6 +2,7 @@ package com.arekalov.core;
 
 
 import com.arekalov.Client;
+import com.arekalov.entities.AuthMode;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.entities.UserInfo;
@@ -84,7 +85,7 @@ public class ClientRunner {
         System.out.println("Проверка логина и пароля происходит при каждой отправке команды," +
                 "если логин или пароль окажутся неверными, выполнение команд будет невозможно. \n" +
                 "В этом случае введите слово login!");
-        userInfo = new UserInfo(login, pass);
+        userInfo = new UserInfo(login, pass, AuthMode.LogIn);
     }
 
     private void registerNewUser() {
@@ -101,7 +102,7 @@ public class ClientRunner {
             System.out.println("Пароль не должен быть пустым, попробуйте еще раз!");
             pass = ioManager.consoleRead();
         }
-        userInfo = new UserInfo(login, pass);
+        userInfo = new UserInfo(login, pass, AuthMode.SignUp);
 
     }
 
