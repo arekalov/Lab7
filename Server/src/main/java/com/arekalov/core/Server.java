@@ -2,6 +2,7 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
+import com.arekalov.errors.UserAlreadyExistError;
 import com.arekalov.managers.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,8 +23,6 @@ public class Server {
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
     DBConnectivityManager dbManager = new DBConnectivityManager();
-    DBCommandManager dbCommandManager = new DBCommandManager(dbManager.getConnection());
-
     public HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
 
     public void run() {
@@ -57,7 +56,7 @@ public class Server {
                         logger.info("Клиент подключен");
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
-                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager();
+                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(new DBCommandManager(dbManager.getConnection(), client));
                         clientsHashSet.put(client.hashCode(), serverExecutionManager);
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_READ);
@@ -90,8 +89,12 @@ public class Server {
 
     private void readData(CommandWithProduct commandWithProduct, SocketChannel client) {
         try {
+            clientsHashSet.get(client.hashCode()).authenticate(commandWithProduct);
             clientsHashSet.get(client.hashCode()).executeCommand(commandWithProduct, client);
-        } catch (Exception ex) {
+        }catch (UserAlreadyExistError userAlreadyExistError) {
+            logger.info("Login is busy");
+        }
+        catch (Exception ex) {
             logger.error(ex);
         }
     }

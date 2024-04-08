@@ -22,6 +22,30 @@ public class UserInfo implements Serializable {
         return Objects.equals(login, userInfo.login) && Objects.equals(password, userInfo.password) && authMode == userInfo.authMode;
     }
 
+    public AuthMode getAuthMode() {
+        return authMode;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthMode(AuthMode authMode) {
+        this.authMode = authMode;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(login, password, authMode);

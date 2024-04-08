@@ -3,11 +3,12 @@ package com.arekalov.managers;
 import com.arekalov.commands.*;
 import com.arekalov.core.IOManager;
 import com.arekalov.core.Server;
+import com.arekalov.entities.AuthMode;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
-import com.arekalov.entities.UserInfo;
 import com.arekalov.errors.EnvNotFoundError;
 import com.arekalov.errors.ReadFromFileError;
+import com.arekalov.errors.UserAlreadyExistError;
 import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
@@ -30,6 +32,12 @@ public class ServerExecutionManager {
     HashMap<String, Command> commandHashMap;
     Logger logger = Server.logger;
     ClientCommandManager commandManager;
+    private DBCommandManager dbCommandManager;
+
+    public ServerExecutionManager(DBCommandManager dbCommandManager) {
+        this.dbCommandManager = dbCommandManager;
+    }
+
     {
         initFromFile();
         collectionManager = new CollectionManager(arrayDeque);
@@ -43,7 +51,13 @@ public class ServerExecutionManager {
         isRunning = running;
     }
 
-    public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client){
+    public void authenticate(CommandWithProduct commandWithProduct) throws SQLException, IOException, UserAlreadyExistError {
+        if (commandWithProduct.getUserInfo().getAuthMode().equals(AuthMode.SignUp)) {
+            dbCommandManager.signUp(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
+        }
+    }
+
+    public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) {
         try {
             System.out.println(commandWithProduct);
             String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
@@ -55,15 +69,14 @@ public class ServerExecutionManager {
                 client.write(buffer);
             }
             logger.info("OK\n");
-        }
-        catch (RuntimeException runtimeException) {
+        } catch (RuntimeException runtimeException) {
             logger.error(runtimeException.getMessage());
         } catch (IOException e) {
             logger.error("Serialization error");
         }
     }
 
-    private static byte[] serialize(String obj) throws IOException {
+    static byte[] serialize(String obj) throws IOException {
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(obj);
@@ -77,12 +90,10 @@ public class ServerExecutionManager {
                 CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null, null);
                 commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
                 logger.info("OK\n");
-            }
-            else {
+            } else {
                 logger.error("Error: Incorrect server command");
             }
-        }
-        catch (RuntimeException runtimeException) {
+        } catch (RuntimeException runtimeException) {
             logger.error(runtimeException.getMessage());
         }
     }
@@ -102,6 +113,7 @@ public class ServerExecutionManager {
             setRunning(false);
         }
     }
+
     private void initCommands() {
         commandManager.initHashMap(
                 new Pair<>("help", new HelpCommand(commandManager)),

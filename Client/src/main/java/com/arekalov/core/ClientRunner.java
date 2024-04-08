@@ -116,7 +116,6 @@ public class ClientRunner {
                 userInfo = null;
                 signUpOrLogin();
             } else {
-                System.out.println(userInfo);
                 sendCommand(command);
             }
         } catch (SocketException socketException) {
@@ -181,6 +180,10 @@ public class ClientRunner {
                 String obj = deserialize(answer);
                 if (obj.equals("Bye")) {
                     isRunning = false;
+                }
+                if (!obj.equals("Пользователь с таким логином уже существует!")) {
+                    System.out.println("yep");
+                    userInfo.setAuthMode(AuthMode.LogIn);
                 }
                 System.out.println(obj);
                 break;
