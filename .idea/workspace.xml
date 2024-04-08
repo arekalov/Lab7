@@ -9,8 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add creation.sql script">
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/db/creation.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/db/creation.sql" afterDir="false" />
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add USERS table into script.sql">
+      <change afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/UserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/UserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/CommandsInfoArrays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/CommandWithProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/CommandWithProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/CommandWithProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities/CommandWithProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +88,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/java/com/arekalov/entities/Organization.java",
+    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab7/Server/src/main/java/com/arekalov/entities",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -222,7 +229,7 @@
       <workItem from="1711994224838" duration="2727000" />
       <workItem from="1712060285099" duration="825000" />
       <workItem from="1712061503963" duration="1205000" />
-      <workItem from="1712554738960" duration="11450000" />
+      <workItem from="1712554738960" duration="13290000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -416,7 +423,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712568676960</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add USERS table into script.sql">
+      <option name="closed" value="true" />
+      <created>1712568999502</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1712568999502</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -454,6 +469,7 @@
     <MESSAGE value="create folder for managers in server module" />
     <MESSAGE value="fix serialization buq" />
     <MESSAGE value="add creation.sql script" />
-    <option name="LAST_COMMIT_MESSAGE" value="add creation.sql script" />
+    <MESSAGE value="add USERS table into script.sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="add USERS table into script.sql" />
   </component>
 </project>

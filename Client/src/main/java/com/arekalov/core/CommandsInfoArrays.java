@@ -8,6 +8,7 @@ public class CommandsInfoArrays {
 
     public static ArrayList<String> commandsList = new ArrayList<>();
     static {
+        commandsList.add("login");
         commandsList.add("help");
         commandsList.add("info");
         commandsList.add("show");

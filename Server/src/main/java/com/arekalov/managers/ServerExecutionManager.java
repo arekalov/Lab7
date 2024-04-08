@@ -5,6 +5,7 @@ import com.arekalov.core.IOManager;
 import com.arekalov.core.Server;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
+import com.arekalov.entities.UserInfo;
 import com.arekalov.errors.EnvNotFoundError;
 import com.arekalov.errors.ReadFromFileError;
 import com.arekalov.parsing.JsonParser;
@@ -73,7 +74,7 @@ public class ServerExecutionManager {
     public void save(String consoleInput) {
         try {
             if (consoleInput.toLowerCase().equals("save")) {
-                CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null);
+                CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null, null);
                 commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
                 logger.info("OK\n");
             }
