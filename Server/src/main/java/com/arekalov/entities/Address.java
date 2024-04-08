@@ -15,6 +15,25 @@ public class Address implements Serializable {
         this.town = town;
     }
 
+    public Address() {
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Location getTown() {
+        return town;
+    }
+
+    public void setTown(Location town) {
+        this.town = town;
+    }
+
     private String street; //Строка не может быть пустой, Поле может быть null
     private Location town; //Поле не может быть null
 

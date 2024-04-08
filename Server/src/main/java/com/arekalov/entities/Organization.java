@@ -21,6 +21,45 @@ public class Organization implements Serializable {
         this.postalAddress = postalAddress;
     }
 
+    public Organization() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Float getAnnualTurnover() {
+        return annualTurnover;
+    }
+
+    public void setAnnualTurnover(Float annualTurnover) {
+        this.annualTurnover = annualTurnover;
+    }
+
+    public OrganizationType getType() {
+        return type;
+    }
+
+    public void setType(OrganizationType type) {
+        this.type = type;
+    }
+
+    public Address getPostalAddress() {
+        return postalAddress;
+    }
+
+    public void setPostalAddress(Address postalAddress) {
+        this.postalAddress = postalAddress;
+    }
+
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Float annualTurnover; //Поле может быть null, Значение поля должно быть больше 0

@@ -48,7 +48,7 @@ public class ProductReader implements Reader {
         Organization organization = new OrganizationReader(ioManager).getOrganization();
         System.out.println("End inputting Product");
         return new Product(id, name, coordinates, localDateTime, price,
-                partNumber, manufactureCost, unitOfMeasure, organization);
+                partNumber, manufactureCost, unitOfMeasure, organization, null);
     }
 
     /**

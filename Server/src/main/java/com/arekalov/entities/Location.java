@@ -17,6 +17,33 @@ public class Location implements Serializable {
         this.name = name;
     }
 
+    public Location() {
+    }
+
+    public Float getX() {
+        return x;
+    }
+
+    public void setX(Float x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private Float x; //Поле не может быть null
     private double y;
     private String name; //Строка не может быть пустой, Поле может быть null

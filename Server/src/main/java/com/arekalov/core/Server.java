@@ -58,7 +58,7 @@ public class Server {
                         logger.info("Клиент подключен");
                         ServerSocketChannel server = (ServerSocketChannel) key.channel();
                         SocketChannel client = server.accept();
-                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(new DBCommandManager(dbManager.getConnection(), client));
+                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(new DBAuthenticateManager(dbManager.getConnection(), client), dbManager.getConnection(), new DBCommandManager(dbManager.getConnection()));
                         clientsHashSet.put(client.hashCode(), serverExecutionManager);
                         client.configureBlocking(false);
                         client.register(selector, SelectionKey.OP_READ);
@@ -77,9 +77,9 @@ public class Server {
                             CommandWithProduct obj = deserialize(data);
                             readData(obj, client);
                         }
-                }
+                    }
 
-            }
+                }
             }
         } catch (IOException e) {
         } catch (Exception exception) {
@@ -93,16 +93,13 @@ public class Server {
         try {
             clientsHashSet.get(client.hashCode()).authenticate(commandWithProduct);
             clientsHashSet.get(client.hashCode()).executeCommand(commandWithProduct, client);
-        }catch (UserAlreadyExistError userAlreadyExistError) {
+        } catch (UserAlreadyExistError userAlreadyExistError) {
             logger.info("Логин уже занят.");
-        }
-        catch (HaveNotAccauntError haveNotAccauntError) {
+        } catch (HaveNotAccauntError haveNotAccauntError) {
             logger.info("У пользователя нет аккаунта.");
-        }
-        catch (IncorrectPasswordError incorrectPasswordError) {
+        } catch (IncorrectPasswordError incorrectPasswordError) {
             logger.info("Неправильный пароль.");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.error(ex);
         }
     }

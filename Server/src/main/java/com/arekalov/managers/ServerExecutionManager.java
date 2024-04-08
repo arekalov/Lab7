@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -30,19 +31,21 @@ public class ServerExecutionManager {
     HashMap<String, Command> commandHashMap;
     Logger logger = Server.logger;
     ClientCommandManager commandManager;
+    private DBAuthenticateManager dbAuthenticateManager;
+    private Connection connection;
     private DBCommandManager dbCommandManager;
 
-    public ServerExecutionManager(DBCommandManager dbCommandManager) {
+    public ServerExecutionManager(DBAuthenticateManager dbAuthenticateManager, Connection connection, DBCommandManager dbCommandManager) throws SQLException {
+        this.dbAuthenticateManager = dbAuthenticateManager;
+        this.connection = connection;
         this.dbCommandManager = dbCommandManager;
-    }
-
-    {
-        initFromFile();
+        initFromDB();
         collectionManager = new CollectionManager(arrayDeque);
         commandManager = new ClientCommandManager(ioManager, this, parser, collectionManager);
         commandHashMap = commandManager.getHashMapCommands();
         initCommands();
     }
+
 
 
     public void setRunning(Boolean running) {
@@ -51,10 +54,10 @@ public class ServerExecutionManager {
 
     public void authenticate(CommandWithProduct commandWithProduct) throws SQLException, IOException, UserAlreadyExistError, IncorrectPasswordError, HaveNotAccauntError {
         if (commandWithProduct.getUserInfo().getAuthMode().equals(AuthMode.SignUp)) {
-            dbCommandManager.signUp(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
+            dbAuthenticateManager.signUp(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
         }
         if (commandWithProduct.getUserInfo().getAuthMode().equals(AuthMode.LogIn)) {
-            dbCommandManager.logIn(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
+            dbAuthenticateManager.logIn(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
         }
     }
 
@@ -99,20 +102,8 @@ public class ServerExecutionManager {
         }
     }
 
-    public void initFromFile() {
-        try {
-            String json = ioManager.getJsonFromEnv();
-            arrayDeque = parser.jsonToDequeOfProducts(json);
-        } catch (EnvNotFoundError envNotFoundError) {
-            logger.error(envNotFoundError.getMessage());
-            setRunning(false);
-        } catch (ReadFromFileError readFromFileError) {
-            logger.error(readFromFileError.getMessage());
-            setRunning(false);
-        } catch (Exception exception) {
-            logger.fatal("Unexpected error! (" + exception + ")");
-            setRunning(false);
-        }
+    public void initFromDB() throws SQLException {
+        arrayDeque = dbCommandManager.getProducts();
     }
 
     private void initCommands() {

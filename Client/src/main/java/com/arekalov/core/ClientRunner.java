@@ -74,7 +74,7 @@ public class ClientRunner {
                 System.out.println("Неверная команда");
             }
         }
-        System.out.println("Регистрация пройдена успешно!");
+        System.out.println("Вы будете авторизованы после выполнения любой команды.");
     }
 
     private void logIn() {
@@ -82,9 +82,6 @@ public class ClientRunner {
         String login = ioManager.consoleRead();
         System.out.println("Введите пароль");
         String pass = ioManager.consoleRead();
-        System.out.println("Проверка логина и пароля происходит при каждой отправке команды," +
-                "если логин или пароль окажутся неверными, выполнение команд будет невозможно. \n" +
-                "В этом случае введите слово login!");
         userInfo = new UserInfo(login, pass, AuthMode.LogIn);
     }
 

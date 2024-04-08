@@ -15,6 +15,9 @@ public class Coordinates implements Serializable {
         this.y = y;
     }
 
+    public Coordinates() {
+    }
+
     private float x;
     private float y; //Максимальное значение поля: 557
 

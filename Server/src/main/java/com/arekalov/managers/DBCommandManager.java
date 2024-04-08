@@ -1,111 +1,80 @@
 package com.arekalov.managers;
 
-import com.arekalov.core.Server;
-import com.arekalov.entities.UserInfo;
-import com.arekalov.errors.HaveNotAccauntError;
-import com.arekalov.errors.IncorrectPasswordError;
-import com.arekalov.errors.UserAlreadyExistError;
-import org.apache.logging.log4j.Logger;
+import com.arekalov.entities.*;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-
-import static com.arekalov.managers.ServerExecutionManager.serialize;
+import java.util.ArrayDeque;
 
 public class DBCommandManager {
     private Connection connection;
-    private Logger logger = Server.logger;
-    private SocketChannel client;
 
-    public DBCommandManager(Connection connection, SocketChannel client) {
+    public DBCommandManager(Connection connection) {
         this.connection = connection;
-        this.client = client;
     }
 
-    public void signUp(String login, String password) throws SQLException, IOException, UserAlreadyExistError {
-        System.out.println("signUp");
-        String countQuery = "SELECT COUNT(*) FROM USERS WHERE (login = ?)";
-        PreparedStatement countStatement = connection.prepareStatement(countQuery);
-        countStatement.setString(1, login);
-        countStatement.execute();
-        ResultSet countResult = countStatement.getResultSet();
-        countResult.next();
-        int count = countResult.getInt("count");
-        if (count == 0) {
-            String insertQuery = "INSERT INTO users (login, password) VALUES (?, ?);";
-            PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
-            insertStatement.setString(1, login);
-            insertStatement.setString(2, hashString(password));
-            insertStatement.execute();
-        } else {
-            String answer = "Пользователь с таким логином уже существует! Введите команду login и повторите попытку!";
-            sendToClient(answer);
-            throw new UserAlreadyExistError(answer);
+    public ArrayDeque<Product> getProducts() throws SQLException {
+        ArrayDeque<Product> arrayDeque = new ArrayDeque<Product>();
+        PreparedStatement statement = connection.prepareStatement("select *\n" +
+                "from product\n" +
+                "         natural inner join coordinate\n" +
+                "         inner join organization on manufacturer = organization.id\n" +
+                "         inner join adress on organization.postaladress = adress.id\n" +
+                "         inner join locationp on adress.location = locationp.id\n");
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            arrayDeque.add(getProduct(resultSet));
         }
-
+        return arrayDeque;
     }
 
-    public void logIn(String login, String password) throws SQLException, IncorrectPasswordError, IOException, HaveNotAccauntError {
-        System.out.println("login");
-        String usersInTableQuery = "SELECT * FROM USERS WHERE (login = ?)";
-        PreparedStatement usersStatement = connection.prepareStatement(usersInTableQuery);
-        usersStatement.setString(1, login);
-        usersStatement.execute();
-        ResultSet usersStatementResult = usersStatement.getResultSet();
-        if (usersStatementResult.next()) {
-            String pass = usersStatementResult.getString("password");
-            System.out.println(pass);
-            if (!verifyHash(password, pass)){
-                sendToClient("Неправильный пароль. Введите команду login и повторите попытку.");
-                throw new IncorrectPasswordError();
-            }
-        }
-        else {
-            sendToClient("У вас нет аккаунта. Введите команду login и пройдите регистрацию.");
-            throw new HaveNotAccauntError();
-        }
+    public Product getProduct(ResultSet resultSet) throws SQLException {
+        Product product = new Product();
+        product.setId(resultSet.getLong("id"));
+        product.setName(resultSet.getString("name"));
+        product.setCoordinates(getCoordinateFromResultSet(resultSet));
 
+        product.setCreationDate(resultSet.getTimestamp("localDate").toLocalDateTime());
+        product.setPrice(resultSet.getLong("price"));
+        product.setPartNumber(resultSet.getString("partNumber"));
+        product.setManufactureCost(resultSet.getInt("manufactureCost"));
+        product.setUnitOfMeasure(UnitOfMeasure.valueOf(resultSet.getString("unitOfMeasure")));
+        product.setManufacturer(getOrganizationFromResultSet(resultSet));
+
+        product.setCreator(resultSet.getString("creatorLogin"));
+
+        return product;
     }
 
-    private void sendToClient(String answer) throws IOException {
-        byte[] data = serialize(answer);
-        ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        buffer.put(data);
-        buffer.flip();
-        while (buffer.hasRemaining()) {
-            client.write(buffer);
-        }
+    public Coordinates getCoordinateFromResultSet(ResultSet resultSet) throws SQLException {
+        Coordinates coordinate = new Coordinates();
+        coordinate.setX(resultSet.getFloat("x"));
+        coordinate.setY(resultSet.getFloat("y"));
+        return coordinate;
     }
 
-    public static String hashString(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            byte[] hashedBytes = digest.digest(input.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public Organization getOrganizationFromResultSet(ResultSet resultSet) throws SQLException {
+        Organization organization = new Organization();
+        organization.setName(resultSet.getString("name"));
+        organization.setAnnualTurnover(resultSet.getFloat("annualTurnover"));
+        organization.setType(OrganizationType.valueOf(resultSet.getString("type")));
+        organization.setPostalAddress(getAddressFromResultSet(resultSet));
+        return organization;
     }
 
-    // Функция для проверки соответствия хэш-значения исходному тексту
-    public static boolean verifyHash(String input, String hash) {
-        return hashString(input).equals(hash);
+    public Address getAddressFromResultSet(ResultSet resultSet) throws SQLException {
+        Address address = new Address();
+        address.setStreet(resultSet.getString("street"));
+        address.setTown(getLocationFromResultSet(resultSet));
+
+        return address;
     }
 
-    public static void main(String[] args) {
-        String input = "Hello World";
-        String hashed = hashString(input);
-        System.out.println("Hashed value: " + hashed);
-        System.out.println("Is Hash Verified: " + verifyHash(input, hashed)); // Должно быть true
+    public Location getLocationFromResultSet(ResultSet resultSet) throws SQLException {
+        Location location = new Location();
+        location.setX(resultSet.getFloat("x"));
+        location.setY(resultSet.getDouble("y"));
+        location.setName(resultSet.getString("name"));
+        return location;
     }
 
 

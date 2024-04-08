@@ -22,7 +22,7 @@ public class Product implements Comparable<Product>, Serializable {
      */
     public Product(Long id, String name, Coordinates coordinates,
                    LocalDateTime creationDate, Long price, String partNumber,
-                   Integer manufactureCost, UnitOfMeasure unitOfMeasure, Organization manufacturer) {
+                   Integer manufactureCost, UnitOfMeasure unitOfMeasure, Organization manufacturer, String creator) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -32,6 +32,10 @@ public class Product implements Comparable<Product>, Serializable {
         this.manufactureCost = manufactureCost;
         this.unitOfMeasure = unitOfMeasure;
         this.manufacturer = manufacturer;
+        this.creator = creator;
+    }
+
+    public Product() {
     }
 
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -43,6 +47,16 @@ public class Product implements Comparable<Product>, Serializable {
     private Integer manufactureCost; //Поле не может быть null
     private UnitOfMeasure unitOfMeasure; //Поле может быть null
     private Organization manufacturer; //Поле не может быть null
+    private String creator;
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     /**
      * Method to get id
      * @return
