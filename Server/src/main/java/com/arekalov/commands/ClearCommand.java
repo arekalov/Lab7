@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -14,14 +14,14 @@ public class ClearCommand implements Command{
      * Manager for command
 
      */
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for set manager field
 
      * @param manager - manager for command
      */
-    public ClearCommand(CommandManager manager) {
+    public ClearCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
 

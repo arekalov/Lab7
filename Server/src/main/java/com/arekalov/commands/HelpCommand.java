@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -9,13 +9,13 @@ import com.arekalov.entities.Product;
  * This command shows all available commands.
  */
 public class HelpCommand implements Command{
-    private final CommandManager commandManager;
+    private final ClientCommandManager commandManager;
 
     /**
      * Constructor for class HelpCommand.
      * @param commandManager
      */
-    public HelpCommand(CommandManager commandManager) {
+    public HelpCommand(ClientCommandManager commandManager) {
         this.commandManager = commandManager;
     }
     /**

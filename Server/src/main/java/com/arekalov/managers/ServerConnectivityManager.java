@@ -1,5 +1,6 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
+import com.arekalov.core.Server;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.nio.channels.ServerSocketChannel;
 
 public class ServerConnectivityManager {
     private Integer port;
-    Selector selector;
+    public Selector selector;
 
     Logger logger;
     private ServerSocketChannel serverSocketChannel;

@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -11,16 +11,16 @@ public class AddCommand implements Command {
     /**
      * The command manager that the command will be added to.
      *
-     * @see CommandManager
+     * @see ClientCommandManager
      */
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for the AddCommand class.
      *
      * @param manager
      */
-    public AddCommand(CommandManager manager) {
+    public AddCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
 

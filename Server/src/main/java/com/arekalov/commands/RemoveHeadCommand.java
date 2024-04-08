@@ -1,21 +1,21 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * class for the remove head command
  */
 public class RemoveHeadCommand implements Command {
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * constructor for the remove head command
      *
      * @param manager the manager of the command
      */
-    public RemoveHeadCommand(CommandManager manager) {
+    public RemoveHeadCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
 

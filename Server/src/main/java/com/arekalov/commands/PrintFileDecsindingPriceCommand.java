@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -9,14 +9,14 @@ import com.arekalov.entities.Product;
  * This command print file in descending order of price.
  */
 public class PrintFileDecsindingPriceCommand implements Command {
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for class PrintFileDecsindingPriceCommand.
      *
      * @param manager
      */
-    public PrintFileDecsindingPriceCommand(CommandManager manager) {
+    public PrintFileDecsindingPriceCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
 

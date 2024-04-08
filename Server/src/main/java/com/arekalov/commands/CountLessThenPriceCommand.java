@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -9,12 +9,12 @@ import com.arekalov.entities.Product;
  * This command counts the number of elements whose price is less than the specified one.
  */
 public class CountLessThenPriceCommand implements Command{
-    private CommandManager manager;
+    private ClientCommandManager manager;
     /**
      * Constructor for creating a new command.
      * @param manager set manager for command
      */
-    public CountLessThenPriceCommand(CommandManager manager) {
+    public CountLessThenPriceCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
     /**

@@ -1,6 +1,8 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
 import com.arekalov.commands.*;
+import com.arekalov.core.IOManager;
+import com.arekalov.core.Server;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.EnvNotFoundError;
@@ -26,11 +28,11 @@ public class ServerExecutionManager {
     protected Boolean isRunning = true;
     HashMap<String, Command> commandHashMap;
     Logger logger = Server.logger;
-    CommandManager commandManager;
+    ClientCommandManager commandManager;
     {
         initFromFile();
         collectionManager = new CollectionManager(arrayDeque);
-        commandManager = new CommandManager(ioManager, this, parser, collectionManager);
+        commandManager = new ClientCommandManager(ioManager, this, parser, collectionManager);
         commandHashMap = commandManager.getHashMapCommands();
         initCommands();
     }

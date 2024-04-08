@@ -1,21 +1,21 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * SaveCommand class is a command to save the current state of the system.
  */
 public class SaveCommand implements Command {
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for SaveCommand.
      *
      * @param manager The command manager that handles this command.
      */
-    public SaveCommand(CommandManager manager) {
+    public SaveCommand(ClientCommandManager manager) {
         this.manager = manager;
         ;
     }

@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -10,14 +10,14 @@ import com.arekalov.entities.Product;
  * implements Command
  */
 public class InfoCommand implements Command {
-    private final CommandManager commandManager;
+    private final ClientCommandManager commandManager;
 
     /**
      * Constructor for this class
      *
      * @param commandManager - for this class
      */
-    public InfoCommand(CommandManager commandManager) {
+    public InfoCommand(ClientCommandManager commandManager) {
         this.commandManager = commandManager;
     }
 

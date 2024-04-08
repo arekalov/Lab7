@@ -2,6 +2,10 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
+import com.arekalov.managers.DBConnectivityManager;
+import com.arekalov.managers.ServerCommandManager;
+import com.arekalov.managers.ServerConnectivityManager;
+import com.arekalov.managers.ServerExecutionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +24,8 @@ public class Server {
     final public static Integer PORT = 54376;
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
-    HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
+    DBConnectivityManager dbManager = new DBConnectivityManager();
+    public HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
 
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");

@@ -1,20 +1,20 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * Class of command Exit.
  */
 public class ExitCommand implements Command{
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for class ExitCommand.
      * @param manager
      */
-    public ExitCommand(CommandManager manager) {
+    public ExitCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
     /**

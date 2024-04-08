@@ -1,7 +1,7 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
@@ -9,13 +9,13 @@ import com.arekalov.entities.Product;
  * This command removes all elements from the collection that are less than the given one.
  */
 public class RemoveLowerCommand implements Command{
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * Constructor for class RemoveLowerCommand.
      * @param manager
      */
-    public RemoveLowerCommand(CommandManager manager) {
+    public RemoveLowerCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
     /**

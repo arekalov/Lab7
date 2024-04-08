@@ -1,8 +1,9 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
 
 import com.arekalov.commands.Command;
 import com.arekalov.commands.Validators;
+import com.arekalov.core.IOManager;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgumentError;
 import com.arekalov.errors.EmptyDequeError;
@@ -16,13 +17,12 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * This class is responsible for executing commands
  * There are methods for executing commands and working with them
  */
-public class CommandManager {
+public class ClientCommandManager {
 
     private ServerExecutionManager runner;
     private IOManager ioManager;
@@ -37,7 +37,7 @@ public class CommandManager {
      * @param runner
      * @param parser
      */
-    public CommandManager(IOManager ioManager, ServerExecutionManager runner, JsonParser parser, CollectionManager collectionManager) {
+    public ClientCommandManager(IOManager ioManager, ServerExecutionManager runner, JsonParser parser, CollectionManager collectionManager) {
         this.runner = runner;
         this.ioManager = ioManager;
         this.parser = parser;

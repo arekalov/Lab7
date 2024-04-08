@@ -1,19 +1,19 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * Class of the command to show the collection
  */
 public class ShowCommand implements Command{
-    CommandManager manager;
+    ClientCommandManager manager;
     /**
      * Constructor for the command
      * @param manager - the manager of the command
      */
-    public ShowCommand(CommandManager manager) {
+    public ShowCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
     /**

@@ -1,4 +1,4 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
 
 import com.arekalov.entities.Product;

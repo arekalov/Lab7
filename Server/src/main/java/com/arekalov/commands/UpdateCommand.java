@@ -1,19 +1,19 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * UpdateCommand class is a command that updates the command in the command manager
  */
 public class UpdateCommand implements Command{
-    private CommandManager manager;
+    private ClientCommandManager manager;
     /**
      * Constructor for UpdateCommand
      * @param manager CommandManager object
      */
-    public UpdateCommand(CommandManager manager) {
+    public UpdateCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
     /**

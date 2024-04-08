@@ -1,12 +1,12 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
+import com.arekalov.core.Server;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgsCountError;
 import com.arekalov.errors.IncorrectCommandError;
 import javafx.util.Pair;
 
 import java.util.ArrayDeque;
-import java.util.HashMap;
 
 public class ServerCommandManager {
     Server server;

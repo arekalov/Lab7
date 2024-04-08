@@ -1,21 +1,21 @@
 package com.arekalov.commands;
 
 
-import com.arekalov.core.CommandManager;
+import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
 /**
  * class for the remove first command
  */
 public class RemoveFirstCommand implements Command {
-    private CommandManager manager;
+    private ClientCommandManager manager;
 
     /**
      * constructor for the remove first command
      *
      * @param manager the manager of the command
      */
-    public RemoveFirstCommand(CommandManager manager) {
+    public RemoveFirstCommand(ClientCommandManager manager) {
         this.manager = manager;
     }
 

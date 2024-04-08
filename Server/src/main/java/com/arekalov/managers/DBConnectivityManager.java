@@ -1,5 +1,6 @@
-package com.arekalov.core;
+package com.arekalov.managers;
 
+import com.arekalov.core.Server;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -10,12 +11,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DBManager {
+public class DBConnectivityManager {
     private Session session;
     private Connection connection;
     private Logger logger = Server.logger;
 
-    public DBManager() {
+    public DBConnectivityManager() {
         connect();
     }
 
@@ -48,7 +49,7 @@ public class DBManager {
 
             String dbUrl = "jdbc:postgresql://localhost:" + tunnelLocalPort + "/" + dbName;
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-            logger.info("Соединение установлено успешно.");
+            logger.info("Соединение c "+ dbUrl + " установлено успешно.");
 
         } catch (JSchException e) {
             e.printStackTrace();
@@ -60,7 +61,7 @@ public class DBManager {
     public void disconnect() {
         try {
             connection.close();
-            logger.info("Соединение закрыто.");
+            logger.info("Соединение c бд закрыто.");
 
             session.disconnect();
         } catch (SQLException e) {
