@@ -4,6 +4,8 @@ package com.arekalov.commands;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
+import java.sql.SQLException;
+
 /**
  * AddCommand class is a command that adds a new command to the command manager.
  */
@@ -31,7 +33,7 @@ public class AddCommand implements Command {
      */
 
     @Override
-    public String execute(String[] commandParts, Product product) {
+    public String execute(String[] commandParts, Product product) throws SQLException {
         return  manager.addCommand(commandParts, product);
     }
 }

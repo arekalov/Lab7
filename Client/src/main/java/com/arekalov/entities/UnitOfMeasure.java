@@ -10,4 +10,6 @@ public enum UnitOfMeasure implements Serializable {
     SQUARE_METERS,
     PCS,
     MILLIGRAMS;
+
 }
+

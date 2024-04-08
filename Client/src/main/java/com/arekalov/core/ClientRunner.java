@@ -130,7 +130,6 @@ public class ClientRunner {
             ioManager.setScanner(scanner);
             if (true) {
                 System.out.println("Start executing script");
-                files.add(path);
                 do {
                     String line = scanner.nextLine();
                     System.out.println("__");
@@ -140,6 +139,7 @@ public class ClientRunner {
                     }
                     executeCommand(line);
                 } while (scanner.hasNextLine());
+                files.add(path);
                 ioManager.setScanner(new Scanner(System.in));
                 System.out.println("End executing script");
             } else throw new RecursionError();

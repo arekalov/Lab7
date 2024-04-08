@@ -33,7 +33,7 @@ public class ServerExecutionManager {
     ClientCommandManager commandManager;
     private DBAuthenticateManager dbAuthenticateManager;
     private Connection connection;
-    private DBCommandManager dbCommandManager;
+    DBCommandManager dbCommandManager;
 
     public ServerExecutionManager(DBAuthenticateManager dbAuthenticateManager, Connection connection, DBCommandManager dbCommandManager) throws SQLException {
         this.dbAuthenticateManager = dbAuthenticateManager;
@@ -64,6 +64,11 @@ public class ServerExecutionManager {
     public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) {
         try {
             System.out.println(commandWithProduct);
+            if(commandWithProduct.getProduct() != null) {
+                Product product = commandWithProduct.getProduct();
+                product.setCreator(commandWithProduct.getUserInfo().getLogin());
+                commandWithProduct.setProduct(product);
+            }
             String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
             byte[] data = serialize(answer);
             ByteBuffer buffer = ByteBuffer.allocate(data.length);
@@ -77,6 +82,8 @@ public class ServerExecutionManager {
             logger.error(runtimeException.getMessage());
         } catch (IOException e) {
             logger.error("Serialization error");
+        } catch (SQLException e) {
+            logger.error(e);
         }
     }
 
@@ -99,6 +106,8 @@ public class ServerExecutionManager {
             }
         } catch (RuntimeException runtimeException) {
             logger.error(runtimeException.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -116,7 +125,6 @@ public class ServerExecutionManager {
                 new Pair<>("remove_by_id", new RemoveByIdCommand(commandManager)),
                 new Pair<>("clear", new ClearCommand(commandManager)),
                 new Pair<>("save", new SaveCommand(commandManager)),
-//                new Pair<>("execute_script", new ExecuteScriptCommand(commandManager)),
                 new Pair<>("exit", new ExitCommand(commandManager)),
                 new Pair<>("remove_first", new RemoveFirstCommand(commandManager)),
                 new Pair<>("remove_head", new RemoveHeadCommand(commandManager)),

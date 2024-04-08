@@ -14,6 +14,7 @@ import javafx.util.Pair;
 //import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class ClientCommandManager {
 
-    private ServerExecutionManager runner;
+    private ServerExecutionManager serverExecutionManager;
     private IOManager ioManager;
     private JsonParser parser;
     private HashMap<String, Command> hashMapCommands;
@@ -38,7 +39,7 @@ public class ClientCommandManager {
      * @param parser
      */
     public ClientCommandManager(IOManager ioManager, ServerExecutionManager runner, JsonParser parser, CollectionManager collectionManager) {
-        this.runner = runner;
+        this.serverExecutionManager = runner;
         this.ioManager = ioManager;
         this.parser = parser;
         this.hashMapCommands = new HashMap<>();
@@ -221,7 +222,8 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-    public String addCommand(String[] commandParts, Product product) {
+    public String addCommand(String[] commandParts, Product product) throws SQLException {
+        serverExecutionManager.dbCommandManager.insertProduct(product);
         collectionManager.add(product);
         return "Success";
     }

@@ -12,6 +12,65 @@ public class DBCommandManager {
         this.connection = connection;
     }
 
+    public void insertProduct(Product product) throws SQLException {
+        PreparedStatement idStatement = connection.prepareStatement("select nextval('product_id_seq')");
+        idStatement.execute();
+        ResultSet idRes = idStatement.getResultSet();
+        idRes.next();
+        int id = idRes.getInt("nextval");
+
+        Coordinates coordinates = product.getCoordinates();
+        Organization organization = product.getManufacturer();
+        Address address = organization.getPostalAddress();
+        Location location = address.getTown();
+
+        PreparedStatement coordinateStatement = connection.prepareStatement("insert into coordinate (id,x, y) " +
+                "VALUES (?, ?, ?)");
+        coordinateStatement.setInt(1, id);
+        coordinateStatement.setFloat(2, coordinates.getX());
+        coordinateStatement.setFloat(3, coordinates.getY());
+        coordinateStatement.executeUpdate();
+
+
+        PreparedStatement locationStatement = connection.prepareStatement("insert into locationp (id, x, y, name)\n" +
+                "VALUES (?,?, ?, ?)");
+        locationStatement.setInt(1, id);
+        locationStatement.setFloat(2, location.getX());
+        locationStatement.setDouble(3, location.getY());
+        locationStatement.setString(4, location.getName());
+        locationStatement.executeUpdate();
+
+        PreparedStatement addressStatement = connection.prepareStatement("insert into adress (id, street, location)\n" +
+                "VALUES (?, ?, ?)");
+        addressStatement.setInt(1, id);
+        addressStatement.setString(2, address.getStreet());
+        addressStatement.setInt(3, id);
+        addressStatement.executeUpdate();
+
+        PreparedStatement organizationStatement = connection.prepareStatement("insert into organization (id, name, annualturnover, type, postaladress) VALUES " +
+                "(?, ?, ?, ?, ?)");
+        organizationStatement.setInt(1, id);
+        organizationStatement.setString(2, organization.getName());
+        organizationStatement.setDouble(3, organization.getAnnualTurnover());
+        organizationStatement.setObject(4, organization.getType(), Types.OTHER);
+        organizationStatement.setInt(5, id);
+        organizationStatement.executeUpdate();
+
+        PreparedStatement productStatement = connection.prepareStatement("insert into product (id, name, coordinates, localdate, price, partnumber, manufacturecost, unitofmeasure, manufacturer, creatorlogin) VALUES " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        productStatement.setInt(1, id);
+        productStatement.setString(2, product.getName());
+        productStatement.setInt(3, id);
+        productStatement.setTimestamp(4, Timestamp.valueOf(product.getCreationDate()));
+        productStatement.setLong(5, product.getPrice());
+        productStatement.setString(6, product.getPartNumber());
+        productStatement.setInt(7, product.getManufactureCost());
+        productStatement.setObject(8,  product.getUnitOfMeasure(), Types.OTHER);
+        productStatement.setInt(9, id);
+        productStatement.setString(10, product.getCreator());
+        productStatement.executeUpdate();
+    }
+
     public ArrayDeque<Product> getProducts() throws SQLException {
         ArrayDeque<Product> arrayDeque = new ArrayDeque<Product>();
         PreparedStatement statement = connection.prepareStatement("select *\n" +

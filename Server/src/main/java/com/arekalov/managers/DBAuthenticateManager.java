@@ -26,7 +26,6 @@ public class DBAuthenticateManager {
     }
 
     public void signUp(String login, String password) throws SQLException, IOException, UserAlreadyExistError {
-        System.out.println("signUp");
         String countQuery = "SELECT COUNT(*) FROM USERS WHERE (login = ?)";
         PreparedStatement countStatement = connection.prepareStatement(countQuery);
         countStatement.setString(1, login);
@@ -49,7 +48,6 @@ public class DBAuthenticateManager {
     }
 
     public void logIn(String login, String password) throws SQLException, IncorrectPasswordError, IOException, HaveNotAccauntError {
-        System.out.println("login");
         String usersInTableQuery = "SELECT * FROM USERS WHERE (login = ?)";
         PreparedStatement usersStatement = connection.prepareStatement(usersInTableQuery);
         usersStatement.setString(1, login);
@@ -57,7 +55,6 @@ public class DBAuthenticateManager {
         ResultSet usersStatementResult = usersStatement.getResultSet();
         if (usersStatementResult.next()) {
             String pass = usersStatementResult.getString("password");
-            System.out.println(pass);
             if (!verifyHash(password, pass)){
                 sendToClient("Неправильный пароль. Введите команду login и повторите попытку.");
                 throw new IncorrectPasswordError();
