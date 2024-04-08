@@ -6,9 +6,7 @@ import com.arekalov.core.Server;
 import com.arekalov.entities.AuthMode;
 import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
-import com.arekalov.errors.EnvNotFoundError;
-import com.arekalov.errors.ReadFromFileError;
-import com.arekalov.errors.UserAlreadyExistError;
+import com.arekalov.errors.*;
 import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 import org.apache.logging.log4j.Logger;
@@ -51,9 +49,12 @@ public class ServerExecutionManager {
         isRunning = running;
     }
 
-    public void authenticate(CommandWithProduct commandWithProduct) throws SQLException, IOException, UserAlreadyExistError {
+    public void authenticate(CommandWithProduct commandWithProduct) throws SQLException, IOException, UserAlreadyExistError, IncorrectPasswordError, HaveNotAccauntError {
         if (commandWithProduct.getUserInfo().getAuthMode().equals(AuthMode.SignUp)) {
             dbCommandManager.signUp(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
+        }
+        if (commandWithProduct.getUserInfo().getAuthMode().equals(AuthMode.LogIn)) {
+            dbCommandManager.logIn(commandWithProduct.getUserInfo().getLogin(), commandWithProduct.getUserInfo().getPassword());
         }
     }
 

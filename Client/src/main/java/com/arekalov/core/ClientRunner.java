@@ -182,7 +182,6 @@ public class ClientRunner {
                     isRunning = false;
                 }
                 if (!obj.equals("Пользователь с таким логином уже существует!")) {
-                    System.out.println("yep");
                     userInfo.setAuthMode(AuthMode.LogIn);
                 }
                 System.out.println(obj);

@@ -2,6 +2,8 @@ package com.arekalov.core;
 
 
 import com.arekalov.entities.CommandWithProduct;
+import com.arekalov.errors.HaveNotAccauntError;
+import com.arekalov.errors.IncorrectPasswordError;
 import com.arekalov.errors.UserAlreadyExistError;
 import com.arekalov.managers.*;
 import org.apache.logging.log4j.LogManager;
@@ -92,7 +94,13 @@ public class Server {
             clientsHashSet.get(client.hashCode()).authenticate(commandWithProduct);
             clientsHashSet.get(client.hashCode()).executeCommand(commandWithProduct, client);
         }catch (UserAlreadyExistError userAlreadyExistError) {
-            logger.info("Login is busy");
+            logger.info("Логин уже занят.");
+        }
+        catch (HaveNotAccauntError haveNotAccauntError) {
+            logger.info("У пользователя нет аккаунта.");
+        }
+        catch (IncorrectPasswordError incorrectPasswordError) {
+            logger.info("Неправильный пароль.");
         }
         catch (Exception ex) {
             logger.error(ex);
