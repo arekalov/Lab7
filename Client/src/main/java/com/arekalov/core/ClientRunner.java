@@ -137,9 +137,9 @@ public class ClientRunner {
                     if (files.contains(path)) {
                         throw new RecursionError();
                     }
+                    files.add(path);
                     executeCommand(line);
                 } while (scanner.hasNextLine());
-                files.add(path);
                 ioManager.setScanner(new Scanner(System.in));
                 System.out.println("End executing script");
             } else throw new RecursionError();

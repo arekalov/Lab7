@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add update command">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add Для многопоточной отправки ответа использовать Fixed thread pool">
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +74,7 @@
     "Gradle.Lab6:Server [:Server:Server.main()].executor": "Run",
     "Gradle.Lab6:Server [:Server:TestServer.main()].executor": "Run",
     "Gradle.Lab6:Server [:Server:TestServer2.main()].executor": "Run",
-    "Gradle.Lab7:Client [:Client:Client.main()].executor": "Run",
+    "Gradle.Lab7:Client [:Client:Client.main()].executor": "Debug",
     "Gradle.Lab7:Client [:Client:Client2.main()].executor": "Run",
     "Gradle.Lab7:Server [:Server:DBManager.main()].executor": "Run",
     "Gradle.Lab7:Server [:Server:MainServer.main()].executor": "Run",
@@ -128,7 +127,7 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client2">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -238,7 +237,7 @@
       <workItem from="1712591928321" duration="1539000" />
       <workItem from="1712593592665" duration="234000" />
       <workItem from="1712593842061" duration="3654000" />
-      <workItem from="1712597508889" duration="20350000" />
+      <workItem from="1712597508889" duration="20981000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -520,7 +519,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712663700913</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="add Для многопотчной обработки полученного запроса использовать Cached thread pool">
+      <option name="closed" value="true" />
+      <created>1712666132278</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1712666132278</updated>
+    </task>
+    <task id="LOCAL-00037" summary="add Для многопоточной отправки ответа использовать Fixed thread pool">
+      <option name="closed" value="true" />
+      <created>1712666336081</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1712666336081</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,8 +553,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix bug with env reading" />
-    <MESSAGE value="fix recursion problems, add recursion.txt file for demonstration" />
     <MESSAGE value="fix commit without asynhronus io" />
     <MESSAGE value="change commands and add selectors" />
     <MESSAGE value="edit buffer size, app work normal" />
@@ -563,7 +576,9 @@
     <MESSAGE value="add clear and RemoveByIdCommand" />
     <MESSAGE value="add remove commands" />
     <MESSAGE value="add update command" />
-    <option name="LAST_COMMIT_MESSAGE" value="add update command" />
+    <MESSAGE value="add Для многопотчной обработки полученного запроса использовать Cached thread pool" />
+    <MESSAGE value="add Для многопоточной отправки ответа использовать Fixed thread pool" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Для многопоточной отправки ответа использовать Fixed thread pool" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
