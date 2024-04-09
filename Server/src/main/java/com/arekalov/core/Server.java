@@ -34,6 +34,7 @@ public class Server {
     Selector selector = serverConnectivityManager.selector;
 
     ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    ExecutorService fixedThreadPool = Executors.newFixedThreadPool(100);
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");
         try {
@@ -142,17 +143,19 @@ public class Server {
     }
 
     private void sendToClient(String answer, SocketChannel client) {
-        try {
-            byte[] data = serialize(answer);
-            ByteBuffer buffer = ByteBuffer.allocate(data.length);
-            buffer.put(data);
-            buffer.flip();
-            while (buffer.hasRemaining()) {
-                client.write(buffer);
+        fixedThreadPool.execute(() -> {
+            try {
+                byte[] data = serialize(answer);
+                ByteBuffer buffer = ByteBuffer.allocate(data.length);
+                buffer.put(data);
+                buffer.flip();
+                while (buffer.hasRemaining()) {
+                    client.write(buffer);
+                }
+            } catch (Exception ex) {
+                logger.error("Can't send answer to client!");
             }
-        } catch (Exception ex) {
-            logger.error("Can't send answer to client!");
-        }
+        });
     }
 
     private static CommandWithProduct deserialize(byte[] data) {
