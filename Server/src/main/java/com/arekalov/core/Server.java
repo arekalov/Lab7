@@ -15,9 +15,12 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.sql.Connection;
 import java.util.*;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ConcurrentLinkedDeque;
+
+import static com.arekalov.managers.ServerExecutionManager.serialize;
 
 public class Server {
     final public static Integer PORT = 54376;
@@ -88,7 +91,22 @@ public class Server {
         } catch (IncorrectPasswordError incorrectPasswordError) {
             logger.info("Неправильный пароль.");
         } catch (Exception ex) {
+            sendToClient(ex.getMessage(), client);
             logger.error(ex);
+        }
+    }
+
+    private void sendToClient(String answer, SocketChannel client) {
+        try {
+            byte[] data = serialize(answer);
+            ByteBuffer buffer = ByteBuffer.allocate(data.length);
+            buffer.put(data);
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                client.write(buffer);
+            }
+        } catch (Exception ex) {
+            logger.error("Can't send answer to client!");
         }
     }
 

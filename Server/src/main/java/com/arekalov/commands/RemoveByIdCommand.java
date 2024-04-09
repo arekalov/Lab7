@@ -5,6 +5,8 @@ import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
+import java.sql.SQLException;
+
 /**
  * Class of command PrintFileDecsindingPriceCommand.
  * implements Command
@@ -25,7 +27,7 @@ public class RemoveByIdCommand implements Command{
 
 
     @Override
-    public String execute(String[] commandParts, CommandWithProduct product) {
+    public String execute(String[] commandParts, CommandWithProduct product) throws SQLException {
         return manager.removeByIdCommand(commandParts, product);
     }
 }

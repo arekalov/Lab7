@@ -9,26 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add concurrent collection">
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add remove commands">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/AddCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ClearCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CountLessThenPriceCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CountLessThenPriceCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/InfoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintFileDecsindingPriceCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintFileDecsindingPriceCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintUniqueManufactureCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/PrintUniqueManufactureCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/data/simple.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/data/simple.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveFirstCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveFirstCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveHeadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveHeadCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveLowerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveLowerCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/ShowCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/UpdateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/db/creation.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/db/creation.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBCommandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" afterDir="false" />
     </list>
@@ -147,7 +133,7 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Client2">
+  <component name="RunManager" selected="Application.MainServer">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -257,7 +243,7 @@
       <workItem from="1712591928321" duration="1539000" />
       <workItem from="1712593592665" duration="234000" />
       <workItem from="1712593842061" duration="3654000" />
-      <workItem from="1712597508889" duration="11399000" />
+      <workItem from="1712597508889" duration="18351000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -515,7 +501,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712608350967</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="add clear and RemoveByIdCommand">
+      <option name="closed" value="true" />
+      <created>1712653012879</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1712653012879</updated>
+    </task>
+    <task id="LOCAL-00034" summary="add remove commands">
+      <option name="closed" value="true" />
+      <created>1712653698690</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1712653698690</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,8 +535,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="edit commands" />
-    <MESSAGE value="add recursion fix" />
     <MESSAGE value="reset" />
     <MESSAGE value="fix bug with env reading" />
     <MESSAGE value="fix recursion problems, add recursion.txt file for demonstration" />
@@ -558,20 +558,22 @@
     <MESSAGE value="add reading from db" />
     <MESSAGE value="add insert to db" />
     <MESSAGE value="add concurrent collection" />
-    <option name="LAST_COMMIT_MESSAGE" value="add concurrent collection" />
+    <MESSAGE value="add clear and RemoveByIdCommand" />
+    <MESSAGE value="add remove commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="add remove commands" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBCommandManager.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java</url>
           <line>127</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java</url>
+          <line>189</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

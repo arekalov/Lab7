@@ -62,8 +62,7 @@ public class ServerExecutionManager {
         }
     }
 
-    public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) {
-        try {
+    public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) throws IOException, SQLException {
             System.out.println(commandWithProduct);
             if(commandWithProduct.getProduct() != null) {
                 Product product = commandWithProduct.getProduct();
@@ -72,23 +71,17 @@ public class ServerExecutionManager {
             }
             String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct);
             byte[] data = serialize(answer);
+            System.out.println(answer);
             ByteBuffer buffer = ByteBuffer.allocate(data.length);
             buffer.put(data);
             buffer.flip();
             while (buffer.hasRemaining()) {
                 client.write(buffer);
             }
-            logger.info("OK\n");
-        } catch (RuntimeException runtimeException) {
-            logger.error(runtimeException.getMessage());
-        } catch (IOException e) {
-            logger.error("Serialization error");
-        } catch (SQLException e) {
-            logger.error(e);
-        }
+            logger.info("Send answer\n");
     }
 
-    static byte[] serialize(String obj) throws IOException {
+    public static byte[] serialize(String obj) throws IOException {
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(obj);

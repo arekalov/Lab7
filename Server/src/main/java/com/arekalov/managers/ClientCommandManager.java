@@ -109,9 +109,8 @@ public class ClientCommandManager {
             Product product1 = collectionManager.removeHead(product.getUserInfo().getLogin());
             if (product1 != null) {
                 serverExecutionManager.dbCommandManager.removeProduct(product1);
-                return product1+ "\n" + "Successfully deleted";
-            }
-            else {
+                return product1 + "\n" + "Successfully deleted";
+            } else {
                 return "No product, created with this login";
             }
 
@@ -130,8 +129,7 @@ public class ClientCommandManager {
             if (product1 != null) {
                 serverExecutionManager.dbCommandManager.removeProduct(product1);
                 return "Successfully deleted";
-            }
-            else {
+            } else {
                 return "No product, created with this login";
             }
 
@@ -146,7 +144,6 @@ public class ClientCommandManager {
     public String exitCommand(String[] commandParts) {
         return "Bye";
     }
-
 
 
     /**
@@ -167,20 +164,20 @@ public class ClientCommandManager {
      * @param commandParts - command parts
      * @param product
      */
-//    todo 4
-    public String removeByIdCommand(String[] commandParts, CommandWithProduct product) {
+    public String removeByIdCommand(String[] commandParts, CommandWithProduct product) throws SQLException {
         Product toRemove = null;
         Long id = Validators.checkLong(commandParts[1]);
         for (Product i : collectionManager.getArrayDeque()) {
-            if (i.getId().equals(id)) {
+            if (i.getId().equals(id) && i.getCreator().equals(product.getUserInfo().getLogin())) {
                 toRemove = i;
             }
         }
         if (toRemove != null) {
             collectionManager.remove(toRemove);
+            serverExecutionManager.dbCommandManager.removeProduct(toRemove);
             return "Success";
         } else {
-            throw new ArgumentError("Error: No product with id " + id);
+            throw new ArgumentError("Error: No product with id or you can't edit product " + id);
         }
     }
 
@@ -189,26 +186,30 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-//    todo 5
-    public String updateCommand(String[] commandParts, CommandWithProduct commandWithProduct) {
-
-        Long id = Validators.checkLong(commandParts[1]);
+    public String updateCommand(String[] commandParts, CommandWithProduct commandWithProduct) {;
+        Integer id = Math.toIntExact(Validators.checkLong(commandParts[1]));
         Product product = commandWithProduct.getProduct();
-        Product changeProduct = commandWithProduct.getProduct();
+        Product changeProduct = null;
         for (Product i : collectionManager.getArrayDeque()) {
-            if (Objects.equals(i.getId(), id)) {
+            if (i.getId().equals(Long.valueOf(id)) && i.getCreator().equals(commandWithProduct.getUserInfo().getLogin())) {
                 changeProduct = i;
             }
         }
-        changeProduct.setName(product.getName());
-        changeProduct.setCoordinates(product.getCoordinates());
-        changeProduct.setCreationDate(product.getCreationDate());
-        changeProduct.setPrice(product.getPrice());
-        changeProduct.setPartNumber(product.getPartNumber());
-        changeProduct.setManufactureCost(product.getManufactureCost());
-        changeProduct.setUnitOfMeasure(product.getUnitOfMeasure());
-        changeProduct.setManufacturer(product.getManufacturer());
-        return "Success";
+        if (changeProduct != null) {
+            serverExecutionManager.dbCommandManager.updateProduct(product, id);
+            changeProduct.setName(product.getName());
+            changeProduct.setCoordinates(product.getCoordinates());
+            changeProduct.setCreationDate(product.getCreationDate());
+            changeProduct.setPrice(product.getPrice());
+            changeProduct.setPartNumber(product.getPartNumber());
+            changeProduct.setManufactureCost(product.getManufactureCost());
+            changeProduct.setUnitOfMeasure(product.getUnitOfMeasure());
+            changeProduct.setManufacturer(product.getManufacturer());
+            return "Success";
+        }
+        else {
+            return "No product with id or you can't edit product " + id;
+        }
     }
 
     /**

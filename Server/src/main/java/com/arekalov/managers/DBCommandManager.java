@@ -19,6 +19,7 @@ public class DBCommandManager {
         this.connection = connection;
     }
 
+
     public void removeProduct(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("delete from product where id = ?");
         statement.setLong(1, product.getId());
@@ -36,6 +37,59 @@ public class DBCommandManager {
         PreparedStatement statement = connection.prepareStatement("delete from product where creatorlogin = ?");
         statement.setString(1, login);
         statement.executeUpdate();
+    }
+
+    public void updateProduct(Product product, Integer productId) {
+        try {
+
+            // Обновляем координаты
+            Coordinates coordinates = product.getCoordinates();
+            PreparedStatement coordinateStatement = connection.prepareStatement("UPDATE coordinate SET x = ?, y = ? WHERE id = ?");
+            coordinateStatement.setFloat(1, coordinates.getX());
+            coordinateStatement.setFloat(2, coordinates.getY());
+            coordinateStatement.setInt(3, productId);
+            coordinateStatement.executeUpdate();
+
+            // Обновляем местоположение
+            Location location = product.getManufacturer().getPostalAddress().getTown();
+            PreparedStatement locationStatement = connection.prepareStatement("UPDATE locationp SET x = ?, y = ?, name = ? WHERE id = ?");
+            locationStatement.setFloat(1, location.getX());
+            locationStatement.setDouble(2, location.getY());
+            locationStatement.setString(3, location.getName());
+            locationStatement.setInt(4, productId);
+            locationStatement.executeUpdate();
+
+            // Обновляем адрес
+            Address address = product.getManufacturer().getPostalAddress();
+            PreparedStatement addressStatement = connection.prepareStatement("UPDATE adress SET street = ? WHERE id = ?");
+            addressStatement.setString(1, address.getStreet());
+            addressStatement.setInt(2, productId);
+            addressStatement.executeUpdate();
+
+            // Обновляем организацию
+            Organization organization = product.getManufacturer();
+            PreparedStatement organizationStatement = connection.prepareStatement("UPDATE organization SET name = ?, annualturnover = ?, type = ? WHERE id = ?");
+            organizationStatement.setString(1, organization.getName());
+            organizationStatement.setDouble(2, organization.getAnnualTurnover());
+            organizationStatement.setObject(3, organization.getType(), Types.OTHER);
+            organizationStatement.setInt(4, productId);
+            organizationStatement.executeUpdate();
+
+            // Обновляем продукт
+            PreparedStatement productStatement = connection.prepareStatement("UPDATE product SET name = ?, localdate = ?, price = ?, partnumber = ?, manufacturecost = ?, unitofmeasure = ?, creatorlogin = ? WHERE id = ?");
+            productStatement.setString(1, product.getName());
+            productStatement.setTimestamp(2, Timestamp.valueOf(product.getCreationDate()));
+            productStatement.setLong(3, product.getPrice());
+            productStatement.setString(4, product.getPartNumber());
+            productStatement.setInt(5, product.getManufactureCost());
+            productStatement.setObject(6, product.getUnitOfMeasure(), Types.OTHER);
+            productStatement.setString(7, product.getCreator());
+            productStatement.setInt(8, productId);
+            productStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            logger.error("Failed to update product", ex);
+        }
     }
 
     public int insertProduct(Product product) throws SQLException {
