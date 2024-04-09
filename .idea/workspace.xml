@@ -9,14 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add remove commands">
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add update command">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/data/simple.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/data/simple.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/RemoveByIdCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBCommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +128,7 @@
       <recent name="com.arekalov" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainServer">
+  <component name="RunManager" selected="Application.Client2">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client" />
       <module name="Lab6.Client.main" />
@@ -243,7 +238,7 @@
       <workItem from="1712591928321" duration="1539000" />
       <workItem from="1712593592665" duration="234000" />
       <workItem from="1712593842061" duration="3654000" />
-      <workItem from="1712597508889" duration="18351000" />
+      <workItem from="1712597508889" duration="20350000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -517,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712653698690</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="add update command">
+      <option name="closed" value="true" />
+      <created>1712663700913</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1712663700913</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,7 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="reset" />
     <MESSAGE value="fix bug with env reading" />
     <MESSAGE value="fix recursion problems, add recursion.txt file for demonstration" />
     <MESSAGE value="fix commit without asynhronus io" />
@@ -560,7 +562,8 @@
     <MESSAGE value="add concurrent collection" />
     <MESSAGE value="add clear and RemoveByIdCommand" />
     <MESSAGE value="add remove commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="add remove commands" />
+    <MESSAGE value="add update command" />
+    <option name="LAST_COMMIT_MESSAGE" value="add update command" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

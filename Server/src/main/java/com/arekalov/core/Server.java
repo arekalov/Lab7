@@ -15,12 +15,14 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.arekalov.managers.ServerExecutionManager.serialize;
+import static org.apache.commons.lang3.SerializationUtils.deserialize;
 
 public class Server {
     final public static Integer PORT = 54376;
@@ -29,12 +31,11 @@ public class Server {
     DBConnectivityManager dbManager = new DBConnectivityManager();
     public HashMap<Integer, ServerExecutionManager> clientsHashSet = new HashMap<>();
     ConcurrentLinkedDeque arrayDeque = new DBCommandManager(dbManager.getConnection()).getProducts();
+    Selector selector = serverConnectivityManager.selector;
 
+    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
     public void run() {
         logger.info("Сервер запущен. Ожидание подключения...");
-
-        ByteBuffer buffer = ByteBuffer.allocate(16384);
-        Selector selector = serverConnectivityManager.selector;
         try {
             while (true) {
                 selector.select();
@@ -47,27 +48,9 @@ public class Server {
 
                     if (key.isAcceptable()) {
                         logger.info("Клиент подключен");
-                        ServerSocketChannel server = (ServerSocketChannel) key.channel();
-                        SocketChannel client = server.accept();
-                        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(arrayDeque, new DBAuthenticateManager(dbManager.getConnection(), client), dbManager.getConnection(), new DBCommandManager(dbManager.getConnection()));
-                        clientsHashSet.put(client.hashCode(), serverExecutionManager);
-                        client.configureBlocking(false);
-                        client.register(selector, SelectionKey.OP_READ);
+                        handleClientConnection(key);
                     } else if (key.isReadable()) {
-                        SocketChannel client = (SocketChannel) key.channel();
-                        buffer.clear();
-                        int bytesRead = client.read(buffer);
-                        if (bytesRead == -1) {
-                            logger.info("Соединение с клиентом закрыто!");
-                            clientsHashSet.remove(client.hashCode());
-                            client.close();
-                        } else if (bytesRead > 0) {
-                            buffer.flip();
-                            byte[] data = new byte[buffer.remaining()];
-                            buffer.get(data);
-                            CommandWithProduct obj = deserialize(data);
-                            readData(obj, client);
-                        }
+                        handleClientRead(key);
                     }
 
                 }
@@ -80,7 +63,69 @@ public class Server {
         }
     }
 
-    private void readData(CommandWithProduct commandWithProduct, SocketChannel client) {
+    private void handleClientConnection(SelectionKey key) throws IOException, SQLException {
+        ServerSocketChannel server = (ServerSocketChannel) key.channel();
+        SocketChannel client = server.accept();
+        client.configureBlocking(false);
+        ServerExecutionManager serverExecutionManager = new ServerExecutionManager(arrayDeque, new DBAuthenticateManager(dbManager.getConnection(), client), dbManager.getConnection(), new DBCommandManager(dbManager.getConnection()));
+                        clientsHashSet.put(client.hashCode(), serverExecutionManager);
+        client.register(selector, SelectionKey.OP_READ);
+
+        // Создаем новый поток для обработки подключения
+        Thread clientThread = new Thread(() -> {
+            try {
+                ByteBuffer buffer = ByteBuffer.allocate(16384);
+                while (client.isOpen() && client.isConnected()) {
+                    buffer.clear();
+                    int bytesRead = client.read(buffer);
+                    if (bytesRead == -1) {
+                        logger.info("Соединение с клиентом закрыто!");
+                        client.close();
+                        break;
+                    } else if (bytesRead > 0) {
+                        buffer.flip();
+                        byte[] data = new byte[buffer.remaining()];
+                        buffer.get(data);
+                        CommandWithProduct obj = deserialize(data);
+                        executeCommand(obj, client);
+                    }
+                }
+            } catch (IOException ex) {
+                logger.error("Ошибка ввода-вывода в потоке клиента: " + ex.getMessage());
+            } finally {
+                // Удаление клиента из списка при закрытии соединения
+                clientsHashSet.remove(client.hashCode());
+            }
+        });
+        clientThread.start();
+    }
+
+    private void handleClientRead(SelectionKey key) throws IOException {
+        cachedThreadPool.execute(() -> {
+            try {
+                SocketChannel client = (SocketChannel) key.channel();
+                ByteBuffer buffer = ByteBuffer.allocate(16384);
+                buffer.clear();
+                int bytesRead = client.read(buffer);
+                if (bytesRead == -1) {
+                    logger.info("Соединение с клиентом закрыто!");
+                    clientsHashSet.remove(client.hashCode());
+                    client.close();
+                } else if (bytesRead > 0) {
+                    buffer.flip();
+                    byte[] data = new byte[buffer.remaining()];
+                    buffer.get(data);
+                    CommandWithProduct obj = deserialize(data);
+                    executeCommand(obj, client);
+                }
+            } catch (IOException ex) {
+                logger.error("Ошибка ввода-вывода в потоке клиента: " + ex.getMessage());
+            }
+        });
+    }
+
+
+    private void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) {
         try {
             clientsHashSet.get(client.hashCode()).authenticate(commandWithProduct);
             clientsHashSet.get(client.hashCode()).executeCommand(commandWithProduct, client);
