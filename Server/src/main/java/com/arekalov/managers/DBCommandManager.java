@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static com.arekalov.core.Server.logger;
 
+
 public class DBCommandManager {
     private static final Logger log = LogManager.getLogger(DBCommandManager.class);
     private Connection connection;
@@ -17,19 +18,18 @@ public class DBCommandManager {
     public DBCommandManager(Connection connection) {
         this.connection = connection;
     }
+
+    public void removeLowerWithLogin(String login, Product product) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("delete from product where price < ? and creatorlogin = ?");
+        statement.setLong(1, product.getPrice());
+        statement.setString(2, login);
+        statement.executeUpdate();
+    }
     
     public void clearWithLogin(String login) throws SQLException {
-        ArrayDeque<Product> arrayDeque = new ArrayDeque<Product>();
-        PreparedStatement statement = connection.prepareStatement("select *\n" +
-                "from product\n" +
-                "         natural inner join coordinate\n" +
-                "         inner join organization on manufacturer = organization.id\n" +
-                "         inner join adress on organization.postaladress = adress.id\n" +
-                "         inner join locationp on adress.location = locationp.id\n");
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            arrayDeque.add(getProduct(resultSet));
-        }
+        PreparedStatement statement = connection.prepareStatement("delete from product where creatorlogin = ?");
+        statement.setString(1, login);
+        statement.executeUpdate();
     }
 
     public int insertProduct(Product product) throws SQLException {

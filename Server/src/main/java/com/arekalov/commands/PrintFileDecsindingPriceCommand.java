@@ -1,6 +1,7 @@
 package com.arekalov.commands;
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
@@ -28,7 +29,7 @@ public class PrintFileDecsindingPriceCommand implements Command {
 
 
     @Override
-    public String execute(String[] commandParts, Product product) {
-        return manager.printFiledDescendingPriceCommand(commandParts);
+    public String execute(String[] commandParts, CommandWithProduct product) {
+        return manager.printFiledDescendingPriceCommand(commandParts, product);
     }
 }

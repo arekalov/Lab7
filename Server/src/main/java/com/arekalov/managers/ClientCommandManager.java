@@ -4,16 +4,14 @@ package com.arekalov.managers;
 import com.arekalov.commands.Command;
 import com.arekalov.commands.Validators;
 import com.arekalov.core.IOManager;
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 import com.arekalov.errors.ArgumentError;
 import com.arekalov.errors.EmptyDequeError;
-import com.arekalov.errors.EnvNotFoundError;
-import com.arekalov.errors.ReadFromFileError;
 import com.arekalov.parsing.JsonParser;
 import javafx.util.Pair;
 //import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
@@ -54,8 +52,9 @@ public class ClientCommandManager {
      * This method prints the field in descending order
      *
      * @param commandParts - command parts
+     * @param product
      */
-    public String printFiledDescendingPriceCommand(String[] commandParts) {
+    public String printFiledDescendingPriceCommand(String[] commandParts, CommandWithProduct product) {
         String stream = collectionManager.getArrayDeque().stream().sorted(Comparator.reverseOrder())
                 .map(Product::toString).collect(Collectors.joining("\n"));
         return stream;
@@ -66,8 +65,9 @@ public class ClientCommandManager {
      * This method prints unique manufacturers
      *
      * @param commandParts - command parts
+     * @param product
      */
-    public String printUniqueManufactureCommand(String[] commandParts) {
+    public String printUniqueManufactureCommand(String[] commandParts, CommandWithProduct product) {
         String stream = collectionManager.getArrayDeque().stream().map(x -> x.getManufacturer().getName())
                 .map(Object::toString).distinct().collect(Collectors.joining(" "));
         return "Unique manufacturers: " + stream;
@@ -78,8 +78,9 @@ public class ClientCommandManager {
      * This method counts the number of products with a price less than the specified one
      *
      * @param commandParts - command parts
+     * @param product
      */
-    public String countLessThenPriceCommand(String[] commandParts) {
+    public String countLessThenPriceCommand(String[] commandParts, CommandWithProduct product) {
         Long price = Long.valueOf(commandParts[1]);
         Long stream = collectionManager.getArrayDeque().stream().filter(x -> x.getPrice() < price).count();
         return "Count: " + stream;
@@ -91,9 +92,9 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-//    todo 1
-    public String removeLowerCommand(String[] commandParts, Product product) {
-        collectionManager.removeLower(product);
+    public String removeLowerCommand(String[] commandParts, CommandWithProduct product) throws SQLException {
+        serverExecutionManager.dbCommandManager.removeLowerWithLogin(product.getUserInfo().getLogin(), product.getProduct());
+        collectionManager.removeLower(product.getProduct(), product.getUserInfo().getLogin());
         return "Success";
     }
 
@@ -101,9 +102,10 @@ public class ClientCommandManager {
      * This method removes the first product
      *
      * @param commandParts - command parts
+     * @param product
      */
 //    todo 2
-    public String removeHeadCommand(String[] commandParts) {
+    public String removeHeadCommand(String[] commandParts, CommandWithProduct product) {
         if (!collectionManager.isEmpty()) {
             return collectionManager.removeHead() + "\n" + "Successfully deleted";
         } else throw new EmptyDequeError();
@@ -113,9 +115,10 @@ public class ClientCommandManager {
      * This method removes the first product
      *
      * @param commandParts - command parts
+     * @param product
      */
 //    todo 3
-    public String removeFirstCommand(String[] commandParts) {
+    public String removeFirstCommand(String[] commandParts, CommandWithProduct product) {
 
         if (!collectionManager.isEmpty()) {
             collectionManager.removeHead();
@@ -141,9 +144,9 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-//    todo 3
-    public String clearCommand(String[] commandParts) {
-        collectionManager.clear();
+    public String clearCommand(String[] commandParts, CommandWithProduct product) throws SQLException {
+        serverExecutionManager.dbCommandManager.clearWithLogin(product.getUserInfo().getLogin());
+        collectionManager.clear(product.getUserInfo().getLogin());
         return ("Successfully cleared");
 
     }
@@ -152,9 +155,10 @@ public class ClientCommandManager {
      * This method removes the product by id, in this method we can throw an exception if the product is not found
      *
      * @param commandParts - command parts
+     * @param product
      */
 //    todo 4
-    public String removeByIdCommand(String[] commandParts) {
+    public String removeByIdCommand(String[] commandParts, CommandWithProduct product) {
         Product toRemove = null;
         Long id = Validators.checkLong(commandParts[1]);
         for (Product i : collectionManager.getArrayDeque()) {
@@ -171,15 +175,16 @@ public class ClientCommandManager {
     }
 
     /**
-     * This method updates the product by id, in this method we can throw an exception if the product is not found
+     * This method updates the commandWithProduct by id, in this method we can throw an exception if the commandWithProduct is not found
      *
      * @param commandParts - command parts
      */
 //    todo 5
-    public String updateCommand(String[] commandParts, Product product) {
+    public String updateCommand(String[] commandParts, CommandWithProduct commandWithProduct) {
 
         Long id = Validators.checkLong(commandParts[1]);
-        Product changeProduct = product;
+        Product product = commandWithProduct.getProduct();
+        Product changeProduct = commandWithProduct.getProduct();
         for (Product i : collectionManager.getArrayDeque()) {
             if (Objects.equals(i.getId(), id)) {
                 changeProduct = i;
@@ -201,7 +206,8 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-    public String addCommand(String[] commandParts, Product product) throws SQLException {
+    public String addCommand(String[] commandParts, CommandWithProduct commandWithProduct) throws SQLException {
+        Product product = commandWithProduct.getProduct();
         Long id = (long) serverExecutionManager.dbCommandManager.insertProduct(product);
         product.setId(id);
         collectionManager.add(product);

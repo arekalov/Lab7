@@ -1,6 +1,7 @@
 package com.arekalov.commands;
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
@@ -21,7 +22,7 @@ public class UpdateCommand implements Command{
      * @param commandParts String array of command parts
      */
     @Override
-    public String execute(String[] commandParts, Product product) {
+    public String execute(String[] commandParts, CommandWithProduct product) {
         return manager.updateCommand(commandParts, product);
     }
 }

@@ -70,7 +70,7 @@ public class ServerExecutionManager {
                 product.setCreator(commandWithProduct.getUserInfo().getLogin());
                 commandWithProduct.setProduct(product);
             }
-            String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+            String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct);
             byte[] data = serialize(answer);
             ByteBuffer buffer = ByteBuffer.allocate(data.length);
             buffer.put(data);
@@ -100,7 +100,7 @@ public class ServerExecutionManager {
         try {
             if (consoleInput.toLowerCase().equals("save")) {
                 CommandWithProduct commandWithProduct = new CommandWithProduct("save", new String[]{"save"}, null, null);
-                commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct.getProduct());
+                commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct);
                 logger.info("OK\n");
             } else {
                 logger.error("Error: Incorrect server command");

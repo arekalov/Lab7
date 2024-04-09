@@ -1,8 +1,11 @@
 package com.arekalov.commands;
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
+
+import java.sql.SQLException;
 
 /**
  * Class of command RemoveLower.
@@ -25,7 +28,7 @@ public class RemoveLowerCommand implements Command{
 
 
     @Override
-    public String execute(String[] commandParts, Product product) {
+    public String execute(String[] commandParts, CommandWithProduct product) throws SQLException {
         return manager.removeLowerCommand(commandParts, product);
     }
 }

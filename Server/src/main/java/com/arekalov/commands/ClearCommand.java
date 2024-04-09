@@ -1,8 +1,11 @@
 package com.arekalov.commands;
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
+
+import java.sql.SQLException;
 
 /**
  * ClearCommand class realizes Command interface and execute method
@@ -30,8 +33,9 @@ public class ClearCommand implements Command{
      * @param commandParts
      */
 
+
     @Override
-    public String execute(String[] commandParts, Product product) {
-        return manager.clearCommand(commandParts);
+    public String execute(String[] commandParts, CommandWithProduct product) throws SQLException {
+        return manager.clearCommand(commandParts, product);
     }
 }

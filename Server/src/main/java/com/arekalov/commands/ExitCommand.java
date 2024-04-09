@@ -1,6 +1,7 @@
 package com.arekalov.commands;
 
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
@@ -24,7 +25,7 @@ public class ExitCommand implements Command{
 
 
     @Override
-    public String execute(String[] commandParts, Product product) {
+    public String execute(String[] commandParts, CommandWithProduct product) {
         return manager.exitCommand(commandParts);
     }
 }

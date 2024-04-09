@@ -1,5 +1,6 @@
 package com.arekalov.commands;
 
+import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.entities.Product;
 
 import java.sql.SQLException;
@@ -12,5 +13,5 @@ public interface Command {
      * Execute the command
      * @param commandParts
      */
-    String execute(String[] commandParts, Product product) throws SQLException;
+    String execute(String[] commandParts, CommandWithProduct commandWithProduct) throws SQLException;
 }
