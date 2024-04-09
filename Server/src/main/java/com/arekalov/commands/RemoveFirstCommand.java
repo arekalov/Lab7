@@ -5,6 +5,8 @@ import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
+import java.sql.SQLException;
+
 /**
  * class for the remove first command
  */
@@ -26,7 +28,7 @@ public class RemoveFirstCommand implements Command {
      * @param commandParts the parts of the command
      */
     @Override
-    public String execute(String[] commandParts, CommandWithProduct product) {
+    public String execute(String[] commandParts, CommandWithProduct product) throws SQLException {
         return manager.removeFirstCommand(commandParts, product);
     }
 }

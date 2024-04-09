@@ -46,8 +46,18 @@ public class CollectionManager {
      *
      * @return int
      */
-    public Product removeHead() {
-        return arrayDeque.pop();
+    public Product removeHead(String login) {
+        Product product = null;
+        for (Product pr: arrayDeque) {
+            if (pr.getCreator().equals(login)) {
+                product = pr;
+                break;
+            }
+        }
+        if (product != null) {
+            arrayDeque.remove(product);
+        }
+        return product;
     }
 
     /**

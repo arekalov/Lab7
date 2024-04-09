@@ -19,6 +19,12 @@ public class DBCommandManager {
         this.connection = connection;
     }
 
+    public void removeProduct(Product product) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("delete from product where id = ?");
+        statement.setLong(1, product.getId());
+        statement.executeUpdate();
+    }
+
     public void removeLowerWithLogin(String login, Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("delete from product where price < ? and creatorlogin = ?");
         statement.setLong(1, product.getPrice());

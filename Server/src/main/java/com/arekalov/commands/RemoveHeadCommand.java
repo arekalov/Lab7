@@ -5,6 +5,8 @@ import com.arekalov.entities.CommandWithProduct;
 import com.arekalov.managers.ClientCommandManager;
 import com.arekalov.entities.Product;
 
+import java.sql.SQLException;
+
 /**
  * class for the remove head command
  */
@@ -27,7 +29,7 @@ public class RemoveHeadCommand implements Command {
      */
 
     @Override
-    public String execute(String[] commandParts, CommandWithProduct product) {
+    public String execute(String[] commandParts, CommandWithProduct product) throws SQLException {
         return manager.removeHeadCommand(commandParts, product);
     }
 }

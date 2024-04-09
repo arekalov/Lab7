@@ -104,10 +104,17 @@ public class ClientCommandManager {
      * @param commandParts - command parts
      * @param product
      */
-//    todo 2
-    public String removeHeadCommand(String[] commandParts, CommandWithProduct product) {
+    public String removeHeadCommand(String[] commandParts, CommandWithProduct product) throws SQLException {
         if (!collectionManager.isEmpty()) {
-            return collectionManager.removeHead() + "\n" + "Successfully deleted";
+            Product product1 = collectionManager.removeHead(product.getUserInfo().getLogin());
+            if (product1 != null) {
+                serverExecutionManager.dbCommandManager.removeProduct(product1);
+                return product1+ "\n" + "Successfully deleted";
+            }
+            else {
+                return "No product, created with this login";
+            }
+
         } else throw new EmptyDequeError();
     }
 
@@ -117,15 +124,18 @@ public class ClientCommandManager {
      * @param commandParts - command parts
      * @param product
      */
-//    todo 3
-    public String removeFirstCommand(String[] commandParts, CommandWithProduct product) {
-
+    public String removeFirstCommand(String[] commandParts, CommandWithProduct product) throws SQLException {
         if (!collectionManager.isEmpty()) {
-            collectionManager.removeHead();
-            return "Success";
-        } else {
-            throw new EmptyDequeError();
-        }
+            Product product1 = collectionManager.removeHead(product.getUserInfo().getLogin());
+            if (product1 != null) {
+                serverExecutionManager.dbCommandManager.removeProduct(product1);
+                return "Successfully deleted";
+            }
+            else {
+                return "No product, created with this login";
+            }
+
+        } else throw new EmptyDequeError();
     }
 
     /**
