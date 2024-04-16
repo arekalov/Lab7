@@ -11,10 +11,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import static com.arekalov.managers.Config.*;
+
 public class DBConnectivityManager {
     private Session session;
     private Connection connection;
     private Logger logger = Server.logger;
+
 
     public DBConnectivityManager() {
         connect();
@@ -25,16 +28,6 @@ public class DBConnectivityManager {
     }
 
     public void connect() {
-        String sshHost = "se.ifmo.ru";
-        String sshUsername = "s409449";
-        String sshPassword = "CXef&0424";
-        String dbHost = "localhost";
-        int sshPort = 2222;
-        int localPort = 54321;
-        int dbPort = 5432;
-        String dbName = "studs";
-        String dbUsername = "s409449";
-        String dbPassword = "7ChhsEMmi3l6rp3x";
 
         try {
             JSch jsch = new JSch();
@@ -53,7 +46,7 @@ public class DBConnectivityManager {
 
             String dbUrl = "jdbc:postgresql://localhost:" + tunnelLocalPort + "/" + dbName;
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-            logger.info("Соединение c "+ dbUrl + " установлено успешно.");
+            logger.info("Соединение c " + dbUrl + " установлено успешно.");
 
         } catch (JSchException e) {
             e.printStackTrace();
