@@ -37,7 +37,7 @@ public class DBAuthenticateManager {
             String insertQuery = "INSERT INTO users (login, password) VALUES (?, ?);";
             PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
             insertStatement.setString(1, login);
-            insertStatement.setString(2, hashString(password));
+            insertStatement.setString(2, password);
             insertStatement.execute();
         } else {
             String answer = "Пользователь с таким логином уже существует! Введите команду login и повторите попытку!";
@@ -77,32 +77,12 @@ public class DBAuthenticateManager {
         }
     }
 
-    public static String hashString(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            byte[] hashedBytes = digest.digest(input.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     // Функция для проверки соответствия хэш-значения исходному тексту
     public static boolean verifyHash(String input, String hash) {
-        return hashString(input).equals(hash);
+        return input.equals(hash);
     }
 
-    public static void main(String[] args) {
-        String input = "Hello World";
-        String hashed = hashString(input);
-        System.out.println("Hashed value: " + hashed);
-        System.out.println("Is Hash Verified: " + verifyHash(input, hashed)); // Должно быть true
-    }
 
 
 }

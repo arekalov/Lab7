@@ -1,5 +1,5 @@
 add
-name
+newuser
 12
 12
 12

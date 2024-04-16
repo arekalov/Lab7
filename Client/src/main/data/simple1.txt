@@ -1,0 +1,16 @@
+update 21
+1
+1
+1
+1
+1
+1
+KILOGRAMS
+11
+1
+trust
+11
+11
+1
+1
+execute_script /home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/data/simple11.txt

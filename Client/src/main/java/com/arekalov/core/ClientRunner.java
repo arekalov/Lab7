@@ -15,6 +15,8 @@ import java.io.*;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -82,7 +84,7 @@ public class ClientRunner {
         String login = ioManager.consoleRead();
         System.out.println("Введите пароль");
         String pass = ioManager.consoleRead();
-        userInfo = new UserInfo(login, pass, AuthMode.LogIn);
+        userInfo = new UserInfo(login, hashString(pass), AuthMode.LogIn);
     }
 
     private void registerNewUser() {
@@ -99,8 +101,23 @@ public class ClientRunner {
             System.out.println("Пароль не должен быть пустым, попробуйте еще раз!");
             pass = ioManager.consoleRead();
         }
-        userInfo = new UserInfo(login, pass, AuthMode.SignUp);
+        userInfo = new UserInfo(login, hashString(pass), AuthMode.SignUp);
 
+    }
+
+    public static String hashString(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            byte[] hashedBytes = digest.digest(input.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void executeCommand(String command) {

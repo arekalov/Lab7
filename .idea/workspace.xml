@@ -2,17 +2,23 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Lab6:jar" />
+      <artifact name="Lab7:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="fix recursion problems">
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/Config.java" afterDir="false" />
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add config">
+      <change afterPath="$PROJECT_DIR$/Client/src/main/data/simple1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Lab6_Server_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Lab6_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Lab7_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBConnectivityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBConnectivityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/data/add.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/data/add.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/data/simple.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBAuthenticateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/DBAuthenticateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,62 +85,64 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build Lab6.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:Client.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:Client2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:NonBlockingClient.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:NonBlockingClient2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:TestClient.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Client [:Client:TestClient2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:MainServer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:NonBlockingServer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:Server.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:TestServer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab6:Server [:Server:TestServer2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab7:Client [:Client:Client.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab7:Client [:Client:Client2.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab7:Server [:Server:DBManager.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Lab7:Server [:Server:MainServer.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/arekalov/Subjects/II/Proga/Lab7&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;/home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/java/com/arekalov/entities/Organization.java&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Lab6.executor": "Run",
+    "Gradle.Build Lab7.executor": "Run",
+    "Gradle.Lab6:Client [:Client:Client.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:Client2.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:NonBlockingClient.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:NonBlockingClient2.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:TestClient.main()].executor": "Run",
+    "Gradle.Lab6:Client [:Client:TestClient2.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:MainServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:NonBlockingServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:Server.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:TestServer.main()].executor": "Run",
+    "Gradle.Lab6:Server [:Server:TestServer2.main()].executor": "Run",
+    "Gradle.Lab7:Client [:Client:Client.main()].executor": "Run",
+    "Gradle.Lab7:Client [:Client:Client2.main()].executor": "Run",
+    "Gradle.Lab7:Client [:Client:Client3.main()].executor": "Run",
+    "Gradle.Lab7:Server [:Server:DBManager.main()].executor": "Run",
+    "Gradle.Lab7:Server [:Server:MainServer.main()].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "two.files.diff.last.used.file": "/home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/java/com/arekalov/entities/Organization.java",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.arekalov" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Client/src/main/data" />
       <recent name="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities" />
       <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov/entities" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core" />
-      <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Server/src/main/resources" />
@@ -142,8 +150,8 @@
       <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.arekalov.entities" />
       <recent name="com.arekalov" />
+      <recent name="com.arekalov.entities" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Client">
@@ -162,6 +170,19 @@
     </configuration>
     <configuration name="Client2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arekalov.Client2" />
+      <module name="Lab6.Client.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.arekalov.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.arekalov.Client3" />
       <module name="Lab6.Client.main" />
       <extension name="coverage">
         <pattern>
@@ -199,26 +220,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NonBlockingClient2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.arekalov.NonBlockingClient2" />
-      <module name="Lab6.Client.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.arekalov.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Client3" />
         <item itemvalue="Application.DBConnectivityManager" />
         <item itemvalue="Application.Client2" />
         <item itemvalue="Application.Client" />
         <item itemvalue="Application.MainServer" />
-        <item itemvalue="Application.NonBlockingClient2" />
       </list>
     </recent_temporary>
   </component>
@@ -260,7 +268,7 @@
       <workItem from="1712764363467" duration="22000" />
       <workItem from="1713241746432" duration="2175000" />
       <workItem from="1713251920514" duration="24000" />
-      <workItem from="1713268758372" duration="1286000" />
+      <workItem from="1713268758372" duration="5853000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -566,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712667029163</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="add config">
+      <option name="closed" value="true" />
+      <created>1713270095327</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270095327</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +600,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change commands and add selectors" />
     <MESSAGE value="edit buffer size, app work normal" />
     <MESSAGE value="add ServerCommandManager.java" />
     <MESSAGE value="add stream api to CommandManager.java in Server module" />
@@ -609,14 +624,15 @@
     <MESSAGE value="add Для многопотчной обработки полученного запроса использовать Cached thread pool" />
     <MESSAGE value="add Для многопоточной отправки ответа использовать Fixed thread pool" />
     <MESSAGE value="fix recursion problems" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix recursion problems" />
+    <MESSAGE value="add config" />
+    <option name="LAST_COMMIT_MESSAGE" value="add config" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java</url>
-          <line>127</line>
+          <line>146</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
