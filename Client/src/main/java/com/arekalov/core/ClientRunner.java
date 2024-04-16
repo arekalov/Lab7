@@ -120,7 +120,7 @@ public class ClientRunner {
         }
     }
 
-    private void executeCommand(String command) {
+    private void executeCommand(String command) throws IOException {
         try {
             String[] commandParts = validateCommand(command);
             commandParts[0] = commandParts[0].toLowerCase();
@@ -136,12 +136,11 @@ public class ClientRunner {
             System.out.println("\u001B[31m" + "Сервер временно недоступен" + "\u001B[0m");
             isRunning = false;
         } catch (Exception ex) {
-            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
+            throw new IOException();
         }
     }
 
-    private void executeScript(String path) {
-        try {
+    private void executeScript(String path) throws IOException {
             File inputFile = new File(path);
             Scanner scanner = new Scanner(inputFile);
             ioManager.setScanner(scanner);
@@ -160,9 +159,7 @@ public class ClientRunner {
                 ioManager.setScanner(new Scanner(System.in));
                 System.out.println("End executing script");
             } else throw new RecursionError();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     protected void sendCommand(String command) throws IOException, ClassNotFoundException {
@@ -194,6 +191,9 @@ public class ClientRunner {
                 String obj = deserialize(answer);
                 if (obj.equals("Bye")) {
                     isRunning = false;
+                }
+                if (obj.equals("")) {
+                    System.out.println(obj);
                 }
                 if (!obj.equals("Пользователь с таким логином уже существует!")) {
                     userInfo.setAuthMode(AuthMode.LogIn);

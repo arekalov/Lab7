@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 
 public class Client2 {
-    final public static int PORT = 54376;
+    final public static int PORT = 54375;
     final public static String HOST = "localhost";
 
     public static void main(String[] args) {

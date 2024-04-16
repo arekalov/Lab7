@@ -25,7 +25,7 @@ import static com.arekalov.managers.ServerExecutionManager.serialize;
 import static org.apache.commons.lang3.SerializationUtils.deserialize;
 
 public class Server {
-    final public static Integer PORT = 54376;
+    final public static Integer PORT = 54375;
     public static final Logger logger = LogManager.getLogger(Server.class);
     ServerConnectivityManager serverConnectivityManager = new ServerConnectivityManager(PORT, logger);
     DBConnectivityManager dbManager = new DBConnectivityManager();
@@ -92,6 +92,7 @@ public class Server {
                     }
                 }
             } catch (IOException ex) {
+                clientsHashSet.remove(client.hashCode());
                 logger.error("Ошибка ввода-вывода в потоке клиента: " + ex.getMessage());
             } finally {
                 // Удаление клиента из списка при закрытии соединения
