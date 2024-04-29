@@ -122,7 +122,7 @@ public class Server {
                     executeCommand(obj, client);
                 }
             } catch (IOException ex) {
-                logger.error("Ошибка ввода-вывода в потоке клиента: " + ex.getMessage());
+                logger.info("Ошибка ввода-вывода в потоке клиента или соединение закрыто!" + ex.getMessage());
             }
         });
     }
