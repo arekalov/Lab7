@@ -48,7 +48,6 @@ public class ServerExecutionManager {
     }
 
 
-
     public void setRunning(Boolean running) {
         isRunning = running;
     }
@@ -63,22 +62,20 @@ public class ServerExecutionManager {
     }
 
     public void executeCommand(CommandWithProduct commandWithProduct, SocketChannel client) throws IOException, SQLException {
-            System.out.println(commandWithProduct);
-            if(commandWithProduct.getProduct() != null) {
-                Product product = commandWithProduct.getProduct();
-                product.setCreator(commandWithProduct.getUserInfo().getLogin());
-                commandWithProduct.setProduct(product);
-            }
-            String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct);
-            byte[] data = serialize(answer);
-            System.out.println(answer);
-            ByteBuffer buffer = ByteBuffer.allocate(data.length);
-            buffer.put(data);
-            buffer.flip();
-            while (buffer.hasRemaining()) {
-                client.write(buffer);
-            }
-            logger.info("Send answer\n");
+        if (commandWithProduct.getProduct() != null) {
+            Product product = commandWithProduct.getProduct();
+            product.setCreator(commandWithProduct.getUserInfo().getLogin());
+            commandWithProduct.setProduct(product);
+        }
+        String answer = commandHashMap.get(commandWithProduct.getArgs()[0]).execute(commandWithProduct.getArgs(), commandWithProduct);
+        byte[] data = serialize(answer);
+        ByteBuffer buffer = ByteBuffer.allocate(data.length);
+        buffer.put(data);
+        buffer.flip();
+        while (buffer.hasRemaining()) {
+            client.write(buffer);
+        }
+        logger.info("Send answer\n");
     }
 
     public static byte[] serialize(String obj) throws IOException {
@@ -108,6 +105,7 @@ public class ServerExecutionManager {
     private void initCommands() {
         commandManager.initHashMap(
                 new Pair<>("help", new HelpCommand(commandManager)),
+                new Pair<>("checkupdate", new CheckUpdateCommand(commandManager)),
                 new Pair<>("info", new InfoCommand(commandManager)),
                 new Pair<>("show", new ShowCommand(commandManager)),
                 new Pair<>("add", new AddCommand(commandManager)),

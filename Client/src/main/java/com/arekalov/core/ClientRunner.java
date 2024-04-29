@@ -57,8 +57,11 @@ public class ClientRunner {
             System.err.println("Exit");
             isRunning = false;
             stopWorkingPrinter();
-        } catch (Exception exception) {
-            System.err.println("Unexpected error!");
+        }
+        catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            System.out.println("hui");
+            exception.printStackTrace();
             isRunning = false;
             stopWorkingPrinter();
         }
@@ -135,72 +138,116 @@ public class ClientRunner {
         } catch (SocketException socketException) {
             System.out.println("\u001B[31m" + "Сервер временно недоступен" + "\u001B[0m");
             isRunning = false;
-        } catch (Exception ex) {
+        }catch (IncorrectCommandError incorrectCommandError) {
+            System.out.println("\u001B[31m" + "Неверная команда" + "\u001B[0m");
+        }
+        catch (IOException ex) {
             throw new IOException();
         }
     }
 
     private void executeScript(String path) throws IOException {
-            File inputFile = new File(path);
-            Scanner scanner = new Scanner(inputFile);
-            ioManager.setScanner(scanner);
-            if (true) {
-                System.out.println("Start executing script");
-                do {
-                    String line = scanner.nextLine();
-                    System.out.println("__");
-                    System.out.println(line);
-                    if (files.contains(path)) {
-                        throw new RecursionError();
-                    }
-                    files.add(path);
-                    executeCommand(line);
-                } while (scanner.hasNextLine());
-                ioManager.setScanner(new Scanner(System.in));
-                System.out.println("End executing script");
-            } else throw new RecursionError();
+        File inputFile = new File(path);
+        Scanner scanner = new Scanner(inputFile);
+        ioManager.setScanner(scanner);
+        if (true) {
+            System.out.println("Start executing script");
+            do {
+                String line = scanner.nextLine();
+                System.out.println("__");
+                System.out.println(line);
+                if (files.contains(path)) {
+                    throw new RecursionError();
+                }
+                files.add(path);
+                executeCommand(line);
+            } while (scanner.hasNextLine());
+            ioManager.setScanner(new Scanner(System.in));
+            System.out.println("End executing script");
+        } else throw new RecursionError();
 
     }
 
-    protected void sendCommand(String command) throws IOException, ClassNotFoundException {
-        String[] commandParts = validateCommand(command.toLowerCase());
-        Product product = null;
-        if (CommandsInfoArrays.commandsWithInputing.contains(commandParts[0])) {
-            product = productReader.getProduct();
-        }
-        CommandWithProduct commandWithProduct = new CommandWithProduct(commandParts[0], commandParts, product, userInfo);
-        byte[] data = Client.serialize(commandWithProduct);
-        ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        buffer.put(data);
-        buffer.flip();
-        // Отправляем данные на сервер
-        while (buffer.hasRemaining()) {
-            socketChanel.write(buffer);
-        }
+    protected void sendCommand(String command) {
+        try {
+            String[] commandParts = validateCommand(command.toLowerCase());
+            Product product = null;
+            if (commandParts[0].equals("update")) {
+                commandParts[0] = "checkupdate";
+                CommandWithProduct commandWithProduct = new CommandWithProduct("checkupdate", commandParts, product, userInfo);
+//                System.out.println(commandWithProduct);
+                byte[] newData = Client.serialize(commandWithProduct);
+                ByteBuffer buffer2 = ByteBuffer.allocate(newData.length);
+                buffer2.put(newData);
+                buffer2.flip();
+                while (buffer2.hasRemaining()) {
+                    socketChanel.write(buffer2);
+                }
 
-        ByteBuffer bufferNew = ByteBuffer.allocate(16384);
-        while (true) {
-            bufferNew.clear();
-            int bytesRead = socketChanel.read(bufferNew);
-            if (bytesRead == -1) {
-                break;
-            } else if (bytesRead > 0) {
-                bufferNew.flip();
-                byte[] answer = new byte[bufferNew.remaining()];
-                bufferNew.get(answer);
-                String obj = deserialize(answer);
-                if (obj.equals("Bye")) {
-                    isRunning = false;
+                ByteBuffer bufferNew2 = ByteBuffer.allocate(16384);
+                while (true) {
+                    bufferNew2.clear();
+                    int bytesRead = socketChanel.read(bufferNew2);
+                    if (bytesRead == -1) {
+                        break;
+                    } else if (bytesRead > 0) {
+                        bufferNew2.flip();
+                        byte[] answer = new byte[bufferNew2.remaining()];
+                        bufferNew2.get(answer);
+                        String obj = deserialize(answer);
+                        System.out.println(obj);
+                        if (Objects.equals(obj, "ok")) {
+                            commandParts[0] = "update";
+                            break;
+                        } else {
+                            return;
+                        }
+                    }
                 }
-                if (obj.equals("")) {
-                    System.out.println(obj);
-                }
-                if (!obj.equals("Пользователь с таким логином уже существует!")) {
-                    userInfo.setAuthMode(AuthMode.LogIn);
-                }
-                System.out.println(obj);
-                break;
             }
+            if (CommandsInfoArrays.commandsWithInputing.contains(commandParts[0])) {
+                product = productReader.getProduct();
+            }
+            if (commandParts[0].equals("update")) {
+                product.setCreator(userInfo.getLogin());
+            }
+            CommandWithProduct commandWithProduct = new CommandWithProduct(commandParts[0], commandParts, product, userInfo);
+//            System.out.println(commandWithProduct);
+            byte[] data = Client.serialize(commandWithProduct);
+            ByteBuffer buffer = ByteBuffer.allocate(data.length);
+            buffer.put(data);
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                socketChanel.write(buffer);
+            }
+
+            ByteBuffer bufferNew = ByteBuffer.allocate(16384);
+            while (true) {
+                bufferNew.clear();
+                int bytesRead = socketChanel.read(bufferNew);
+                if (bytesRead == -1) {
+                    break;
+                } else if (bytesRead > 0) {
+                    bufferNew.flip();
+                    byte[] answer = new byte[bufferNew.remaining()];
+                    bufferNew.get(answer);
+                    String obj = deserialize(answer);
+                    if (obj.equals("Bye")) {
+                        isRunning = false;
+                    }
+                    if (obj.equals("")) {
+                        System.out.println(obj);
+                    }
+                    if (!obj.equals("Пользователь с таким логином уже существует!")) {
+                        userInfo.setAuthMode(AuthMode.LogIn);
+                    }
+                    System.out.println(obj);
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            isRunning = false;
+            System.out.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
         }
     }
 

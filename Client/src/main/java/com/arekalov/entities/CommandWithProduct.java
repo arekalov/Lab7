@@ -51,7 +51,8 @@ public class CommandWithProduct implements Serializable {
     @Override
     public String toString() {
         return "CommandWithProduct{" +
-                "command='" + command + '\'' +
+                "userInfo=" + userInfo +
+                ", command='" + command + '\'' +
                 ", args=" + Arrays.toString(args) +
                 ", product=" + product +
                 '}';

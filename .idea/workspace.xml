@@ -9,11 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="move hashing to client">
+    <list default="true" id="89efabd3-39bd-4ac9-aa22-5808c5c51ecc" name="Changes" comment="add reconnection">
+      <change afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/commands/CheckUpdateCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/CommandWithProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/com/arekalov/entities/CommandWithProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/core/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ServerExecutionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +108,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab7/Client/src/main/data",
+    "last_opened_file_path": "/home/arekalov/Subjects/II/Proga/Lab7",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -145,6 +148,7 @@
       <recent name="$PROJECT_DIR$/Server/src/main/java/com/arekalov" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.arekalov.commands" />
       <recent name="com.arekalov" />
       <recent name="com.arekalov.entities" />
     </key>
@@ -263,7 +267,9 @@
       <workItem from="1712764363467" duration="22000" />
       <workItem from="1713241746432" duration="2175000" />
       <workItem from="1713251920514" duration="24000" />
-      <workItem from="1713268758372" duration="8172000" />
+      <workItem from="1713268758372" duration="14279000" />
+      <workItem from="1713361199565" duration="15000" />
+      <workItem from="1714419036043" duration="3209000" />
     </task>
     <task id="LOCAL-00001" summary="add managers">
       <option name="closed" value="true" />
@@ -585,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713274839136</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="add reconnection">
+      <option name="closed" value="true" />
+      <created>1713277145212</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1713277145212</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add ServerCommandManager.java" />
     <MESSAGE value="add stream api to CommandManager.java in Server module" />
     <MESSAGE value="edit ServerCommandManager.java" />
     <MESSAGE value="add client2" />
@@ -628,20 +641,16 @@
     <MESSAGE value="fix recursion problems" />
     <MESSAGE value="add config" />
     <MESSAGE value="move hashing to client" />
-    <option name="LAST_COMMIT_MESSAGE" value="move hashing to client" />
+    <MESSAGE value="add reconnection" />
+    <option name="LAST_COMMIT_MESSAGE" value="add reconnection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Client/src/main/java/com/arekalov/core/ClientRunner.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/src/main/java/com/arekalov/managers/ClientCommandManager.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="3" />
+          <line>207</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

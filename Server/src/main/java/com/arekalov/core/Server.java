@@ -93,6 +93,7 @@ public class Server {
                 }
             } catch (IOException ex) {
                 clientsHashSet.remove(client.hashCode());
+                ex.printStackTrace();
                 logger.error("Ошибка ввода-вывода в потоке клиента: " + ex.getMessage());
             } finally {
                 // Удаление клиента из списка при закрытии соединения

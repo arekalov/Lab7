@@ -186,7 +186,7 @@ public class ClientCommandManager {
      *
      * @param commandParts - command parts
      */
-    public String updateCommand(String[] commandParts, CommandWithProduct commandWithProduct) {;
+    public String updateCommand(String[] commandParts, CommandWithProduct commandWithProduct) {
         Integer id = Math.toIntExact(Validators.checkLong(commandParts[1]));
         Product product = commandWithProduct.getProduct();
         Product changeProduct = null;
@@ -281,5 +281,19 @@ public class ClientCommandManager {
             hashMapCommands.put(command.getKey(), command.getValue());
         }
         return hashMapCommands;
+    }
+
+    public String checkupdate(String[] commandParts, CommandWithProduct product) {
+        Integer id = Math.toIntExact(Validators.checkLong(commandParts[1]));
+        Product changeProduct = null;
+        for (Product i : collectionManager.getArrayDeque()) {
+            if (i.getId().equals(Long.valueOf(id)) && i.getCreator().equals(product.getUserInfo().getLogin())) {
+                changeProduct = i;
+            }
+        }
+        if (changeProduct != null) {
+            return "ok";
+        }
+        return "Incorrect user or access denied";
     }
 }
